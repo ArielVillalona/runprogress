@@ -7,519 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <style>
-    :root {
-      --orange: #FF4D00;
-      --orange-light: #FF7A3D;
-      --black: #0A0A0A;
-      --dark: #111111;
-      --card-bg: #161616;
-      --text: #E8E8E8;
-      --muted: #777;
-      --border: rgba(255,77,0,0.15);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background: var(--black);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* NOISE TEXTURE */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 0; opacity: 0.4;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      position: relative;
-      padding: 80px 0 60px;
-      overflow: hidden;
-    }
-
-    .hero-bg-number {
-      position: absolute;
-      right: -2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(200px, 30vw, 420px);
-      color: rgba(255,77,0,0.04);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .hero-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
-      color: var(--orange);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.2s forwards;
-    }
-
-    .hero-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(60px, 11vw, 140px);
-      line-height: 0.9;
-      color: #fff;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.4s forwards;
-    }
-
-    .hero-title span {
-      color: var(--orange);
-      display: block;
-    }
-
-    .hero-sub {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin: 1.8rem 0 2.8rem;
-      line-height: 1.7;
-      font-weight: 300;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.6s forwards;
-    }
-
-    .hero-cta {
-      opacity: 0;
-      animation: fadeUp 0.7s 0.8s forwards;
-    }
-
-    .btn-primary-custom {
-      background: var(--orange);
-      color: #fff;
-      border: none;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 16px 36px;
-      border-radius: 0;
-      text-decoration: none;
-      display: inline-block;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s;
-    }
-    .btn-primary-custom::after {
-      content: '';
-      position: absolute; bottom: 0; left: -100%; width: 100%; height: 2px;
-      background: #fff;
-      transition: left 0.3s;
-    }
-    .btn-primary-custom:hover { background: var(--orange-light); color: #fff; transform: translateY(-2px); }
-    .btn-primary-custom:hover::after { left: 0; }
-
-    .btn-outline-custom {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.15);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 15px 36px;
-      border-radius: 0;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.3s;
-    }
-    .btn-outline-custom:hover { border-color: var(--orange); color: var(--orange); }
-
-    /* TICKER */
-    .ticker {
-      background: var(--orange);
-      padding: 12px 0;
-      overflow: hidden;
-      position: relative;
-    }
-    .ticker-track {
-      display: flex; gap: 3rem;
-      animation: ticker 20s linear infinite;
-      white-space: nowrap;
-    }
-    .ticker-item {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.1em;
-      color: #fff;
-      flex-shrink: 0;
-    }
-    .ticker-item::before { content: '◆  '; opacity: 0.7; }
-
-    /* STATS */
-    .stats-section { padding: 80px 0; }
-    .stat-card {
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      padding: 40px 32px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s;
-    }
-    .stat-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; width: 3px; height: 0;
-      background: var(--orange);
-      transition: height 0.4s;
-    }
-    .stat-card:hover::before { height: 100%; }
-    .stat-card:hover { border-color: rgba(255,77,0,0.4); transform: translateY(-4px); }
-    .stat-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 4rem;
-      color: #fff;
-      line-height: 1;
-    }
-    .stat-unit { color: var(--orange); font-size: 2rem; }
-    .stat-label { color: var(--muted); font-size: 0.82rem; letter-spacing: 0.05em; margin-top: 8px; }
-
-    /* SECTION TITLES */
-    .section-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      color: var(--orange);
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(36px, 6vw, 72px);
-      line-height: 1;
-      color: #fff;
-    }
-
-    /* JOURNEY / FASES */
-    .journey-section { padding: 80px 0; }
-
-    .phase-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 36px 32px;
-      position: relative;
-      height: 100%;
-      transition: all 0.35s;
-      cursor: default;
-    }
-    .phase-card:hover {
-      background: #1c1c1c;
-      border-color: rgba(255,77,0,0.5);
-      transform: translateY(-6px);
-    }
-    .phase-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 5rem;
-      color: rgba(255,77,0,0.12);
-      position: absolute;
-      top: 12px; right: 20px;
-      line-height: 1;
-      transition: color 0.3s;
-    }
-    .phase-card:hover .phase-num { color: rgba(255,77,0,0.25); }
-    .phase-badge {
-      display: inline-block;
-      background: rgba(255,77,0,0.12);
-      color: var(--orange);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      padding: 4px 12px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-    .phase-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.8rem;
-      color: #fff;
-      margin-bottom: 12px;
-    }
-    .phase-desc {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.7;
-      font-weight: 300;
-    }
-    .phase-list {
-      list-style: none;
-      margin-top: 20px;
-      padding: 0;
-    }
-    .phase-list li {
-      color: var(--text);
-      font-size: 0.88rem;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      display: flex; align-items: center; gap: 10px;
-    }
-    .phase-list li::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--orange);
-      flex-shrink: 0;
-      border-radius: 50%;
-    }
-
-    /* TIPS GRID */
-    .tips-section { padding: 80px 0; background: var(--dark); }
-    .tip-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 30px;
-      height: 100%;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .tip-card:hover { border-color: rgba(255,77,0,0.5); transform: translateY(-4px); }
-    .tip-icon {
-      font-size: 2rem;
-      color: var(--orange);
-      margin-bottom: 16px;
-      display: block;
-    }
-    .tip-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-    .tip-text { color: var(--muted); font-size: 0.88rem; line-height: 1.7; font-weight: 300; }
-
-    /* PLAN 10K */
-    .plan-section { padding: 80px 0; }
-    .week-row {
-      display: flex; align-items: center;
-      padding: 18px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      transition: background 0.2s;
-      gap: 20px;
-    }
-    .week-row:hover { background: rgba(255,77,0,0.04); }
-    .week-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--orange);
-      min-width: 60px;
-    }
-    .week-name { font-size: 0.9rem; font-weight: 500; flex: 1; }
-    .week-km {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.2rem;
-      color: #fff;
-      min-width: 80px;
-      text-align: right;
-    }
-    .progress-bar-custom {
-      height: 4px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 0;
-      flex: 2;
-    }
-    .progress-fill {
-      height: 100%;
-      background: var(--orange);
-      border-radius: 0;
-      transition: width 1s;
-    }
-    .plan-table-wrap { border: 1px solid var(--border); background: var(--card-bg); }
-
-    /* INSTAGRAM CTA */
-    .cta-section {
-      padding: 120px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(255,77,0,0.12) 0%, transparent 70%);
-    }
-    .cta-big {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(50px, 9vw, 110px);
-      line-height: 0.95;
-      text-align: center;
-      color: #fff;
-    }
-    .cta-big .accent { color: var(--orange); }
-    .cta-sub {
-      text-align: center;
-      color: var(--muted);
-      font-size: 1rem;
-      margin: 1.5rem auto 2.5rem;
-      max-width: 480px;
-      line-height: 1.7;
-    }
-
-    /* TESTIMONIALS */
-    .test-section { padding: 80px 0; background: var(--dark); }
-    .test-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 32px;
-      position: relative;
-      height: 100%;
-    }
-    .test-quote {
-      font-size: 3rem;
-      color: var(--orange);
-      font-family: 'Bebas Neue', sans-serif;
-      line-height: 1;
-      margin-bottom: 12px;
-      opacity: 0.6;
-    }
-    .test-text { color: var(--text); font-size: 0.9rem; line-height: 1.7; font-weight: 300; margin-bottom: 20px; }
-    .test-name { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--orange); letter-spacing: 0.1em; }
-    .test-info { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-    }
-    .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.8rem;
-      color: #fff;
-    }
-    .footer-logo span { color: var(--orange); }
-    .social-link {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 40px; height: 40px;
-      border: 1px solid rgba(255,255,255,0.12);
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 1.1rem;
-      transition: all 0.25s;
-    }
-    .social-link:hover { border-color: var(--orange); color: var(--orange); }
-
-    /* NAVBAR */
-    .navbar-custom {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 1000;
-      padding: 20px 0;
-      background: rgba(10,10,10,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      transition: padding 0.3s;
-    }
-    .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      color: #fff;
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--orange); }
-    .nav-link-custom {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      padding: 4px 0;
-    }
-    .nav-link-custom:hover { color: var(--orange); }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.7s, transform 0.7s;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* DIVIDER */
-    .divider {
-      width: 60px; height: 2px;
-      background: var(--orange);
-      margin: 20px 0;
-    }
-
-    /* RESPONSIVE */
-
-    /* Mobile — hasta 575px */
-    @media(max-width: 575px) {
-      .hero { padding-top: 90px; padding-bottom: 50px; }
-      .hero-bg-number { display: none; }
-      .hero-sub { font-size: 0.95rem; }
-      .btn-primary-custom, .btn-outline-custom { width: 100%; text-align: center; padding: 15px 20px; }
-      .hero-cta { flex-direction: column; }
-
-      .stats-section { padding: 50px 0; }
-      .stat-number { font-size: 2.8rem; }
-
-      .journey-section, .tips-section, .plan-section, .test-section { padding: 60px 0; }
-
-      .phase-card { padding: 28px 22px; }
-      .phase-num { font-size: 3.5rem; }
-      .phase-title { font-size: 1.5rem; }
-
-      .tip-card { padding: 24px 20px; }
-
-      /* Plan table — ocultar barra de progreso en móvil */
-      .progress-bar-custom { display: none; }
-      .week-row { flex-wrap: wrap; gap: 6px; padding: 14px 16px; }
-      .week-km { min-width: auto; }
-
-      .cta-section { padding: 80px 0; }
-
-      .test-card { padding: 24px 20px; }
-
-      footer { padding: 40px 0; }
-      .footer-logo { font-size: 1.5rem; }
-
-      .section-title { font-size: clamp(32px, 10vw, 60px); }
-    }
-
-    /* Tablet — 576px a 767px */
-    @media(min-width: 576px) and (max-width: 767px) {
-      .hero { padding-top: 100px; }
-      .hero-bg-number { display: none; }
-      .progress-bar-custom { display: none; }
-      .week-row { flex-wrap: wrap; gap: 8px; }
-    }
-
-    /* Tablet grande — 768px a 991px */
-    @media(min-width: 768px) and (max-width: 991px) {
-      .hero { padding-top: 100px; }
-      .hero-bg-number { font-size: 200px; opacity: 0.5; }
-      .phase-num { font-size: 4rem; }
-      .progress-bar-custom { flex: 1; }
-    }
-
-    /* Todas las pantallas medianas y menores */
-    @media(max-width: 991px) {
-      .hero-bg-number { display: none; }
-      .week-name { font-size: 0.82rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -530,25 +18,35 @@
 
     <!-- Desktop links -->
     <div class="d-none d-md-flex gap-4 align-items-center">
-      <a href="#journey" class="nav-link-custom">El camino</a>
-      <a href="#tips" class="nav-link-custom">Tips</a>
-      <a href="#plan" class="nav-link-custom">Plan 10K</a>
-      <a href="#instagram" class="btn-primary-custom" style="padding:10px 24px;font-size:0.65rem;">Seguir en IG</a>
+      <a href="#journey" class="nav-link-custom" data-i18n="nav_journey">El camino</a>
+      <a href="#tips" class="nav-link-custom" data-i18n="nav_tips">Tips</a>
+      <a href="#plan" class="nav-link-custom" data-i18n="nav_plan">Plan 10K</a>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="es">🇩🇴 ES</button>
+        <button class="lang-btn" data-lang="en">🇺🇸 EN</button>
+      </div>
+      <a href="#instagram" class="btn-primary-custom" style="padding:10px 24px;font-size:0.65rem;" data-i18n="nav_follow">Seguir en IG</a>
     </div>
 
-    <!-- Mobile hamburger -->
-    <button class="d-md-none" id="menuBtn" style="background:none;border:1px solid rgba(255,255,255,0.15);color:var(--text);padding:8px 12px;cursor:pointer;font-size:1.1rem;">
-      <i class="bi bi-list" id="menuIcon"></i>
-    </button>
+    <!-- Mobile: lang toggle + hamburger -->
+    <div class="d-flex d-md-none align-items-center gap-2">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="es">🇩🇴 ES</button>
+        <button class="lang-btn" data-lang="en">🇺🇸 EN</button>
+      </div>
+      <button class="d-md-none" id="menuBtn" style="background:none;border:1px solid rgba(255,255,255,0.15);color:var(--text);padding:8px 12px;cursor:pointer;font-size:1.1rem;">
+        <i class="bi bi-list" id="menuIcon"></i>
+      </button>
+    </div>
   </div>
 
   <!-- Mobile menu dropdown -->
   <div id="mobileMenu" style="display:none;background:rgba(10,10,10,0.97);border-top:1px solid var(--border);padding:20px 0;">
     <div class="container d-flex flex-column gap-3">
-      <a href="#journey" class="nav-link-custom" onclick="closeMenu()">El camino</a>
-      <a href="#tips" class="nav-link-custom" onclick="closeMenu()">Tips</a>
-      <a href="#plan" class="nav-link-custom" onclick="closeMenu()">Plan 10K</a>
-      <a href="#instagram" class="btn-primary-custom text-center mt-2" style="font-size:0.75rem;" onclick="closeMenu()">
+      <a href="#journey" class="nav-link-custom" onclick="closeMenu()" data-i18n="nav_journey">El camino</a>
+      <a href="#tips" class="nav-link-custom" onclick="closeMenu()" data-i18n="nav_tips">Tips</a>
+      <a href="#plan" class="nav-link-custom" onclick="closeMenu()" data-i18n="nav_plan">Plan 10K</a>
+      <a href="#instagram" class="btn-primary-custom text-center mt-2" style="font-size:0.75rem;" onclick="closeMenu()" data-i18n="nav_follow_long">
         <i class="bi bi-instagram me-2"></i>Seguir en Instagram
       </a>
     </div>
@@ -559,40 +57,39 @@
 <section class="hero">
   <div class="hero-bg-number">10K</div>
   <div class="container position-relative" style="z-index:1;">
-    <p class="hero-label">📍 Tu guía de running · desde 0 hasta la línea de meta</p>
-    <h1 class="hero-title">
-      De sofá<br>
-      <span>a corredor</span>
+    <p class="hero-label" data-i18n="hero_label">📍 Tu guía de running · desde 0 hasta la línea de meta</p>
+    <h1 class="hero-title" data-i18n="hero_title">
+      De sofá<br><span>a corredor</span>
     </h1>
-    <p class="hero-sub">
+    <p class="hero-sub" data-i18n="hero_sub">
       Contenido real para runners reales. Tips, planes de entrenamiento y todo lo que necesitas para completar tu primer 10K — sin morir en el intento.
     </p>
     <div class="hero-cta d-flex flex-wrap gap-3">
       <a href="#instagram" class="btn-primary-custom">
-        <i class="bi bi-instagram me-2"></i>Sígueme en Instagram
+        <i class="bi bi-instagram me-2"></i><span data-i18n="hero_cta_ig">Sígueme en Instagram</span>
       </a>
-      <a href="#journey" class="btn-outline-custom">Ver el camino →</a>
+      <a href="#journey" class="btn-outline-custom" data-i18n="hero_cta_journey">Ver el camino →</a>
     </div>
   </div>
 </section>
 
 <!-- TICKER -->
 <div class="ticker">
-  <div class="ticker-track">
+  <div class="ticker-track" id="tickerTrack">
     <span class="ticker-item">Empieza hoy</span>
     <span class="ticker-item">Tips de running</span>
     <span class="ticker-item">De 0 a 10K</span>
     <span class="ticker-item">Sin lesiones</span>
     <span class="ticker-item">Progreso real</span>
     <span class="ticker-item">Primera carrera</span>
-    <span class="ticker-item">Constancia > velocidad</span>
+    <span class="ticker-item">Constancia > Velocidad</span>
     <span class="ticker-item">Empieza hoy</span>
     <span class="ticker-item">Tips de running</span>
     <span class="ticker-item">De 0 a 10K</span>
     <span class="ticker-item">Sin lesiones</span>
     <span class="ticker-item">Progreso real</span>
     <span class="ticker-item">Primera carrera</span>
-    <span class="ticker-item">Constancia > velocidad</span>
+    <span class="ticker-item">Constancia > Velocidad</span>
   </div>
 </div>
 
@@ -600,34 +97,22 @@
 <section class="stats-section">
   <div class="container">
     <div class="row g-4 reveal">
-      <!-- <div class="col-6 col-md-3">
-        <div class="stat-card">
-          <div class="stat-number"><span class="stat-unit">+</span>500</div>
-          <div class="stat-label">Runners activos en comunidad</div>
-        </div>
-      </div> -->
-      <!-- <div class="col-6 col-md-3">
-        <div class="stat-card">
-          <div class="stat-number">8<span class="stat-unit">sem</span></div>
-          <div class="stat-label">Plan de 0 a 10K</div>
-        </div>
-      </div> -->
       <div class="col-6 col-md-3">
         <div class="stat-card">
           <div class="stat-number">8<span class="stat-unit">sem</span></div>
-          <div class="stat-label">Programa progresivo para a 10K</div>
+          <div class="stat-label" data-i18n="stat1">Programa progresivo para 10K</div>
         </div>
       </div>
       <div class="col-6 col-md-3">
         <div class="stat-card">
           <div class="stat-number">10<span class="stat-unit">K</span></div>
-          <div class="stat-label">Meta alcanzable para cualquiera</div>
+          <div class="stat-label" data-i18n="stat2">Meta alcanzable para cualquiera</div>
         </div>
       </div>
       <div class="col-6 col-md-3">
         <div class="stat-card">
           <div class="stat-number"><span class="stat-unit">%</span>0</div>
-          <div class="stat-label">Experiencia previa requerida</div>
+          <div class="stat-label" data-i18n="stat3">Experiencia previa requerida</div>
         </div>
       </div>
     </div>
@@ -638,10 +123,10 @@
 <section class="journey-section" id="journey">
   <div class="container">
     <div class="reveal mb-5">
-      <p class="section-label">El camino</p>
-      <h2 class="section-title">3 Fases para<br>Llegar a Meta</h2>
+      <p class="section-label" data-i18n="journey_label">El camino</p>
+      <h2 class="section-title" data-i18n="journey_title">3 Fases para<br>Llegar a Meta</h2>
       <div class="divider"></div>
-      <p class="stat-label" style="max-width:500px;font-size:0.95rem;line-height:1.7;">
+      <p class="stat-label" style="max-width:500px;font-size:0.95rem;line-height:1.7;" data-i18n="journey_desc">
         No importa si no has corrido en tu vida. Este es el proceso real, sin atajos, el mismo que estoy utilizando para mi primer 10K.
       </p>
     </div>
@@ -650,14 +135,14 @@
       <div class="col-md-4 reveal">
         <div class="phase-card">
           <div class="phase-num">01</div>
-          <div class="phase-badge">Semanas 1–3</div>
-          <div class="phase-title">El Despertar</div>
-          <p class="phase-desc">Empezar es lo más difícil. Esta fase trata de construir el hábito, no el rendimiento.</p>
-          <ul class="phase-list">
+          <div class="phase-badge" data-i18n="p1_badge">Semanas 1–3</div>
+          <div class="phase-title" data-i18n="p1_title">El Despertar</div>
+          <p class="phase-desc" data-i18n="p1_desc">Empezar es lo más difícil. Esta fase trata de construir el hábito, no el rendimiento.</p>
+          <ul class="phase-list" id="p1list">
             <li>Correr/caminar 20 min alternando</li>
             <li>3 salidas por semana</li>
             <li>Ritmo donde puedas hablar</li>
-            <li>Zapatillas adecuadas</li>
+            <li>Tenis adecuados</li>
             <li>Registro diario de cómo te sientes</li>
           </ul>
         </div>
@@ -666,10 +151,10 @@
       <div class="col-md-4 reveal">
         <div class="phase-card">
           <div class="phase-num">02</div>
-          <div class="phase-badge">Semanas 4–6</div>
-          <div class="phase-title">La Construcción</div>
-          <p class="phase-desc">Aquí el cuerpo se adapta. Empiezas a correr sin parar y el progreso se vuelve visible.</p>
-          <ul class="phase-list">
+          <div class="phase-badge" data-i18n="p2_badge">Semanas 4–6</div>
+          <div class="phase-title" data-i18n="p2_title">La Construcción</div>
+          <p class="phase-desc" data-i18n="p2_desc">Aquí el cuerpo se adapta. Empiezas a correr sin parar y el progreso se vuelve visible.</p>
+          <ul class="phase-list" id="p2list">
             <li>Correr 20–30 min continuos</li>
             <li>Aumentar distancia 10% semanal</li>
             <li>Trabajo de técnica de carrera</li>
@@ -682,10 +167,10 @@
       <div class="col-md-4 reveal">
         <div class="phase-card">
           <div class="phase-num">03</div>
-          <div class="phase-badge">Semanas 7–8</div>
-          <div class="phase-title">La Llegada</div>
-          <p class="phase-desc">Ya eres corredor. Hora de afinarte para ese primer 10K oficial y la foto en la meta.</p>
-          <ul class="phase-list">
+          <div class="phase-badge" data-i18n="p3_badge">Semanas 7–8</div>
+          <div class="phase-title" data-i18n="p3_title">La Llegada</div>
+          <p class="phase-desc" data-i18n="p3_desc">Ya eres corredor. Hora de afinarte para ese primer 10K oficial y la foto en la meta.</p>
+          <ul class="phase-list" id="p3list">
             <li>Rodaje largo de 7–8 km</li>
             <li>Reducción de carga (tapering)</li>
             <li>Estrategia de carrera</li>
@@ -702,51 +187,51 @@
 <section class="tips-section" id="tips">
   <div class="container">
     <div class="reveal mb-5">
-      <p class="section-label">Contenido de valor</p>
-      <h2 class="section-title">Tips que<br>Cambian Todo</h2>
+      <p class="section-label" data-i18n="tips_label">Contenido de valor</p>
+      <h2 class="section-title" data-i18n="tips_title">Tips que<br>Cambian Todo</h2>
       <div class="divider"></div>
     </div>
     <div class="row g-4">
       <div class="col-sm-6 col-lg-4 reveal">
         <div class="tip-card">
           <i class="bi bi-lungs tip-icon"></i>
-          <div class="tip-title">Respiración Correcta</div>
-          <p class="tip-text">El ritmo 3-3 (inhalar 3 pasos, exhalar 3 pasos) reduce los famosos "ponchazos, flato". Practica respiración diafragmática antes de salir.</p>
+          <div class="tip-title" data-i18n="tip1_title">Respiración Correcta</div>
+          <p class="tip-text" data-i18n="tip1_text">El ritmo 3-3 (inhalar 3 pasos, exhalar 3 pasos) reduce los famosos "ponchazos / flato". Practica respiración diafragmática antes de salir.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-4 reveal">
         <div class="tip-card">
           <i class="bi bi-lightning-charge tip-icon"></i>
-          <div class="tip-title">La Zapatilla Correcta</div>
-          <p class="tip-text">No necesitas las más caras; necesitas unas que se sientan cómodas. Pruébate varios modelos y elige el que mejor se adapte a ti. Si puedes, pide un análisis de marcha para orientación adicional.</p>
+          <div class="tip-title" data-i18n="tip2_title">El Calzado Correcto</div>
+          <p class="tip-text" data-i18n="tip2_text">No necesitas las más caras; necesitas unas que se sientan cómodas. Pruébate varios modelos y elige el que mejor se adapte a ti. Si puedes, pide un análisis de marcha para orientación adicional.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-4 reveal">
         <div class="tip-card">
           <i class="bi bi-clock tip-icon"></i>
-          <div class="tip-title">Correr Lento para Correr Rápido</div>
-          <p class="tip-text">El 80% de tus rodajes deben ser muy suaves, ritmo donde puedas hablar. La velocidad llega después, cuando tu base aeróbica mejora.</p>
+          <div class="tip-title" data-i18n="tip3_title">Correr Lento para Correr Rápido</div>
+          <p class="tip-text" data-i18n="tip3_text">El 80% de tus rodajes deben ser muy suaves, ritmo donde puedas hablar. La velocidad llega después, cuando tu base aeróbica mejora.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-4 reveal">
         <div class="tip-card">
           <i class="bi bi-droplet tip-icon"></i>
-          <div class="tip-title">Hidratación Antes y Después</div>
-          <p class="tip-text">Hidrátate desde 2 horas antes. Una buena hidratación mejora tu rendimiento entre un 2% y 10%. El color de la orina es tu mejor indicador.</p>
+          <div class="tip-title" data-i18n="tip4_title">Hidratación Antes y Después</div>
+          <p class="tip-text" data-i18n="tip4_text">Hidrátate desde 2 horas antes. Una buena hidratación mejora tu rendimiento entre un 2% y 10%. El color de la orina es tu mejor indicador.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-4 reveal">
         <div class="tip-card">
           <i class="bi bi-calendar-check tip-icon"></i>
-          <div class="tip-title">Descanso = Progreso</div>
-          <p class="tip-text">El progreso ocurre en el descanso, no en el entrenamiento. La fatiga acumulada por entrenar demasiado rápido es el error #1 de los principiantes.</p>
+          <div class="tip-title" data-i18n="tip5_title">Descanso = Progreso</div>
+          <p class="tip-text" data-i18n="tip5_text">El progreso ocurre en el descanso, no en el entrenamiento. La fatiga acumulada por entrenar demasiado rápido es el error #1 de los principiantes.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-4 reveal">
         <div class="tip-card">
           <i class="bi bi-trophy tip-icon"></i>
-          <div class="tip-title">Inscríbete a una Carrera</div>
-          <p class="tip-text">Tener una fecha en el calendario te da una motivación increíble. Busca una 5K o 10K y anótate cuando te sientas listo.</p>
+          <div class="tip-title" data-i18n="tip6_title">Inscríbete a una Carrera</div>
+          <p class="tip-text" data-i18n="tip6_text">Tener una fecha en el calendario te da una motivación increíble. Busca una 5K o 10K y anótate cuando te sientas listo.</p>
         </div>
       </div>
     </div>
@@ -757,129 +242,97 @@
 <section class="plan-section" id="plan">
   <div class="container">
     <div class="reveal mb-5">
-      <p class="section-label">Plan de entrenamiento</p>
-      <h2 class="section-title">8 Semanas<br>a tu 10K</h2>
+      <p class="section-label" data-i18n="plan_label">Plan de entrenamiento</p>
+      <h2 class="section-title" data-i18n="plan_title">8 Semanas<br>a tu 10K</h2>
       <div class="divider"></div>
-      <p class="stat-label" style="max-width:500px;font-size:0.9rem;line-height:1.7;">
+      <p class="stat-label" style="max-width:500px;font-size:0.9rem;line-height:1.7;" data-i18n="plan_desc">
         Este es el plan base. Cada semana lo detallo en Instagram con videos, reels y tips específicos.
       </p>
     </div>
     <div class="plan-table-wrap reveal">
       <div class="week-row" style="border-bottom:1px solid rgba(255,77,0,0.2);">
-        <span class="week-num" style="color:var(--muted);">SEMANA</span>
-        <span class="week-name" style="color:var(--muted);font-size:0.75rem;letter-spacing:0.1em;font-family:'Space Mono',monospace;">ENFOQUE</span>
+        <span class="week-num" style="color:var(--muted);" data-i18n="col_week">SEMANA</span>
+        <span class="week-name" style="color:var(--muted);font-size:0.75rem;letter-spacing:0.1em;font-family:'Space Mono',monospace;" data-i18n="col_focus">ENFOQUE</span>
         <div style="flex:2;"></div>
-        <span class="week-km" style="color:var(--muted);font-size:0.7rem;font-family:'Space Mono',monospace;">KM TOT.</span>
+        <span class="week-km" style="color:var(--muted);font-size:0.7rem;font-family:'Space Mono',monospace;" data-i18n="col_km">KM TOT.</span>
       </div>
       <div class="week-row">
-        <span class="week-num">SEM 01</span>
-        <span class="week-name">Correr/caminar – construir el hábito</span>
+        <span class="week-num" data-i18n="w1_num">SEM 01</span>
+        <span class="week-name" data-i18n="w1_desc">Correr/caminar – construir el hábito</span>
         <div class="progress-bar-custom"><div class="progress-fill" style="width:10%"></div></div>
         <span class="week-km">8 km</span>
       </div>
       <div class="week-row">
-        <span class="week-num">SEM 02</span>
-        <span class="week-name">20 min corriendo – primera prueba</span>
+        <span class="week-num" data-i18n="w2_num">SEM 02</span>
+        <span class="week-name" data-i18n="w2_desc">20 min corriendo – primera prueba</span>
         <div class="progress-bar-custom"><div class="progress-fill" style="width:18%"></div></div>
         <span class="week-km">12 km</span>
       </div>
       <div class="week-row">
-        <span class="week-num">SEM 03</span>
-        <span class="week-name">Resistencia aeróbica base</span>
+        <span class="week-num" data-i18n="w3_num">SEM 03</span>
+        <span class="week-name" data-i18n="w3_desc">Resistencia aeróbica base</span>
         <div class="progress-bar-custom"><div class="progress-fill" style="width:26%"></div></div>
         <span class="week-km">15 km</span>
       </div>
       <div class="week-row">
-        <span class="week-num">SEM 04</span>
-        <span class="week-name">Primer rodaje de 5K continuo</span>
+        <span class="week-num" data-i18n="w4_num">SEM 04</span>
+        <span class="week-name" data-i18n="w4_desc">Primer rodaje de 5K continuo</span>
         <div class="progress-bar-custom"><div class="progress-fill" style="width:38%"></div></div>
         <span class="week-km">18 km</span>
       </div>
       <div class="week-row">
-        <span class="week-num">SEM 05</span>
-        <span class="week-name">Aumento de volumen + técnica</span>
+        <span class="week-num" data-i18n="w5_num">SEM 05</span>
+        <span class="week-name" data-i18n="w5_desc">Aumento de volumen + técnica</span>
         <div class="progress-bar-custom"><div class="progress-fill" style="width:52%"></div></div>
         <span class="week-km">22 km</span>
       </div>
       <div class="week-row">
-        <span class="week-num">SEM 06</span>
-        <span class="week-name">Rodaje largo 7K + recuperación</span>
+        <span class="week-num" data-i18n="w6_num">SEM 06</span>
+        <span class="week-name" data-i18n="w6_desc">Rodaje largo 7K + recuperación</span>
         <div class="progress-bar-custom"><div class="progress-fill" style="width:67%"></div></div>
         <span class="week-km">22-24 km</span>
       </div>
       <div class="week-row">
-        <span class="week-num">SEM 07</span>
-        <span class="week-name">Simulacro de carrera – 7-8K</span>
+        <span class="week-num" data-i18n="w7_num">SEM 07</span>
+        <span class="week-name" data-i18n="w7_desc">Simulacro de carrera – 7-8K</span>
         <div class="progress-bar-custom"><div class="progress-fill" style="width:84%"></div></div>
         <span class="week-km">24-26 km</span>
       </div>
       <div class="week-row" style="border-bottom:none;">
-        <span class="week-num" style="color:var(--orange);">SEM 08</span>
-        <span class="week-name" style="color:#fff;font-weight:600;">🏁 CARRERA – Tu primer 10K oficial</span>
+        <span class="week-num" style="color:var(--orange);" data-i18n="w8_num">SEM 08</span>
+        <span class="week-name" style="color:#fff;font-weight:600;" data-i18n="w8_desc">🏁 CARRERA – Tu primer 10K oficial</span>
         <div class="progress-bar-custom"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,var(--orange),#FF7A3D)"></div></div>
         <span class="week-km" style="color:var(--orange);">10K</span>
       </div>
     </div>
-    <p class="stat-label mt-3 reveal" style="font-size:0.8rem;">
+    <p class="stat-label mt-3 reveal" style="font-size:0.8rem;" data-i18n="plan_note">
       * Cada semana tiene 3 días de entrenamiento + descanso activo. Sígueme en Instagram para los detalles de cada sesión.
     </p>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<!-- <section class="test-section">
-  <div class="container">
-    <div class="reveal mb-5">
-      <p class="section-label">La comunidad habla</p>
-      <h2 class="section-title">Resultados Reales</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-4 reveal">
-        <div class="test-card">
-          <div class="test-quote">"</div>
-          <p class="test-text">Empecé sin poder correr 5 minutos seguidos. 8 semanas después crucé la meta de mi primer 10K con lágrimas en los ojos. Este contenido cambió mi vida.</p>
-          <div class="test-name">@maria_runner</div>
-          <div class="test-info">Completó 10K en 62 min · Sin experiencia previa</div>
-        </div>
-      </div>
-      <div class="col-md-4 reveal">
-        <div class="test-card">
-          <div class="test-quote">"</div>
-          <p class="test-text">Los tips de respiración me salvaron. Llevaba meses con el "ponche" en el costado y en una semana lo eliminé. Simple, práctico, funciona.</p>
-          <div class="test-name">@carlos_entrena</div>
-          <div class="test-info">Runner novato · 3 meses en la comunidad</div>
-        </div>
-      </div>
-      <div class="col-md-4 reveal">
-        <div class="test-card">
-          <div class="test-quote">"</div>
-          <p class="test-text">Por fin un contenido de running que habla en mi idioma. Sin tecnicismos raros, sin prometerte imposibles. Solo progreso real paso a paso.</p>
-          <div class="test-name">@ana_soycorredora</div>
-          <div class="test-info">Primera carrera completada · 5K en 32 min</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
+<!-- TESTIMONIALS (comentado como en el original) -->
+<!--
+<section class="test-section"> ... </section>
+-->
 
 <!-- CTA INSTAGRAM -->
 <section class="cta-section" id="instagram">
   <div class="container position-relative" style="z-index:1;">
     <div class="reveal">
-      <h2 class="cta-big">
+      <h2 class="cta-big" data-i18n="cta_heading">
         Tu <span class="accent">10K</span><br>
         empieza hoy
       </h2>
-      <p class="cta-sub">
+      <p class="cta-sub" data-i18n="cta_sub">
         Cada semana subo tips, planes y contenido real sobre el camino de novato a corredor. Únete a la comunidad.
       </p>
       <div class="text-center">
         <a href="https://instagram.com/arielvillalona_" target="_blank" class="btn-primary-custom" style="font-size:0.9rem;padding:18px 48px;">
-          <i class="bi bi-instagram me-2"></i>Seguir @arielvillalona_
+          <i class="bi bi-instagram me-2"></i><span data-i18n="cta_btn">Seguir @arielvillalona_</span>
         </a>
       </div>
-      <p class="text-center mt-4" style="color:var(--muted);font-size:0.8rem;font-family:'Space Mono',monospace;">
+      <p class="text-center mt-4" style="color:var(--muted);font-size:0.8rem;font-family:'Space Mono',monospace;" data-i18n="cta_note">
         Gratis · Sin spam · Solo running
       </p>
     </div>
@@ -892,13 +345,13 @@
     <div class="row align-items-center">
       <div class="col-md-4 mb-3 mb-md-0">
         <div class="footer-logo">RUN<span>PROGRESS</span></div>
-        <p class="stat-label mt-2" style="font-size:0.8rem;">De novato a corredor de carrera. Contenido de running en español.</p>
+        <p class="stat-label mt-2" style="font-size:0.8rem;" data-i18n="footer_desc">De novato a corredor de carrera. Contenido de running en español.</p>
       </div>
       <div class="col-md-4 text-md-center mb-3 mb-md-0">
         <div class="d-flex gap-3 justify-content-md-center">
-          <a href="#" class="nav-link-custom">El Camino</a>
-          <a href="#" class="nav-link-custom">Tips</a>
-          <a href="#" class="nav-link-custom">Plan 10K</a>
+          <a href="#journey" class="nav-link-custom" data-i18n="nav_journey">El Camino</a>
+          <a href="#tips" class="nav-link-custom" data-i18n="nav_tips">Tips</a>
+          <a href="#plan" class="nav-link-custom" data-i18n="nav_plan">Plan 10K</a>
         </div>
       </div>
       <div class="col-md-4 text-md-end">
@@ -907,7 +360,7 @@
           <!-- <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
           <a href="#" class="social-link"><i class="bi bi-youtube"></i></a> -->
         </div>
-        <p class="stat-label mt-3" style="font-size:0.72rem;font-family:'Space Mono',monospace;">
+        <p class="stat-label mt-3" style="font-size:0.72rem;font-family:'Space Mono',monospace;" data-i18n="footer_copy">
           © 2025 RunProgress · Todos los derechos reservados
         </p>
       </div>
@@ -916,46 +369,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-
-  // Hamburger menu
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const menuIcon = document.getElementById('menuIcon');
-
-  menuBtn.addEventListener('click', () => {
-    const open = mobileMenu.style.display === 'block';
-    mobileMenu.style.display = open ? 'none' : 'block';
-    menuIcon.className = open ? 'bi bi-list' : 'bi bi-x-lg';
-  });
-
-  function closeMenu() {
-    mobileMenu.style.display = 'none';
-    menuIcon.className = 'bi bi-list';
-  }
-
-  // Close menu on resize to desktop
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768) closeMenu();
-  });
-
-
-  window.addEventListener('scroll', () => {
-    document.querySelector('.navbar-custom').style.padding =
-      window.scrollY > 50 ? '12px 0' : '20px 0';
-  });
-</script>
-
+<script src="js.js"></script>
 </body>
 </html>
