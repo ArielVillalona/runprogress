@@ -37,49 +37,38 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar-custom">
-  <div class="container d-flex align-items-center justify-content-between">
-    <a href="#" class="nav-logo">RUN<span>PROGRESS</span></a>
-
-    <!-- Desktop links -->
-    <div class="d-none d-md-flex gap-4 align-items-center">
-      <a href="#journey" class="nav-link-custom" data-i18n="nav_journey">El camino</a>
-      <a href="#tips" class="nav-link-custom" data-i18n="nav_tips">Tips</a>
-      <a href="#plan" class="nav-link-custom" data-i18n="nav_plan">Plan 10K</a>
-      <a href="guias.html" class="nav-link-custom" data-i18n="nav_guides">Guías</a>
-      <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="es">🇩🇴 ES</button>
-        <button class="lang-btn" data-lang="en">🇺🇸 EN</button>
+  <!-- ════════════════════ NAVBAR ════════════════════ -->
+  <nav class="navbar-custom">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="nav-logo">RUN<span>PROGRESS</span></a>
+      <div class="d-none d-md-flex gap-4 align-items-center">
+        <a href="index.html#journey" class="nav-link-custom">El camino</a>
+        <a href="index.html#tips"    class="nav-link-custom">Tips</a>
+        <a href="index.html#plan"    class="nav-link-custom">Plan 10K</a>
+        <a href="guias.html"         class="nav-link-custom">Guías</a>
+        <a href="sobre-mi.html"      class="nav-link-custom">Sobre mí</a>
+        <a href="https://instagram.com/arielvillalona_" target="_blank"
+           class="btn-primary-custom" style="font-size:.65rem;">Seguir en IG</a>
       </div>
-      <a href="#instagram" class="btn-primary-custom" style="padding:10px 24px;font-size:0.65rem;" data-i18n="nav_follow">Seguir en IG</a>
-    </div>
-
-    <!-- Mobile: lang toggle + hamburger -->
-    <div class="d-flex d-md-none align-items-center gap-2">
-      <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="es">🇩🇴 ES</button>
-        <button class="lang-btn" data-lang="en">🇺🇸 EN</button>
-      </div>
-      <button class="d-md-none" id="menuBtn" style="background:none;border:1px solid rgba(255,255,255,0.15);color:var(--text);padding:8px 12px;cursor:pointer;font-size:1.1rem;">
+      <!-- Mobile menu button -->
+      <button id="menuBtn" class="d-md-none"
+              style="background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;">
         <i class="bi bi-list" id="menuIcon"></i>
       </button>
     </div>
-  </div>
-
-  <!-- Mobile menu dropdown -->
-  <div id="mobileMenu" style="display:none;background:rgba(10,10,10,0.97);border-top:1px solid var(--border);padding:20px 0;">
-    <div class="container d-flex flex-column gap-3">
-      <a href="#journey" class="nav-link-custom" onclick="closeMenu()" data-i18n="nav_journey">El camino</a>
-      <a href="#tips" class="nav-link-custom" onclick="closeMenu()" data-i18n="nav_tips">Tips</a>
-      <a href="#plan" class="nav-link-custom" onclick="closeMenu()" data-i18n="nav_plan">Plan 10K</a>
-      <a href="guias.html" class="nav-link-custom" onclick="closeMenu()" data-i18n="nav_plan">Guias</a>
-      <a href="#instagram" class="btn-primary-custom text-center mt-2" style="font-size:0.75rem;" onclick="closeMenu()" data-i18n="nav_follow_long">
-        <i class="bi bi-instagram me-2"></i>Seguir en Instagram
-      </a>
+    <!-- Mobile dropdown -->
+    <div id="mobileMenu" style="display:none;background:rgba(10,10,10,0.98);border-top:1px solid var(--border);padding:20px 0;">
+      <div class="container d-flex flex-column gap-3">
+        <a href="index.html#journey" class="nav-link-custom" onclick="closeMenu()">El camino</a>
+        <a href="index.html#tips"    class="nav-link-custom" onclick="closeMenu()">Tips</a>
+        <a href="index.html#plan"    class="nav-link-custom" onclick="closeMenu()">Plan 10K</a>
+        <a href="guias.html"         class="nav-link-custom" onclick="closeMenu()">Guías</a>
+        <a href="sobre-mi.html"      class="nav-link-custom" onclick="closeMenu()">Sobre mí</a>
+        <a href="https://instagram.com/arielvillalona_" target="_blank"
+           class="btn-primary-custom" style="text-align:center;">Seguir en Instagram</a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
 <!-- HERO -->
 <section class="hero">

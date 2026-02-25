@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sobre mí · Ariel Villalona · RunProgress</title>
+  <meta name="description" content="Soy Ariel Villalona, programador dominicano que empezó a correr el 06/01/2026. Esto es mi historia real, sin filtros, de sofá a corredor."/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"/>
+
+  <style>
+    /* ══════════════════════════════════════════
+       DESIGN TOKENS — idénticos al proyecto
+    ══════════════════════════════════════════ */
+    :root {
+      --orange:      #FF4D00;
+      --orange-light:#FF7A3D;
+      --black:       #0A0A0A;
+      --dark:        #111111;
+      --card-bg:     #161616;
+      --text:        #E8E8E8;
+      --muted:       #777;
+      --border:      rgba(255,77,0,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Noise texture */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+
+    /* ══════════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════════ */
+    .navbar-custom {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      background: rgba(10,10,10,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: padding 0.3s;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #fff; text-decoration: none; }
+    .nav-logo span { color: var(--orange); }
+    .nav-link-custom {
+      font-family: 'Space Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-link-custom:hover { color: var(--orange); }
+    .nav-link-custom.active { color: var(--orange); }
+    .btn-primary-custom {
+      background: var(--orange); color: #fff; border: none;
+      font-family: 'Space Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 10px 24px; text-decoration: none;
+      display: inline-block; transition: all 0.3s;
+    }
+    .btn-primary-custom:hover { background: var(--orange-light); color: #fff; }
+    .btn-outline-custom {
+      background: transparent; color: var(--text);
+      border: 1px solid rgba(255,255,255,0.15);
+      font-family: 'Space Mono', monospace; font-size: 0.75rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 14px 32px; text-decoration: none;
+      display: inline-block; transition: all 0.3s;
+    }
+    .btn-outline-custom:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ══════════════════════════════════════════
+       PAGE HEADER
+    ══════════════════════════════════════════ */
+    .page-header {
+      padding: 150px 0 70px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header-bg {
+      position: absolute; right: -3rem; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(130px, 20vw, 300px);
+      color: rgba(255,77,0,0.04);
+      line-height: 1; pointer-events: none; user-select: none;
+    }
+    .page-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.28em;
+      color: var(--orange); text-transform: uppercase;
+      margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+    }
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 9vw, 110px);
+      line-height: 0.9; color: #fff;
+      opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+    }
+    .page-title span { color: var(--orange); }
+    .page-desc {
+      color: var(--muted); font-size: 1rem; max-width: 520px;
+      line-height: 1.75; font-weight: 300; margin-top: 1.5rem;
+      opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
+    }
+
+    /* ══════════════════════════════════════════
+       LIVE COUNTER STRIP
+    ══════════════════════════════════════════ */
+    .counter-strip {
+      background: var(--orange);
+      padding: 28px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .counter-strip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,0.04) 0px,
+        rgba(255,255,255,0.04) 1px,
+        transparent 1px,
+        transparent 60px
+      );
+    }
+    .counter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.65);
+      margin-bottom: 4px;
+    }
+    .counter-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      color: #fff; line-height: 1;
+    }
+    .counter-unit {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.7); text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .counter-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.2);
+      align-self: stretch;
+    }
+
+    /* ══════════════════════════════════════════
+       BIO SECTION
+    ══════════════════════════════════════════ */
+    .bio-section { padding: 90px 0; }
+
+    .bio-photo-wrap {
+      position: relative;
+    }
+    .bio-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bio-photo-inner {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 6rem;
+      color: rgba(255,77,0,0.12);
+      user-select: none;
+    }
+    .bio-photo-tag {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid var(--border);
+      padding: 16px 20px;
+    }
+    .bio-photo-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; color: #fff;
+    }
+    .bio-photo-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.15em;
+      color: var(--orange); text-transform: uppercase;
+    }
+    /* corner accent */
+    .bio-photo::after {
+      content: '';
+      position: absolute; top: -1px; left: -1px;
+      width: 40px; height: 40px;
+      border-top: 3px solid var(--orange);
+      border-left: 3px solid var(--orange);
+    }
+    .bio-photo::before {
+      content: '';
+      position: absolute; bottom: -1px; right: -1px;
+      width: 40px; height: 40px;
+      border-bottom: 3px solid var(--orange);
+      border-right: 3px solid var(--orange);
+      z-index: 2;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.3em;
+      color: var(--orange); text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5.5vw, 68px);
+      line-height: 1; color: #fff;
+    }
+    .divider { width: 60px; height: 2px; background: var(--orange); margin: 20px 0; }
+
+    .bio-text {
+      color: var(--muted); font-size: 1rem;
+      line-height: 1.85; font-weight: 300;
+    }
+    .bio-text strong { color: var(--text); font-weight: 500; }
+    .bio-text + .bio-text { margin-top: 1.2rem; }
+
+    .bio-highlight {
+      border-left: 3px solid var(--orange);
+      padding: 16px 20px;
+      background: rgba(255,77,0,0.04);
+      margin: 2rem 0;
+    }
+    .bio-highlight p {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ══════════════════════════════════════════
+       STATS GRID
+    ══════════════════════════════════════════ */
+    .stats-section { padding: 0 0 90px; }
+
+    .stat-card {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      padding: 36px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      height: 100%;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 3px; height: 0;
+      background: var(--orange); transition: height 0.4s;
+    }
+    .stat-card:hover::before { height: 100%; }
+    .stat-card:hover { border-color: rgba(255,77,0,0.4); transform: translateY(-4px); }
+    .stat-icon {
+      font-size: 1.4rem; color: var(--orange);
+      margin-bottom: 16px; display: block;
+    }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.2rem; color: #fff; line-height: 1;
+    }
+    .stat-unit { color: var(--orange); font-size: 1.5rem; }
+    .stat-label { color: var(--muted); font-size: 0.8rem; letter-spacing: 0.05em; margin-top: 8px; line-height: 1.5; }
+    .stat-bg-num {
+      position: absolute; bottom: -10px; right: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem; color: rgba(255,255,255,0.02);
+      line-height: 1; pointer-events: none;
+    }
+
+    /* ══════════════════════════════════════════
+       TIMELINE / HISTORIA
+    ══════════════════════════════════════════ */
+    .historia-section {
+      padding: 90px 0;
+      background: var(--dark);
+      position: relative;
+    }
+    .historia-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 10% 50%, rgba(255,77,0,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--orange) 0%, rgba(255,77,0,0.1) 100%);
+    }
+    .timeline-item {
+      position: relative;
+      padding: 0 0 48px 60px;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: 10px;
+      top: 4px;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--black);
+      border: 2px solid var(--orange);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .timeline-dot::after {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+    .timeline-item.active .timeline-dot {
+      background: var(--orange);
+      box-shadow: 0 0 0 6px rgba(255,77,0,0.15);
+      animation: pulse 2s infinite;
+    }
+    .timeline-item.active .timeline-dot::after {
+      background: #fff;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 6px rgba(255,77,0,0.15); }
+      50% { box-shadow: 0 0 0 12px rgba(255,77,0,0.06); }
+    }
+
+    .timeline-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.15em;
+      color: var(--orange); text-transform: uppercase; margin-bottom: 6px;
+    }
+    .timeline-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem; color: #fff; margin-bottom: 8px;
+    }
+    .timeline-desc {
+      color: var(--muted); font-size: 0.88rem;
+      line-height: 1.75; font-weight: 300;
+    }
+    .timeline-badge {
+      display: inline-block;
+      background: rgba(255,77,0,0.1); color: var(--orange);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      padding: 3px 10px; text-transform: uppercase;
+      margin-top: 10px;
+    }
+    .timeline-badge.now {
+      background: var(--orange); color: #fff;
+      animation: badgePulse 2s infinite;
+    }
+    @keyframes badgePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.75; }
+    }
+
+    /* ══════════════════════════════════════════
+       MISIÓN
+    ══════════════════════════════════════════ */
+    .mision-section { padding: 90px 0; }
+
+    .mision-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mision-card::after {
+      content: 'MISIÓN';
+      position: absolute; bottom: -20px; right: 20px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 7rem; color: rgba(255,77,0,0.04);
+      line-height: 1; pointer-events: none;
+    }
+
+    .mision-item {
+      display: flex; gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .mision-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .mision-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem; color: rgba(255,77,0,0.25);
+      line-height: 1; flex-shrink: 0; min-width: 40px;
+    }
+    .mision-content-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem; color: #fff; margin-bottom: 6px;
+    }
+    .mision-content-text {
+      color: var(--muted); font-size: 0.88rem; line-height: 1.7; font-weight: 300;
+    }
+
+    /* ══════════════════════════════════════════
+       FILOSOFÍA / VALORES
+    ══════════════════════════════════════════ */
+    .filosofia-section { padding: 0 0 90px; }
+
+    .valor-card {
+      border: 1px solid var(--border);
+      padding: 28px 24px;
+      background: transparent;
+      transition: all 0.3s;
+    }
+    .valor-card:hover {
+      background: var(--card-bg);
+      border-color: rgba(255,77,0,0.4);
+    }
+    .valor-icon { color: var(--orange); font-size: 1.5rem; margin-bottom: 14px; display: block; }
+    .valor-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: #fff; margin-bottom: 8px; }
+    .valor-text { color: var(--muted); font-size: 0.84rem; line-height: 1.65; font-weight: 300; }
+
+    /* ══════════════════════════════════════════
+       CTA
+    ══════════════════════════════════════════ */
+    .cta-section {
+      padding: 120px 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,77,0,0.1) 0%, transparent 70%);
+    }
+    .cta-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 100px);
+      line-height: 0.95; text-align: center; color: #fff;
+    }
+    .cta-big .accent { color: var(--orange); }
+    .cta-sub {
+      text-align: center; color: var(--muted);
+      font-size: 1rem; margin: 1.5rem auto 2.5rem;
+      max-width: 460px; line-height: 1.7;
+    }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    footer { border-top: 1px solid var(--border); padding: 44px 0; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #fff; }
+    .footer-logo span { color: var(--orange); }
+    .social-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted); text-decoration: none; font-size: 1.1rem; transition: all 0.25s;
+    }
+    .social-link:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ══════════════════════════════════════════
+       ANIMATIONS + SCROLL REVEAL
+    ══════════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ══════════════════════════════════════════
+       ZONAS CARDÍACAS
+    ══════════════════════════════════════════ */
+    .zonas-section { padding: 0 0 90px; }
+
+    .zona-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .zona-row:last-child { border-bottom: none; }
+    .zona-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.1em;
+      color: var(--muted); min-width: 52px; flex-shrink: 0;
+      text-transform: uppercase;
+    }
+    .zona-color-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+    .zona-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.05rem; color: #fff; flex: 1;
+    }
+    .zona-bpm {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; color: var(--muted); min-width: 100px; text-align: right;
+    }
+    .zona-bar-wrap {
+      flex: 2; height: 6px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 0; overflow: hidden;
+    }
+    .zona-bar {
+      height: 100%; border-radius: 0;
+      transition: width 1.2s ease-out;
+    }
+    .zona-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      padding: 3px 8px; text-transform: uppercase; flex-shrink: 0;
+    }
+    .zona-tag.active-tag {
+      background: rgba(255,77,0,0.15); color: var(--orange);
+      border: 1px solid rgba(255,77,0,0.3);
+    }
+    .zona-tag.inactive-tag {
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* colores por zona */
+    .z1 { background: #4FC3F7; }
+    .z2 { background: #81C784; }
+    .z3 { background: #FFD54F; }
+    .z4 { background: #FF8A65; }
+    .z5 { background: #EF5350; }
+
+    /* info card al lado */
+    .zona-info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 32px 28px;
+      position: relative; overflow: hidden;
+      height: 100%;
+    }
+    .zona-info-card::after {
+      content: '♥';
+      position: absolute; bottom: -10px; right: 14px;
+      font-size: 7rem; color: rgba(255,77,0,0.04);
+      line-height: 1; pointer-events: none;
+    }
+    .zona-fc-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem; color: #fff; line-height: 1;
+    }
+    .zona-fc-unit { color: var(--orange); font-size: 1.5rem; }
+    .zona-fc-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+    }
+    .zona-separator { width: 100%; height: 1px; background: rgba(255,255,255,0.05); margin: 20px 0; }
+
+    /* ══════════════════════════════════════════
+       MI EQUIPO
+    ══════════════════════════════════════════ */
+    .equipo-section {
+      padding: 90px 0;
+      background: var(--dark);
+      position: relative;
+    }
+    .equipo-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 90% 50%, rgba(255,77,0,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ── ITEM DE EQUIPO — fácil de duplicar ── */
+    .gear-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 0;
+      overflow: hidden;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .gear-card:hover { border-color: rgba(255,77,0,0.4); transform: translateY(-4px); }
+    .gear-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--orange); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .gear-card:hover::before { transform: scaleX(1); }
+
+    .gear-visual {
+      height: 140px;
+      background: rgba(255,255,255,0.02);
+      display: flex; align-items: center; justify-content: center;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .gear-icon {
+      font-size: 3.5rem; color: rgba(255,77,0,0.25);
+      transition: color 0.3s;
+    }
+    .gear-card:hover .gear-icon { color: rgba(255,77,0,0.5); }
+    .gear-visual-bg {
+      position: absolute; right: -8px; bottom: -12px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5.5rem; color: rgba(255,255,255,0.02);
+      line-height: 1; pointer-events: none;
+    }
+    .gear-body { padding: 22px 24px; }
+    .gear-category {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.15em;
+      background: rgba(255,77,0,0.1); color: var(--orange);
+      padding: 3px 8px; text-transform: uppercase;
+      display: inline-block; margin-bottom: 10px;
+    }
+    .gear-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem; color: #fff; margin-bottom: 6px; line-height: 1.1;
+    }
+    .gear-desc {
+      color: var(--muted); font-size: 0.82rem; line-height: 1.65; font-weight: 300;
+    }
+    .gear-specs {
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .gear-spec-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 4px 0;
+    }
+    .gear-spec-key {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.08em;
+      color: var(--muted); text-transform: uppercase;
+    }
+    .gear-spec-val {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; color: var(--text);
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 767px) {
+      .page-header { padding: 120px 0 56px; }
+      .page-header-bg { display: none; }
+      .bio-photo { aspect-ratio: 1/1; }
+      .counter-divider { display: none; }
+      .counter-strip .d-flex { flex-wrap: wrap; gap: 24px; justify-content: flex-start !important; }
+      .counter-num { font-size: 3.5rem; }
+      .mision-card { padding: 32px 24px; }
+      .historia-section { padding: 60px 0; }
+      .cta-section { padding: 80px 0; }
+      /* zonas */
+      .zona-bar-wrap { display: none; }
+      .zona-row { flex-wrap: wrap; gap: 8px; }
+      .zona-bpm { min-width: auto; text-align: left; }
+      .zona-tag { display: none; }
+      /* equipo */
+      .gear-visual { height: 100px; }
+      .gear-icon { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════ NAVBAR ════════════════════ -->
+  <nav class="navbar-custom">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="nav-logo">RUN<span>PROGRESS</span></a>
+      <div class="d-none d-md-flex gap-4 align-items-center">
+        <a href="index.html#journey" class="nav-link-custom">El camino</a>
+        <a href="index.html#tips"    class="nav-link-custom">Tips</a>
+        <a href="index.html#plan"    class="nav-link-custom">Plan 10K</a>
+        <a href="guias.html"         class="nav-link-custom">Guías</a>
+        <a href="sobre-mi.html"      class="nav-link-custom active">Sobre mí</a>
+        <a href="https://instagram.com/arielvillalona_" target="_blank"
+           class="btn-primary-custom" style="font-size:.65rem;">Seguir en IG</a>
+      </div>
+      <!-- Mobile menu button -->
+      <button id="menuBtn" class="d-md-none"
+              style="background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;">
+        <i class="bi bi-list" id="menuIcon"></i>
+      </button>
+    </div>
+    <!-- Mobile dropdown -->
+    <div id="mobileMenu" style="display:none;background:rgba(10,10,10,0.98);border-top:1px solid var(--border);padding:20px 0;">
+      <div class="container d-flex flex-column gap-3">
+        <a href="index.html#journey" class="nav-link-custom" onclick="closeMenu()">El camino</a>
+        <a href="index.html#tips"    class="nav-link-custom" onclick="closeMenu()">Tips</a>
+        <a href="index.html#plan"    class="nav-link-custom" onclick="closeMenu()">Plan 10K</a>
+        <a href="guias.html"         class="nav-link-custom" onclick="closeMenu()">Guías</a>
+        <a href="sobre-mi.html"      class="nav-link-custom active" onclick="closeMenu()">Sobre mí</a>
+        <a href="https://instagram.com/arielvillalona_" target="_blank"
+           class="btn-primary-custom" style="text-align:center;">Seguir en Instagram</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════ PAGE HEADER ════════════════════ -->
+  <section class="page-header">
+    <div class="container position-relative">
+      <div class="page-header-bg" aria-hidden="true">ARIEL</div>
+      <p class="page-label">Conoce al corredor</p>
+      <h1 class="page-title">Sobre<br><span>mí</span></h1>
+      <p class="page-desc">Programador dominicano que un día decidió empezar a correr. Sin experiencia previa, sin excusas. Esta es mi historia real.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════ LIVE COUNTER STRIP ════════════════════ -->
+  <div class="counter-strip">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between gap-4 flex-wrap">
+
+        <div>
+          <p class="counter-label">Días corriendo</p>
+          <p class="counter-num" id="counterDias">0</p>
+          <p class="counter-unit">días en la pista</p>
+        </div>
+
+        <div class="counter-divider d-none d-md-block"></div>
+
+        <div>
+          <p class="counter-label">Fecha de inicio</p>
+          <p class="counter-num" style="font-size:clamp(1.6rem,4vw,2.8rem);line-height:1.1;">06 / ENE / 2026</p>
+          <p class="counter-unit">día cero</p>
+        </div>
+
+        <div class="counter-divider d-none d-md-block"></div>
+
+        <div>
+          <p class="counter-label">Rodaje semanal largo</p>
+          <p class="counter-num">15<span style="font-size:2.5rem;"> km</span></p>
+          <p class="counter-unit">cada sábado</p>
+        </div>
+
+        <div class="counter-divider d-none d-md-block"></div>
+
+        <div>
+          <p class="counter-label">Cadencia objetivo</p>
+          <p class="counter-num">170<span style="font-size:2rem;"> SPM</span></p>
+          <p class="counter-unit">pasos por minuto</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ BIO ════════════════════ -->
+  <section class="bio-section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+
+        <!-- Foto / Avatar -->
+        <div class="col-12 col-md-4 reveal">
+          <div class="bio-photo-wrap">
+            <div class="bio-photo">
+              <!-- SVG avatar placeholder — reemplaza con tu foto real -->
+              <svg viewBox="0 0 200 220" width="160" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Silueta de corredor minimalista -->
+                <circle cx="100" cy="52" r="28" fill="rgba(255,77,0,0.15)" stroke="rgba(255,77,0,0.4)" stroke-width="1.5"/>
+                <path d="M72 100 C72 100 80 130 100 138 C120 130 128 100 128 100" stroke="rgba(255,77,0,0.5)" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <!-- brazos en posición de correr -->
+                <path d="M76 115 L52 105" stroke="rgba(255,77,0,0.4)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M124 115 L148 105" stroke="rgba(255,77,0,0.4)" stroke-width="2" stroke-linecap="round"/>
+                <!-- piernas -->
+                <path d="M90 138 L80 178" stroke="rgba(255,77,0,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M110 138 L120 175 L106 175" stroke="rgba(255,77,0,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <!-- decorative number -->
+                <text x="100" y="210" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(255,77,0,0.2)" text-anchor="middle">AV</text>
+              </svg>
+              <div class="bio-photo-inner" aria-hidden="true">AV</div>
+              <div class="bio-photo-tag">
+                <div class="bio-photo-name">Ariel Villalona</div>
+                <div class="bio-photo-sub">Programador · Corredor · 🇩🇴</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texto bio -->
+        <div class="col-12 col-md-8 reveal">
+          <p class="section-label">Mi historia</p>
+          <h2 class="section-title">Un programador<br><span style="color:var(--orange);">que empezó a correr</span></h2>
+          <div class="divider"></div>
+
+          <p class="bio-text">
+            Me llamo Ariel Villalona. Soy programador dominicano y el <strong>6 de enero de 2026</strong> decidí que quería correr mi primer 10K. Sin experiencia previa, sin "base aeróbica", sin excusas.
+          </p>
+
+          <div class="bio-highlight">
+            <p>"No soy un atleta con historial. Soy alguien que decidió empezar, que documenta el proceso real y que quiere que tú también puedas hacerlo."</p>
+          </div>
+
+          <p class="bio-text">
+            Hoy corro entre <strong>5 y 8 km 3 veces por semana</strong> y mis fondos del sábado ya son de <strong>15 km</strong>. Trabajo en técnica de cadencia (170 SPM), respiración 3-3 y ritmo conversacional. Todo lo que aprendo, lo publico.
+          </p>
+
+          <p class="bio-text">
+            <strong>RunProgress</strong> nació porque no encontraba contenido en español que fuera <strong>directo, técnico y sin motivación vacía</strong>. Lo que verás aquí es mi progreso real: los días difíciles, los avances, las dudas y lo que funciona.
+          </p>
+
+          <div class="d-flex gap-3 flex-wrap mt-4">
+            <a href="https://instagram.com/arielvillalona_" target="_blank" class="btn-primary-custom">
+              <i class="bi bi-instagram me-2"></i>Seguir en Instagram
+            </a>
+            <a href="guias.html" class="btn-outline-custom">
+              Ver guías →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ STATS ════════════════════ -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row g-3">
+
+        <div class="col-6 col-md-3 reveal">
+          <div class="stat-card">
+            <i class="bi bi-calendar-check stat-icon"></i>
+            <div class="stat-number"><span id="statDias">0</span></div>
+            <div class="stat-label">días corriendo<br>desde el inicio</div>
+            <div class="stat-bg-num">D</div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 reveal">
+          <div class="stat-card">
+            <i class="bi bi-activity stat-icon"></i>
+            <div class="stat-number">5<span class="stat-unit">–8</span></div>
+            <div class="stat-label">km 3 veces por semana<br>en rodajes normales</div>
+            <div class="stat-bg-num">K</div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 reveal">
+          <div class="stat-card">
+            <i class="bi bi-arrow-up-right stat-icon"></i>
+            <div class="stat-number">15<span class="stat-unit"> km</span></div>
+            <div class="stat-label">fondo largo<br>cada sábado</div>
+            <div class="stat-bg-num">F</div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 reveal">
+          <div class="stat-card">
+            <i class="bi bi-music-note-beamed stat-icon"></i>
+            <div class="stat-number">170<span class="stat-unit" style="font-size:1rem;">spm</span></div>
+            <div class="stat-label">cadencia objetivo<br>con metrónomo</div>
+            <div class="stat-bg-num">C</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ ZONAS CARDÍACAS ════════════════════ -->
+  <!--
+    ╔══════════════════════════════════════════════════════════╗
+    ║  CÓMO EDITAR LAS ZONAS:                                  ║
+    ║  Cada .zona-row es una zona. Ajusta:                     ║
+    ║  · .zona-bpm  → el rango de BPM                         ║
+    ║  · style="width:X%"  → qué % de la barra se rellena     ║
+    ║  · .zona-tag  → "Mi zona" o quítalo                      ║
+    ║  Tus datos clave: FCmax, FC reposo, FC promedio rodaje   ║
+    ╚══════════════════════════════════════════════════════════╝
+  -->
+  <section class="zonas-section">
+    <div class="container">
+
+      <div class="row g-4 align-items-start">
+
+        <!-- Tabla de zonas -->
+        <div class="col-12 col-lg-7 reveal">
+          <p class="section-label">Fisiología del entrenamiento</p>
+          <h2 class="section-title">Zonas<br><span style="color:var(--orange);">cardíacas</span></h2>
+          <div class="divider"></div>
+          <p style="color:var(--muted);font-size:.9rem;line-height:1.75;font-weight:300;margin-bottom:28px;">
+            Corro el 80% del tiempo en Zona 2. Base aeróbica antes que velocidad. El Amazfit Active 2 me confirma la FC en tiempo real.
+          </p>
+
+          <!-- ── Zona 1 ── -->
+          <div class="zona-row">
+            <span class="zona-num">Zona 1</span>
+            <span class="zona-color-dot z1"></span>
+            <span class="zona-name">Recuperación activa</span>
+            <div class="zona-bar-wrap">
+              <div class="zona-bar z1" style="width:20%"></div>
+            </div>
+            <span class="zona-bpm">&lt; 151 bpm</span>
+            <span class="zona-tag inactive-tag">Calent.</span>
+          </div>
+
+          <!-- ── Zona 2 ── -->
+          <div class="zona-row">
+            <span class="zona-num">Zona 2</span>
+            <span class="zona-color-dot z2"></span>
+            <span class="zona-name">Base aeróbica</span>
+            <div class="zona-bar-wrap">
+              <div class="zona-bar z2" style="width:55%"></div>
+            </div>
+            <span class="zona-bpm">152 – 163 bpm</span>
+            <span class="zona-tag active-tag">Mi zona 80%</span>
+          </div>
+
+          <!-- ── Zona 3 ── -->
+          <div class="zona-row">
+            <span class="zona-num">Zona 3</span>
+            <span class="zona-color-dot z3"></span>
+            <span class="zona-name">Umbral aeróbico</span>
+            <div class="zona-bar-wrap">
+              <div class="zona-bar z3" style="width:75%"></div>
+            </div>
+            <span class="zona-bpm">164 – 168 bpm</span>
+            <span class="zona-tag inactive-tag">Tempo</span>
+          </div>
+
+          <!-- ── Zona 4 ── -->
+          <div class="zona-row">
+            <span class="zona-num">Zona 4</span>
+            <span class="zona-color-dot z4"></span>
+            <span class="zona-name">Umbral láctico</span>
+            <div class="zona-bar-wrap">
+              <div class="zona-bar z4" style="width:88%"></div>
+            </div>
+            <span class="zona-bpm">169 – 176 bpm</span>
+            <span class="zona-tag inactive-tag">Interv.</span>
+          </div>
+
+          <!-- ── Zona 5 ── -->
+          <div class="zona-row">
+            <span class="zona-num">Zona 5</span>
+            <span class="zona-color-dot z5"></span>
+            <span class="zona-name">VO₂ máx</span>
+            <div class="zona-bar-wrap">
+              <div class="zona-bar z5" style="width:100%"></div>
+            </div>
+            <span class="zona-bpm">&gt; 177 bpm</span>
+            <span class="zona-tag inactive-tag">Sprint</span>
+          </div>
+
+        </div>
+
+        <!-- Card con mis datos de FC -->
+        <div class="col-12 col-lg-5 reveal">
+          <div class="zona-info-card">
+
+            <p class="zona-fc-label">FC Máxima estimada</p>
+            <div class="zona-fc-num">187<span class="zona-fc-unit"> bpm</span></div>
+            <p style="color:var(--muted);font-size:.78rem;margin-top:4px;font-family:'Space Mono',monospace;">
+              Fórmula: 220 − edad (33 años)
+            </p>
+
+            <div class="zona-separator"></div>
+
+            <p class="zona-fc-label">FC Reposo</p>
+            <div class="zona-fc-num" style="font-size:2.4rem;">58<span class="zona-fc-unit" style="font-size:1.2rem;"> bpm</span></div>
+            <p style="color:var(--muted);font-size:.78rem;margin-top:4px;font-family:'Space Mono',monospace;">
+              Medida al despertar · promedio semanal
+            </p>
+
+            <div class="zona-separator"></div>
+
+            <p class="zona-fc-label">FC Promedio rodaje Z2</p>
+            <div class="zona-fc-num" style="font-size:2.4rem;">160<span class="zona-fc-unit" style="font-size:1.2rem;"> bpm</span></div>
+            <p style="color:var(--muted);font-size:.78rem;margin-top:4px;font-family:'Space Mono',monospace;">
+              Ritmo ~7:30 min/km · conversacional
+            </p>
+
+            <div class="zona-separator"></div>
+
+            <p class="zona-fc-label">Ritmo de paso conversacional</p>
+            <div class="zona-fc-num" style="font-size:2.4rem;">7:30<span class="zona-fc-unit" style="font-size:1.2rem;"> /km</span></div>
+            <p style="color:var(--muted);font-size:.78rem;margin-top:4px;font-family:'Space Mono',monospace;">
+              80% del entrenamiento a este ritmo
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ MI EQUIPO ════════════════════ -->
+  <!--
+    ╔══════════════════════════════════════════════════════════╗
+    ║  CÓMO AGREGAR EQUIPO:                                    ║
+    ║  Duplica cualquier bloque .col que empiece con          ║
+    ║   GEAR ITEM   y cambia:                          ║
+    ║  · .gear-category  → categoría (Reloj, Tenis, etc.)    ║
+    ║  · .gear-name      → nombre del producto               ║
+    ║  · .gear-desc      → descripción en 1-2 frases         ║
+    ║  · .gear-spec-item → specs clave (modelo, uso, etc.)   ║
+    ║  · .bi-XXX         → icono de Bootstrap Icons          ║
+    ╚══════════════════════════════════════════════════════════╝
+  -->
+  <section class="equipo-section">
+    <div class="container">
+
+      <div class="row mb-5 reveal">
+        <div class="col-12 col-md-8">
+          <p class="section-label">Lo que uso en cada rodaje</p>
+          <h2 class="section-title">Mi<br><span style="color:var(--orange);">equipo</span></h2>
+          <div class="divider"></div>
+          <p style="color:var(--muted);font-size:.92rem;line-height:1.75;font-weight:300;max-width:540px;">
+            No necesitas el equipo más caro para empezar. Este es lo que uso yo actualmente, con honestidad sobre qué funciona y qué mejoraría.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-3">
+
+        <!-- GEAR ITEM — Reloj -->
+        <div class="col-12 col-sm-6 col-lg-4 reveal">
+          <div class="gear-card h-100">
+            <div class="gear-visual">
+              <i class="bi bi-smartwatch gear-icon"></i>
+              <span class="gear-visual-bg">01</span>
+            </div>
+            <div class="gear-body">
+              <span class="gear-category">Reloj / GPS</span>
+              <h3 class="gear-name">Amazfit Active 2</h3>
+              <p class="gear-desc">Monitoreo de FC continuo, GPS integrado, registro de cadencia y zonas cardíacas. Relación calidad-precio imbatible para principiantes.</p>
+              <div class="gear-specs">
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">GPS</span>
+                  <span class="gear-spec-val">Integrado</span>
+                </div>
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Batería</span>
+                  <span class="gear-spec-val">~14 días</span>
+                </div>
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">FC</span>
+                  <span class="gear-spec-val">Continua 24h</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GEAR ITEM — Audífonos -->
+        <div class="col-12 col-sm-6 col-lg-4 reveal">
+          <div class="gear-card h-100">
+            <div class="gear-visual">
+              <i class="bi bi-headphones gear-icon"></i>
+              <span class="gear-visual-bg">02</span>
+            </div>
+            <div class="gear-body">
+              <span class="gear-category">Audio</span>
+              <h3 class="gear-name">Audífonos deportivos</h3>
+              <p class="gear-desc">Uso audífonos resistentes al sudor para correr (sony WF-C500)</p>
+              <div class="gear-specs">
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Uso</span>
+                  <span class="gear-spec-val">Música</span>
+                </div>
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Tipo</span>
+                  <span class="gear-spec-val">In-ear</span>
+                </div>
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">sudo</span>
+                  <span class="gear-spec-val">Resistente</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GEAR ITEM — App metrónomo -->
+        <div class="col-12 col-sm-6 col-lg-4 reveal">
+          <div class="gear-card h-100">
+            <div class="gear-visual">
+              <i class="bi bi-phone gear-icon"></i>
+              <span class="gear-visual-bg">03</span>
+            </div>
+            <div class="gear-body">
+              <span class="gear-category">App · Metrónomo</span>
+              <h3 class="gear-name">Pro Metronome / Soundbrenner</h3>
+              <p class="gear-desc">La herramienta más barata y más efectiva para mejorar la cadencia. Configuras 170 BPM y el cuerpo aprende solo en 4–6 sesiones.</p>
+              <div class="gear-specs">
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">BPM objetivo</span>
+                  <span class="gear-spec-val">170 BPM</span>
+                </div>
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Precio</span>
+                  <span class="gear-spec-val">Gratis</span>
+                </div>
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Plataforma</span>
+                  <span class="gear-spec-val">iOS · Android</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GEAR ITEM — Tenis (placeholder para que añadas el tuyo) -->
+        <div class="col-12 col-sm-6 col-lg-4 reveal">
+          <div class="gear-card h-100">
+            <div class="gear-visual">
+              <i class="bi bi-dribbble gear-icon"></i>
+              <span class="gear-visual-bg">04</span>
+            </div>
+            <div class="gear-body">
+              <span class="gear-category">Calzado</span>
+              <h3 class="gear-name">Under Armour Men's Charged Surge 4</h3>
+              <p class="gear-desc">Men's Charged Surge 4. No necesitas el más caro, necesitas el que se siente bien en tu pisada.</p>
+              <div class="gear-specs">
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Modelo</span>
+                  <span class="gear-spec-val">Men's Charged Surge 4</span>
+                </div>
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Drop</span>
+                  <span class="gear-spec-val">neutral</span>
+                </div>
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Km acumulados</span>
+                  <span class="gear-spec-val">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GEAR ITEM — Ropa -->
+        <div class="col-12 col-sm-6 col-lg-4 reveal">
+          <div class="gear-card h-100">
+            <div class="gear-visual">
+              <i class="bi bi-wind gear-icon"></i>
+              <span class="gear-visual-bg">05</span>
+            </div>
+            <div class="gear-body">
+              <span class="gear-category">Ropa</span>
+              <h3 class="gear-name">Ropa técnica dry-fit</h3>
+              <p class="gear-desc">Básico pero importante: telas que evaporen el sudor. Con el calor dominicano, esto marca la diferencia en un rodaje largo.</p>
+              <div class="gear-specs">
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Material</span>
+                  <span class="gear-spec-val">Poliéster técnico</span>
+                </div>
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Clima</span>
+                  <span class="gear-spec-val">Calor / humedad</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GEAR ITEM — Hidratación -->
+        <div class="col-12 col-sm-6 col-lg-4 reveal">
+          <div class="gear-card h-100">
+            <div class="gear-visual">
+              <i class="bi bi-droplet-half gear-icon"></i>
+              <span class="gear-visual-bg">06</span>
+            </div>
+            <div class="gear-body">
+              <span class="gear-category">Hidratación</span>
+              <h3 class="gear-name">Botella o chaleco de hidratación</h3>
+              <p class="gear-desc">Para fondos de 15+ km es obligatorio.</p>
+              <div class="gear-specs">
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Necesario desde</span>
+                  <span class="gear-spec-val">10+ km</span>
+                </div>
+                <div class="gear-spec-item">
+                  <span class="gear-spec-key">Hidratación previa</span>
+                  <span class="gear-spec-val">2 horas antes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /row gear -->
+    </div>
+  </section>
+
+  <!-- ════════════════════ TIMELINE ════════════════════ -->
+  <section class="historia-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4 mb-5 mb-md-0 reveal">
+          <p class="section-label">Línea de tiempo</p>
+          <h2 class="section-title">Mi camino<br><span style="color:var(--orange);">hasta aquí</span></h2>
+          <div class="divider"></div>
+          <p style="color:var(--muted);font-size:.92rem;line-height:1.75;font-weight:300;">
+            Cada hito cuenta. Desde el primer paso torpe hasta los fondos de 15K del sábado. Aquí está el proceso sin editar.
+          </p>
+        </div>
+
+        <div class="col-12 col-md-7 offset-md-1 reveal">
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <p class="timeline-date">06 Enero 2026 — Día 0</p>
+              <h3 class="timeline-title">El primer paso</h3>
+              <p class="timeline-desc">Salí a correr por primera vez sin plan, sin ritmo y sin idea de lo que hacía. Duré menos de 10 minutos. Ese fue el día cero.</p>
+              <span class="timeline-badge">Inicio</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <p class="timeline-date">Semanas 1–2</p>
+              <h3 class="timeline-title">Construyendo el hábito</h3>
+              <p class="timeline-desc">Run/walk intervals, 3 veces por semana. Aprendí que ir lento no es fracasar — es el método. Ritmo conversacional como punto de partida. incluso dias de solo caminar.</p>
+              <span class="timeline-badge">Hábito</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <p class="timeline-date">Semanas 3–4</p>
+              <h3 class="timeline-title">Técnica: cadencia y respiración</h3>
+              <p class="timeline-desc">Con una app metrónomo a 170 BPM y el patrón de respiración 3-3. Dos cambios que transformaron cómo corro. Menos impacto, más eficiencia.</p>
+              <span class="timeline-badge">Técnica</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <p class="timeline-date">Semanas 5–6</p>
+              <h3 class="timeline-title">Primeros 10 km continuos</h3>
+              <p class="timeline-desc">El cuerpo empezó a adaptarse. Los 5–8 km que hago 3 veces por semana se volvieron la norma. El primer rodaje de 10K sin parar fue un antes y un después.</p>
+              <span class="timeline-badge">Hito</span>
+            </div>
+
+            <div class="timeline-item active">
+              <div class="timeline-dot"></div>
+              <p class="timeline-date">Hoy · <span id="timelineHoy"></span></p>
+              <h3 class="timeline-title">Fondos de 15 km + volumen diario + fortalecimiento de core + ejercicio de fuerza</h3>
+              <p class="timeline-desc">Los sábados son de fondo largo: 15+ km. El resto de la semana(3 dias), 5–8 km con foco en técnica. La carrera oficial de 10K está en el horizonte.</p>
+              <span class="timeline-badge now">● En curso</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ MISIÓN ════════════════════ -->
+  <section class="mision-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-5 mb-5 mb-md-0 reveal">
+          <p class="section-label">Por qué existe RunProgress</p>
+          <h2 class="section-title">Mi<br><span style="color:var(--orange);">misión</span></h2>
+          <div class="divider"></div>
+          <p style="color:var(--muted);font-size:.92rem;line-height:1.75;font-weight:300;">
+            No soy coach, no soy atleta de élite. Soy alguien que va delante en el mismo camino que tú, documentando lo que funciona.
+          </p>
+        </div>
+
+        <div class="col-12 col-md-7 reveal">
+          <div class="mision-card">
+
+            <div class="mision-item">
+              <div class="mision-num">01</div>
+              <div>
+                <h3 class="mision-content-title">Contenido real, no inspiración vacía</h3>
+                <p class="mision-content-text">Nada de frases motivacionales sin sustancia. Todo lo que publico viene de mi experiencia directa, con fuentes y con contexto técnico real.</p>
+              </div>
+            </div>
+
+            <div class="mision-item">
+              <div class="mision-num">02</div>
+              <div>
+                <h3 class="mision-content-title">Guías con pasos simples y aplicables</h3>
+                <p class="mision-content-text">Cada guía tiene un objetivo concreto. Puedes leerla en 5 minutos y aplicarla en tu próximo rodaje. Sin rodeos, sin relleno.</p>
+              </div>
+            </div>
+
+            <div class="mision-item">
+              <div class="mision-num">03</div>
+              <div>
+                <h3 class="mision-content-title">Progreso transparente y documentado</h3>
+                <p class="mision-content-text">Comparto mis avances y también mis errores. Que veas que el proceso no es lineal y que el estancamiento también es parte del camino.</p>
+              </div>
+            </div>
+
+            <div class="mision-item">
+              <div class="mision-num">04</div>
+              <div>
+                <h3 class="mision-content-title">Running accesible para cualquiera</h3>
+                <p class="mision-content-text">Si yo pude empezar desde cero siendo programador sedentario, tú también puedes. Este sitio existe para demostrarlo.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FILOSOFÍA / VALORES ════════════════════ -->
+  <section class="filosofia-section">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <p class="section-label">Lo que guía cada rodaje</p>
+        <h2 class="section-title">Mi filosofía<br><span style="color:var(--orange);">de correr</span></h2>
+      </div>
+
+      <div class="row g-3">
+
+        <div class="col-12 col-sm-6 col-lg-3 reveal">
+          <div class="valor-card h-100">
+            <i class="bi bi-speedometer2 valor-icon"></i>
+            <h3 class="valor-title">Lento para ir lejos</h3>
+            <p class="valor-text">El 80% de mis rodajes son en ritmo conversacional(7:30 y soy feliz). La velocidad es consecuencia de la base aeróbica, no al revés.</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3 reveal">
+          <div class="valor-card h-100">
+            <i class="bi bi-graph-up valor-icon"></i>
+            <h3 class="valor-title">Progresión sin prisas</h3>
+            <p class="valor-text">Nunca aumentar más del 10% de volumen semanal. El cuerpo necesita tiempo para adaptarse. Las lesiones son el freno más caro que existe.</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3 reveal">
+          <div class="valor-card h-100">
+            <i class="bi bi-clipboard-data valor-icon"></i>
+            <h3 class="valor-title">Datos sobre intuición</h3>
+            <p class="valor-text">Metrónomo, ritmo cardíaco, RPE. Medir para entender. No improviso el entrenamiento; lo estructuro con información real.</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3 reveal">
+          <div class="valor-card h-100">
+            <i class="bi bi-moon-stars valor-icon"></i>
+            <h3 class="valor-title">Descanso como herramienta</h3>
+            <p class="valor-text">El progreso ocurre durante la recuperación, no en el entrenamiento. Los días de descanso activo son tan importantes como los de rodaje.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ CTA ════════════════════ -->
+  <section class="cta-section">
+    <div class="container position-relative">
+      <h2 class="cta-big">Corre conmigo<br><span class="accent">cada semana</span></h2>
+      <p class="cta-sub">Cada semana subo tips, guías y progreso real en Instagram. Únete y documenta tu propio camino.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="https://instagram.com/arielvillalona_" target="_blank" class="btn-primary-custom" style="font-size:.82rem;padding:16px 40px;">
+          <i class="bi bi-instagram me-2"></i>Seguir @arielvillalona_
+        </a>
+        <a href="guias.html" class="btn-outline-custom">Ver todas las guías</a>
+      </div>
+      <p style="color:var(--muted);font-size:.75rem;font-family:'Space Mono',monospace;text-align:center;margin-top:16px;letter-spacing:.1em;">
+        GRATIS · SIN SPAM · SOLO RUNNING
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FOOTER ════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+        <div>
+          <div class="footer-logo">RUN<span>PROGRESS</span></div>
+          <p style="color:var(--muted);font-size:0.82rem;margin-top:6px;">De novato a corredor de carrera. Contenido de running en español.</p>
+        </div>
+        <div class="d-flex gap-2">
+          <a href="https://instagram.com/arielvillalona_" target="_blank" class="social-link"><i class="bi bi-instagram"></i></a>
+          <a href="index.html" class="social-link"><i class="bi bi-house"></i></a>
+          <a href="guias.html" class="social-link"><i class="bi bi-book"></i></a>
+        </div>
+      </div>
+      <hr style="border-color:var(--border);margin:24px 0 16px"/>
+      <p style="color:var(--muted);font-size:0.75rem;text-align:center;">© 2025 RunProgress · Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ══════════════════════════════════════════
+    // CONTADOR DINÁMICO — días desde 06/01/2026
+    // ══════════════════════════════════════════
+    function calcularDias() {
+      const inicio = new Date('2026-01-06T00:00:00');
+      const hoy    = new Date();
+      const diff   = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
+      return Math.max(0, diff);
+    }
+
+    // Animación de conteo numérico al cargar
+    function animateCounter(el, targetVal, duration = 1200) {
+      const start     = performance.now();
+      const startVal  = 0;
+      const update = (ts) => {
+        const progress = Math.min((ts - start) / duration, 1);
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(startVal + eased * (targetVal - startVal));
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    }
+
+    const dias = calcularDias();
+
+    // Lanzar animación cuando el strip entra en viewport
+    const counterEls = [
+      document.getElementById('counterDias'),
+      document.getElementById('statDias')
+    ];
+    let counterAnimated = false;
+    const counterObserver = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting) && !counterAnimated) {
+        counterAnimated = true;
+        counterEls.forEach(el => { if (el) animateCounter(el, dias); });
+      }
+    }, { threshold: 0.3 });
+    counterEls.forEach(el => { if (el) counterObserver.observe(el); });
+
+    // ──────────────────────────────────────────
+    // Fecha actual en timeline
+    // ──────────────────────────────────────────
+    const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    const hoy   = new Date();
+    const fechaEl = document.getElementById('timelineHoy');
+    if (fechaEl) {
+      fechaEl.textContent = `${hoy.getDate()} ${meses[hoy.getMonth()]} ${hoy.getFullYear()}`;
+    }
+
+    // ══════════════════════════════════════════
+    // SCROLL REVEAL
+    // ══════════════════════════════════════════
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 100);
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ══════════════════════════════════════════
+    // NAVBAR SHRINK
+    // ══════════════════════════════════════════
+    window.addEventListener('scroll', () => {
+      document.querySelector('.navbar-custom').style.padding =
+        window.scrollY > 50 ? '12px 0' : '20px 0';
+    });
+
+    // ══════════════════════════════════════════
+    // HAMBURGER MENU
+    // ══════════════════════════════════════════
+    const menuBtn    = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon   = document.getElementById('menuIcon');
+
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      menuIcon.className = open ? 'bi bi-list' : 'bi bi-x-lg';
+    });
+
+    function closeMenu() {
+      mobileMenu.style.display = 'none';
+      menuIcon.className = 'bi bi-list';
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) closeMenu();
+    });
+  </script>
+</body>
+</html>
