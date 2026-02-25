@@ -3,344 +3,30 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <!-- Open Graph / Facebook / WhatsApp -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://runprogress.netlify.app/guia-cadencia" />
-    <meta property="og:title" content="RunProgress — Guia Aumentar Cadencia" />
-    <meta property="og:description" content="Guía técnica, fases y plan realista para completar tu primer 10K en 8 semanas." />
-    <meta property="og:image" content="https://runprogress.netlify.app/assets/img/og-cadencia.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="RunProgress" />
-    <meta property="og:locale" content="es_ES" />
-
   <title>Cómo aumentar tu cadencia a 170 PPM · RunProgress</title>
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://runprogress.netlify.app/guia-cadencia" />
+  <meta property="og:title"       content="RunProgress — Guía Aumentar Cadencia" />
+  <meta property="og:description" content="Cómo subir tu cadencia a 170 SPM con un metrónomo. Guía técnica para runners principiantes." />
+  <meta property="og:image"       content="https://runprogress.netlify.app/assets/img/og-cadencia.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name"   content="RunProgress" />
+  <meta property="og:locale"      content="es_ES" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"/>
-
-  <style>
-    :root {
-      --orange: #FF4D00;
-      --orange-light: #FF7A3D;
-      --black: #0A0A0A;
-      --dark: #111111;
-      --card-bg: #161616;
-      --text: #E8E8E8;
-      --muted: #777;
-      --border: rgba(255,77,0,0.15);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--black); color: var(--text);
-      font-family: 'DM Sans', sans-serif; overflow-x: hidden;
-    }
-    body::before {
-      content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 0; opacity: 0.4;
-    }
-
-    /* NAVBAR */
-    .navbar-custom {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 20px 0; background: rgba(10,10,10,0.85);
-      backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.04);
-      transition: padding 0.3s;
-    }
-    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #fff; text-decoration: none; }
-    .nav-logo span { color: var(--orange); }
-    .nav-link-custom {
-      font-family: 'Space Mono', monospace; font-size: 0.68rem;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none; transition: color 0.2s;
-    }
-    .nav-link-custom:hover { color: var(--orange); }
-    .nav-link-custom.active { color: var(--orange); }
-
-    /* HERO ARTICLE */
-    .article-hero {
-      padding: 130px 0 60px;
-      position: relative; overflow: hidden;
-      border-bottom: 1px solid var(--border);
-    }
-    .article-hero-bg {
-      position: absolute; right: -2rem; top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(180px, 28vw, 380px);
-      color: rgba(255,77,0,0.035); line-height: 1;
-      pointer-events: none; user-select: none;
-    }
-    .article-breadcrumb {
-      font-family: 'Space Mono', monospace; font-size: 0.62rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1.2rem;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .article-breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .article-breadcrumb a:hover { color: var(--orange); }
-    .article-breadcrumb .sep { color: rgba(255,77,0,0.4); }
-    .article-tag {
-      font-family: 'Space Mono', monospace; font-size: 0.62rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      background: rgba(255,77,0,0.12); color: var(--orange);
-      padding: 4px 12px; display: inline-block; margin-bottom: 18px;
-      opacity: 0; animation: fadeUp 0.5s 0.2s forwards;
-    }
-    .article-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(44px, 7.5vw, 96px); line-height: 0.92; color: #fff;
-      opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
-    }
-    .article-title span { color: var(--orange); }
-    .article-meta {
-      display: flex; align-items: center; gap: 16px;
-      margin-top: 24px; font-family: 'Space Mono', monospace;
-      font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted);
-      opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
-    }
-    .article-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--orange); }
-
-    /* ARTICLE BODY */
-    .article-body {
-      padding: 80px 0 100px;
-    }
-    .article-col {
-      max-width: 720px;
-    }
-
-    /* INTRO PARAGRAPH */
-    .intro-p {
-      font-size: 1.15rem; line-height: 1.8;
-      color: var(--text); font-weight: 300;
-      margin-bottom: 40px;
-    }
-
-    /* SECTION HEADER */
-    .section-label {
-      font-family: 'Space Mono', monospace; font-size: 0.65rem;
-      letter-spacing: 0.3em; color: var(--orange);
-      text-transform: uppercase; margin-bottom: 0.6rem;
-    }
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(32px, 5vw, 52px); line-height: 1; color: #fff;
-      margin-bottom: 16px;
-    }
-    .divider { width: 48px; height: 2px; background: var(--orange); margin: 16px 0 28px; }
-
-    /* BENEFIT LIST */
-    .benefit-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 12px; margin: 24px 0 40px;
-    }
-    .benefit-item {
-      background: var(--card-bg); border: 1px solid var(--border);
-      padding: 16px 20px; display: flex; align-items: flex-start; gap: 12px;
-      position: relative; overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .benefit-item:hover { border-color: rgba(255,77,0,0.4); transform: translateY(-3px); }
-    .benefit-item::before {
-      content: '';
-      position: absolute; left: 0; top: 0; width: 3px; height: 100%;
-      background: var(--orange);
-    }
-    .benefit-icon { font-size: 1.1rem; color: var(--orange); flex-shrink: 0; margin-top: 1px; }
-    .benefit-text { font-size: 0.88rem; color: var(--text); line-height: 1.5; font-weight: 400; }
-
-    /* BODY TEXT */
-    .body-text {
-      color: var(--muted); font-size: 0.95rem;
-      line-height: 1.85; font-weight: 300; margin-bottom: 28px;
-    }
-    .body-text strong { color: var(--text); font-weight: 500; }
-
-    /* STEP CARDS */
-    .step-list { margin: 32px 0 48px; display: flex; flex-direction: column; gap: 24px; }
-    .step-card {
-      background: var(--card-bg); border: 1px solid var(--border);
-      padding: 32px 32px 32px 80px;
-      position: relative; overflow: hidden;
-      transition: border-color 0.3s;
-    }
-    .step-card:hover { border-color: rgba(255,77,0,0.4); }
-    .step-num {
-      position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
-      font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem;
-      color: rgba(255,77,0,0.18); line-height: 1;
-    }
-    .step-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem; color: #fff; margin-bottom: 10px;
-    }
-    .step-text { color: var(--muted); font-size: 0.9rem; line-height: 1.75; font-weight: 300; }
-    .step-text strong { color: var(--text); font-weight: 500; }
-
-    /* APP MOCKUP */
-    .mockup-wrapper {
-      background: var(--dark); border: 1px solid var(--border);
-      padding: 28px; margin: 20px 0 8px;
-      display: flex; align-items: center; justify-content: center;
-      min-height: 200px; position: relative; overflow: hidden;
-    }
-    .mockup-label {
-      position: absolute; top: 12px; left: 16px;
-      font-family: 'Space Mono', monospace; font-size: 0.58rem;
-      letter-spacing: 0.15em; color: rgba(255,77,0,0.5); text-transform: uppercase;
-    }
-
-    /* VISUAL CAPTION */
-    .visual-caption {
-      font-family: 'Space Mono', monospace; font-size: 0.62rem;
-      letter-spacing: 0.08em; color: rgba(255,255,255,0.2);
-      margin-top: 8px; text-align: center;
-    }
-
-    /* RESULT CHECKLIST */
-    .result-list {
-      list-style: none; padding: 0; margin: 24px 0 40px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-    }
-    .result-list li {
-      display: flex; align-items: center; gap: 10px;
-      color: var(--text); font-size: 0.9rem; font-weight: 400;
-      background: var(--card-bg); border: 1px solid var(--border);
-      padding: 12px 16px;
-    }
-    .result-list li .check { color: var(--orange); font-size: 1rem; flex-shrink: 0; }
-
-    /* TIP BOX */
-    .tip-box {
-      background: rgba(255,77,0,0.06);
-      border: 1px solid rgba(255,77,0,0.25);
-      border-left: 3px solid var(--orange);
-      padding: 24px 28px; margin: 40px 0;
-    }
-    .tip-box-label {
-      font-family: 'Space Mono', monospace; font-size: 0.62rem;
-      letter-spacing: 0.2em; color: var(--orange);
-      text-transform: uppercase; margin-bottom: 10px;
-    }
-    .tip-box-text { color: var(--text); font-size: 0.92rem; line-height: 1.75; font-weight: 300; }
-    .tip-box-text strong { color: #fff; font-weight: 500; }
-
-    /* RHYTHM VISUALIZER */
-    .rhythm-vis {
-      display: flex; align-items: flex-end; gap: 4px;
-      height: 60px; padding: 0 4px;
-    }
-    .beat {
-      flex: 1; background: rgba(255,77,0,0.2);
-      border-radius: 2px 2px 0 0;
-      transition: height 0.2s;
-      animation: beatPulse 1s ease-in-out infinite;
-    }
-    .beat.accent { background: var(--orange); }
-    @keyframes beatPulse {
-      0%, 100% { transform: scaleY(1); }
-      50% { transform: scaleY(0.7); }
-    }
-
-    /* CTA BOTTOM */
-    .article-cta {
-      margin-top: 60px; padding: 48px 40px;
-      background: var(--card-bg); border: 1px solid var(--border);
-      text-align: center; position: relative; overflow: hidden;
-    }
-    .article-cta::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(255,77,0,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .article-cta h3 {
-      font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: #fff;
-      margin-bottom: 10px;
-    }
-    .article-cta h3 span { color: var(--orange); }
-    .article-cta p { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; max-width: 400px; margin-inline: auto; line-height: 1.7; }
-
-    .btn-primary-custom {
-      background: var(--orange); color: #fff; border: none;
-      font-family: 'Space Mono', monospace; font-size: 0.75rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 15px 32px; text-decoration: none; display: inline-block;
-      transition: all 0.3s;
-    }
-    .btn-primary-custom:hover { background: var(--orange-light); color: #fff; transform: translateY(-2px); }
-
-    /* FOOTER */
-    footer { border-top: 1px solid var(--border); padding: 40px 0; }
-    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #fff; }
-    .footer-logo span { color: var(--orange); }
-    .social-link {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 40px; height: 40px;
-      border: 1px solid rgba(255,255,255,0.12);
-      color: var(--muted); text-decoration: none; font-size: 1.1rem; transition: all 0.25s;
-    }
-    .social-link:hover { border-color: var(--orange); color: var(--orange); }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s, transform 0.7s; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* RESPONSIVE */
-    @media(max-width: 767px) {
-      .article-hero { padding-top: 100px; }
-      .article-hero-bg { display: none; }
-      .benefit-grid { grid-template-columns: 1fr; }
-      .result-list { grid-template-columns: 1fr; }
-      .step-card { padding: 24px 20px 24px 65px; }
-      .article-cta { padding: 36px 24px; }
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <!-- ════════════════════ NAVBAR ════════════════════ -->
-  <nav class="navbar-custom">
-    <div class="container d-flex align-items-center justify-content-between">
-      <a href="index.html" class="nav-logo">RUN<span>PROGRESS</span></a>
-      <div class="d-none d-md-flex gap-4 align-items-center">
-        <a href="index.html#journey" class="nav-link-custom">El camino</a>
-        <a href="index.html#tips"    class="nav-link-custom">Tips</a>
-        <a href="index.html#plan"    class="nav-link-custom">Plan 10K</a>
-        <a href="guias.html"         class="nav-link-custom active">Guías</a>
-        <a href="sobre-mi.html"      class="nav-link-custom">Sobre mí</a>
-        <a href="https://instagram.com/arielvillalona_" target="_blank"
-           class="btn-primary-custom" style="font-size:.65rem;">Seguir en IG</a>
-      </div>
-      <!-- Mobile menu button -->
-      <button id="menuBtn" class="d-md-none"
-              style="background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;">
-        <i class="bi bi-list" id="menuIcon"></i>
-      </button>
-    </div>
-    <!-- Mobile dropdown -->
-    <div id="mobileMenu" style="display:none;background:rgba(10,10,10,0.98);border-top:1px solid var(--border);padding:20px 0;">
-      <div class="container d-flex flex-column gap-3">
-        <a href="index.html#journey" class="nav-link-custom" onclick="closeMenu()">El camino</a>
-        <a href="index.html#tips"    class="nav-link-custom" onclick="closeMenu()">Tips</a>
-        <a href="index.html#plan"    class="nav-link-custom" onclick="closeMenu()">Plan 10K</a>
-        <a href="guias.html"         class="nav-link-custom active" onclick="closeMenu()">Guías</a>
-        <a href="sobre-mi.html"      class="nav-link-custom" onclick="closeMenu()">Sobre mí</a>
-        <a href="https://instagram.com/arielvillalona_" target="_blank"
-           class="btn-primary-custom" style="text-align:center;">Seguir en Instagram</a>
-      </div>
-    </div>
-  </nav>
+  <!-- ── Navbar inyectada por js.js ── -->
 
-  <!-- ══════════ ARTICLE HERO ══════════ -->
+  <!-- ARTICLE HERO -->
   <header class="article-hero">
     <div class="container position-relative">
       <div class="article-hero-bg">170</div>
@@ -367,7 +53,7 @@
     </div>
   </header>
 
-  <!-- ══════════ ARTICLE BODY ══════════ -->
+  <!-- ARTICLE BODY -->
   <main class="article-body">
     <div class="container">
       <div class="article-col">
@@ -409,40 +95,35 @@
 
         <!-- VISUALIZADOR DE RITMO -->
         <div class="reveal">
-          <div class="mockup-wrapper" style="flex-direction: column; gap: 18px; min-height: 160px;">
+          <div class="mockup-wrapper" style="flex-direction:column;gap:18px;min-height:160px;">
             <div class="mockup-label">Visualización de cadencia</div>
-            <div style="display:flex; gap:24px; align-items:center; width:100%; justify-content:center;">
-
-              <!-- 150 SPM -->
-              <div style="text-align:center; flex: 1; max-width:140px;">
-                <div style="font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--muted); margin-bottom:10px; letter-spacing:0.1em;">150 SPM (típico)</div>
-                <div style="display:flex; align-items:flex-end; gap:3px; height:50px; justify-content:center;">
-                  <div style="width:10px; height:30px; background:rgba(255,255,255,0.12); border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:22px; background:rgba(255,255,255,0.12); border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:30px; background:rgba(255,255,255,0.12); border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:22px; background:rgba(255,255,255,0.12); border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:30px; background:rgba(255,255,255,0.12); border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:22px; background:rgba(255,255,255,0.12); border-radius:2px 2px 0 0;"></div>
+            <div style="display:flex;gap:24px;align-items:center;width:100%;justify-content:center;">
+              <div style="text-align:center;flex:1;max-width:140px;">
+                <div style="font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--muted);margin-bottom:10px;letter-spacing:0.1em;">150 SPM (típico)</div>
+                <div style="display:flex;align-items:flex-end;gap:3px;height:50px;justify-content:center;">
+                  <div style="width:10px;height:30px;background:rgba(255,255,255,0.12);border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:22px;background:rgba(255,255,255,0.12);border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:30px;background:rgba(255,255,255,0.12);border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:22px;background:rgba(255,255,255,0.12);border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:30px;background:rgba(255,255,255,0.12);border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:22px;background:rgba(255,255,255,0.12);border-radius:2px 2px 0 0;"></div>
                 </div>
-                <div style="font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:rgba(255,255,255,0.3); margin-top:4px;">150</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:rgba(255,255,255,0.3);margin-top:4px;">150</div>
               </div>
-
-              <div style="color: rgba(255,77,0,0.4); font-family:'Bebas Neue',sans-serif; font-size:1.6rem;">→</div>
-
-              <!-- 170 SPM -->
-              <div style="text-align:center; flex: 1; max-width:140px;">
-                <div style="font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--orange); margin-bottom:10px; letter-spacing:0.1em;">170 SPM (objetivo)</div>
-                <div style="display:flex; align-items:flex-end; gap:3px; height:50px; justify-content:center;">
-                  <div style="width:10px; height:48px; background:#FF4D00; border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:36px; background:rgba(255,77,0,0.55); border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:48px; background:#FF4D00; border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:36px; background:rgba(255,77,0,0.55); border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:48px; background:#FF4D00; border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:36px; background:rgba(255,77,0,0.55); border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:48px; background:#FF4D00; border-radius:2px 2px 0 0;"></div>
-                  <div style="width:10px; height:36px; background:rgba(255,77,0,0.55); border-radius:2px 2px 0 0;"></div>
+              <div style="color:rgba(255,77,0,0.4);font-family:'Bebas Neue',sans-serif;font-size:1.6rem;">→</div>
+              <div style="text-align:center;flex:1;max-width:140px;">
+                <div style="font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--orange);margin-bottom:10px;letter-spacing:0.1em;">170 SPM (objetivo)</div>
+                <div style="display:flex;align-items:flex-end;gap:3px;height:50px;justify-content:center;">
+                  <div style="width:10px;height:48px;background:#FF4D00;border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:36px;background:rgba(255,77,0,0.55);border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:48px;background:#FF4D00;border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:36px;background:rgba(255,77,0,0.55);border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:48px;background:#FF4D00;border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:36px;background:rgba(255,77,0,0.55);border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:48px;background:#FF4D00;border-radius:2px 2px 0 0;"></div>
+                  <div style="width:10px;height:36px;background:rgba(255,77,0,0.55);border-radius:2px 2px 0 0;"></div>
                 </div>
-                <div style="font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:#FF4D00; margin-top:4px;">170</div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#FF4D00;margin-top:4px;">170</div>
               </div>
             </div>
           </div>
@@ -450,7 +131,7 @@
         </div>
 
         <!-- SECCIÓN 2: EL TRUCO -->
-        <div class="reveal" style="margin-top: 60px;">
+        <div class="reveal" style="margin-top:60px;">
           <p class="section-label">El método</p>
           <h2 class="section-title">El Truco: Correr con<br>un Metrónomo</h2>
           <div class="divider"></div>
@@ -462,7 +143,6 @@
         <!-- STEPS -->
         <div class="step-list">
 
-          <!-- PASO 1 -->
           <div class="step-card reveal">
             <div class="step-num">1</div>
             <h3 class="step-title">Descarga una app de metrónomo</h3>
@@ -472,131 +152,65 @@
               <strong>Android:</strong> Pro Metronome o Simple Metronome<br><br>
               Son gratuitas y funcionan perfecto. Lo que importa es que pueda sonar mientras corres con los audífonos.
             </p>
-
-            <!-- App mockup SVG -->
-            <div class="mockup-wrapper" style="margin-top: 20px; min-height: 180px;">
+            <div class="mockup-wrapper" style="margin-top:20px;min-height:180px;">
               <div class="mockup-label">App de metrónomo</div>
-              <svg width="280" height="140" viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mockup de app de metrónomo con iconos y barras de sonido">
-                <!-- phone frame -->
+              <svg width="280" height="140" viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mockup de app de metrónomo">
                 <rect x="80" y="10" width="120" height="120" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-                <!-- screen bg -->
                 <rect x="88" y="20" width="104" height="100" rx="6" fill="#111"/>
-                <!-- app icon placeholder -->
                 <circle cx="140" cy="55" r="22" fill="rgba(255,77,0,0.12)" stroke="rgba(255,77,0,0.35)" stroke-width="1.5"/>
-                <!-- metronome triangle icon -->
                 <polygon points="130,70 150,70 140,36" fill="none" stroke="rgba(255,77,0,0.7)" stroke-width="1.5" stroke-linejoin="round"/>
                 <line x1="140" y1="65" x2="149" y2="42" stroke="#FF4D00" stroke-width="1.5" stroke-linecap="round"/>
                 <circle cx="149" cy="42" r="3" fill="#FF4D00"/>
-                <!-- sound bars -->
-                <rect x="98" y="85"  width="4" height="16" rx="2" fill="rgba(255,77,0,0.3)"/>
+                <rect x="98"  y="85" width="4" height="16" rx="2" fill="rgba(255,77,0,0.3)"/>
                 <rect x="105" y="80" width="4" height="21" rx="2" fill="rgba(255,77,0,0.5)"/>
                 <rect x="112" y="75" width="4" height="26" rx="2" fill="rgba(255,77,0,0.7)"/>
                 <rect x="119" y="80" width="4" height="21" rx="2" fill="rgba(255,77,0,0.5)"/>
                 <rect x="163" y="85" width="4" height="16" rx="2" fill="rgba(255,77,0,0.3)"/>
                 <rect x="170" y="80" width="4" height="21" rx="2" fill="rgba(255,77,0,0.5)"/>
                 <rect x="177" y="75" width="4" height="26" rx="2" fill="rgba(255,77,0,0.7)"/>
-                <!-- label -->
                 <text x="140" y="113" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,77,0,0.6)" text-anchor="middle" letter-spacing="2">METRONOME</text>
-                <!-- side labels -->
-                <text x="28" y="75" font-family="'DM Sans',sans-serif" font-size="9" fill="var(--muted)" text-anchor="middle">iPhone</text>
-                <text x="255" y="75" font-family="'DM Sans',sans-serif" font-size="9" fill="var(--muted)" text-anchor="middle">Android</text>
-                <line x1="60" y1="74" x2="80" y2="74" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3 2"/>
-                <line x1="200" y1="74" x2="218" y2="74" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3 2"/>
+                <text x="28"  y="75" font-family="'DM Sans',sans-serif" font-size="9" fill="rgba(119,119,119,1)" text-anchor="middle">iPhone</text>
+                <text x="255" y="75" font-family="'DM Sans',sans-serif" font-size="9" fill="rgba(119,119,119,1)" text-anchor="middle">Android</text>
               </svg>
             </div>
             <p class="visual-caption">Icono representativo de app de metrónomo</p>
           </div>
 
-          <!-- PASO 2 -->
           <div class="step-card reveal">
             <div class="step-num">2</div>
             <h3 class="step-title">Configura el metrónomo a 170 BPM</h3>
             <p class="step-text">
               Abre la app, ajusta el tempo a <strong>170 BPM</strong> y selecciona un sonido claro (clic, beep o campana). Evita sonidos muy agudos que se vuelvan molestos durante el rodaje.
             </p>
-
-            <!-- BPM dial SVG -->
-            <div class="mockup-wrapper" style="margin-top: 20px; min-height: 200px;">
+            <div class="mockup-wrapper" style="margin-top:20px;min-height:200px;">
               <div class="mockup-label">Pantalla de metrónomo</div>
               <svg width="260" height="160" viewBox="0 0 260 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Pantalla de app mostrando 170 BPM">
-                <!-- phone screen -->
-                <rect x="55" y="5" width="150" height="150" rx="10" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-                <!-- dark screen bg -->
+                <rect x="55"  y="5" width="150" height="150" rx="10" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
                 <rect x="63" y="13" width="134" height="134" rx="6" fill="#0d0d0d"/>
-                <!-- BPM arc dial -->
                 <circle cx="130" cy="75" r="48" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
-                <!-- arc progress ~170/200 -->
                 <path d="M 82,75 A 48,48 0 1,1 172,112" fill="none" stroke="#FF4D00" stroke-width="8" stroke-linecap="round"/>
-                <!-- center number -->
                 <text x="130" y="68" font-family="'Bebas Neue',sans-serif" font-size="36" fill="#fff" text-anchor="middle">170</text>
                 <text x="130" y="82" font-family="'Space Mono',monospace" font-size="8" fill="rgba(255,77,0,0.8)" text-anchor="middle" letter-spacing="3">BPM</text>
-                <!-- bottom controls row -->
-                <rect x="80" y="127" width="26" height="10" rx="3" fill="rgba(255,255,255,0.06)"/>
+                <rect x="80"  y="127" width="26" height="10" rx="3" fill="rgba(255,255,255,0.06)"/>
                 <rect x="117" y="127" width="26" height="10" rx="3" fill="rgba(255,77,0,0.3)"/>
                 <rect x="154" y="127" width="26" height="10" rx="3" fill="rgba(255,255,255,0.06)"/>
-                <text x="93"  y="135" font-family="'Space Mono',monospace" font-size="6" fill="var(--muted)" text-anchor="middle">−</text>
-                <text x="130" y="135" font-family="'Space Mono',monospace" font-size="6" fill="var(--orange)" text-anchor="middle">▶</text>
-                <text x="167" y="135" font-family="'Space Mono',monospace" font-size="6" fill="var(--muted)" text-anchor="middle">+</text>
-                <!-- knob indicator dot -->
+                <text x="93"  y="135" font-family="'Space Mono',monospace" font-size="6" fill="rgba(119,119,119,1)" text-anchor="middle">−</text>
+                <text x="130" y="135" font-family="'Space Mono',monospace" font-size="6" fill="rgba(255,77,0,1)" text-anchor="middle">▶</text>
+                <text x="167" y="135" font-family="'Space Mono',monospace" font-size="6" fill="rgba(119,119,119,1)" text-anchor="middle">+</text>
                 <circle cx="172" cy="112" r="5" fill="#FF4D00"/>
-                <!-- label below -->
-                <text x="130" y="155" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,255,255,0.15)" text-anchor="middle" letter-spacing="1">AJUSTA A 170 BPM</text>
               </svg>
             </div>
             <p class="visual-caption">Dial de BPM ajustado a 170 — tu ritmo objetivo</p>
           </div>
 
-          <!-- PASO 3 -->
           <div class="step-card reveal">
             <div class="step-num">3</div>
             <h3 class="step-title">Ponte los audífonos y sal a correr</h3>
             <p class="step-text">
-              Usa volumen <strong>medio</strong>. Debes escuchar el clic claramente sin que sea molesto. Los audífonos inalámbricos funcionan perfecto; los de cable también, si los manejas bien durante el rodaje.
+              Usa volumen <strong>medio</strong>. Debes escuchar el clic claramente sin que sea molesto. Los audífonos inalámbricos funcionan perfecto; los de cable también.
             </p>
-
-            <!-- Runner + headphones SVG -->
-            <div class="mockup-wrapper" style="margin-top: 20px; min-height: 180px;">
-              <div class="mockup-label">Corredor con audífonos</div>
-              <svg width="280" height="150" viewBox="0 0 280 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Corredor colocándose audífonos antes del rodaje">
-                <!-- ground line -->
-                <line x1="0" y1="130" x2="280" y2="130" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-                <!-- runner stick figure — running pose -->
-                <!-- head -->
-                <circle cx="140" cy="40" r="14" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <!-- headphones arc -->
-                <path d="M 126,38 A 16,14 0 0,1 154,38" fill="none" stroke="#FF4D00" stroke-width="2.5" stroke-linecap="round"/>
-                <circle cx="125" cy="40" r="4" fill="rgba(255,77,0,0.8)" stroke="#FF4D00" stroke-width="1"/>
-                <circle cx="155" cy="40" r="4" fill="rgba(255,77,0,0.8)" stroke="#FF4D00" stroke-width="1"/>
-                <!-- body -->
-                <line x1="140" y1="54" x2="140" y2="95" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <!-- arms — running swing -->
-                <line x1="140" y1="62" x2="120" y2="80" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <line x1="140" y1="62" x2="162" y2="73" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <!-- legs — running stride -->
-                <line x1="140" y1="95" x2="124" y2="117" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <line x1="124" y1="117" x2="116" y2="130" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <line x1="140" y1="95" x2="158" y2="112" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <line x1="158" y1="112" x2="168" y2="125" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <!-- sound waves from headphones -->
-                <path d="M 108,36 Q 102,42 108,48" fill="none" stroke="rgba(255,77,0,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M 102,32 Q 93,42 102,52" fill="none" stroke="rgba(255,77,0,0.25)" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M 172,36 Q 178,42 172,48" fill="none" stroke="rgba(255,77,0,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M 178,32 Q 187,42 178,52" fill="none" stroke="rgba(255,77,0,0.25)" stroke-width="1.5" stroke-linecap="round"/>
-                <!-- phone icon (optional, in hand) -->
-                <rect x="160" y="70" width="10" height="16" rx="2" fill="rgba(255,77,0,0.3)" stroke="rgba(255,77,0,0.6)" stroke-width="1"/>
-                <!-- CLIC labels floating -->
-                <text x="52"  y="55" font-family="'Space Mono',monospace" font-size="8" fill="rgba(255,77,0,0.5)" letter-spacing="1">CLIC</text>
-                <text x="52"  y="80" font-family="'Space Mono',monospace" font-size="8" fill="rgba(255,77,0,0.35)" letter-spacing="1">CLIC</text>
-                <text x="52" y="105" font-family="'Space Mono',monospace" font-size="8" fill="rgba(255,77,0,0.2)" letter-spacing="1">CLIC</text>
-                <!-- dots connecting labels -->
-                <line x1="82" y1="54" x2="106" y2="44" stroke="rgba(255,77,0,0.2)" stroke-width="1" stroke-dasharray="3 2"/>
-                <line x1="82" y1="79" x2="106" y2="52" stroke="rgba(255,77,0,0.15)" stroke-width="1" stroke-dasharray="3 2"/>
-              </svg>
-            </div>
-            <p class="visual-caption">Corredor sincronizando sus pasos con el metrónomo</p>
           </div>
 
-          <!-- PASO 4 -->
           <div class="step-card reveal">
             <div class="step-num">4</div>
             <h3 class="step-title">Sincroniza cada paso con el clic</h3>
@@ -605,52 +219,35 @@
               <strong>Clic → pie derecho · Clic → pie izquierdo · Repite.</strong><br><br>
               <strong>Importante:</strong> tu velocidad NO tiene que aumentar. Solo la frecuencia. El cuerpo ajustará la zancada automáticamente, haciéndola más corta y eficiente.
             </p>
-
-            <!-- Footstep sequence SVG -->
-            <div class="mockup-wrapper" style="margin-top: 20px; min-height: 160px;">
+            <div class="mockup-wrapper" style="margin-top:20px;min-height:160px;">
               <div class="mockup-label">Secuencia de pasos a 170 BPM</div>
-              <svg width="280" height="120" viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Diagrama de secuencia de pasos sincronizados al metrónomo">
-                <!-- timeline base -->
+              <svg width="280" height="120" viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <line x1="20" y1="90" x2="260" y2="90" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-                <!-- tick marks + foot icons -->
-                <!-- beat 1 R -->
                 <line x1="40"  y1="86" x2="40"  y2="94" stroke="rgba(255,77,0,0.6)" stroke-width="1.5"/>
-                <ellipse cx="40" cy="68" rx="9" ry="13" fill="rgba(255,77,0,0.75)" transform="rotate(-8 40 68)"/>
-                <text x="40" y="104" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,77,0,0.8)" text-anchor="middle">D</text>
-                <!-- beat 2 L -->
+                <ellipse cx="40"  cy="68" rx="9" ry="13" fill="rgba(255,77,0,0.75)" transform="rotate(-8 40 68)"/>
+                <text x="40"  y="104" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,77,0,0.8)" text-anchor="middle">D</text>
                 <line x1="80"  y1="86" x2="80"  y2="94" stroke="rgba(255,77,0,0.6)" stroke-width="1.5"/>
-                <ellipse cx="80" cy="68" rx="9" ry="13" fill="rgba(255,77,0,0.5)" transform="rotate(8 80 68)"/>
-                <text x="80" y="104" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,77,0,0.6)" text-anchor="middle">I</text>
-                <!-- beat 3 R -->
+                <ellipse cx="80"  cy="68" rx="9" ry="13" fill="rgba(255,77,0,0.5)"  transform="rotate(8 80 68)"/>
+                <text x="80"  y="104" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,77,0,0.6)" text-anchor="middle">I</text>
                 <line x1="120" y1="86" x2="120" y2="94" stroke="rgba(255,77,0,0.6)" stroke-width="1.5"/>
                 <ellipse cx="120" cy="68" rx="9" ry="13" fill="rgba(255,77,0,0.75)" transform="rotate(-8 120 68)"/>
                 <text x="120" y="104" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,77,0,0.8)" text-anchor="middle">D</text>
-                <!-- beat 4 L -->
                 <line x1="160" y1="86" x2="160" y2="94" stroke="rgba(255,77,0,0.6)" stroke-width="1.5"/>
-                <ellipse cx="160" cy="68" rx="9" ry="13" fill="rgba(255,77,0,0.5)" transform="rotate(8 160 68)"/>
+                <ellipse cx="160" cy="68" rx="9" ry="13" fill="rgba(255,77,0,0.5)"  transform="rotate(8 160 68)"/>
                 <text x="160" y="104" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,77,0,0.6)" text-anchor="middle">I</text>
-                <!-- beat 5 R -->
                 <line x1="200" y1="86" x2="200" y2="94" stroke="rgba(255,77,0,0.6)" stroke-width="1.5"/>
                 <ellipse cx="200" cy="68" rx="9" ry="13" fill="rgba(255,77,0,0.75)" transform="rotate(-8 200 68)"/>
                 <text x="200" y="104" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,77,0,0.8)" text-anchor="middle">D</text>
-                <!-- beat 6 L -->
                 <line x1="240" y1="86" x2="240" y2="94" stroke="rgba(255,77,0,0.6)" stroke-width="1.5"/>
-                <ellipse cx="240" cy="68" rx="9" ry="13" fill="rgba(255,77,0,0.5)" transform="rotate(8 240 68)"/>
+                <ellipse cx="240" cy="68" rx="9" ry="13" fill="rgba(255,77,0,0.5)"  transform="rotate(8 240 68)"/>
                 <text x="240" y="104" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,77,0,0.6)" text-anchor="middle">I</text>
-                <!-- CLIC labels above -->
-                <text x="40"  y="48" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">CLIC</text>
-                <text x="80"  y="48" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">CLIC</text>
-                <text x="120" y="48" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">CLIC</text>
-                <text x="160" y="48" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">CLIC</text>
-                <text x="200" y="48" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">CLIC</text>
-                <text x="240" y="48" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">CLIC</text>
-                <!-- BPM scale label -->
                 <text x="140" y="118" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,77,0,0.4)" text-anchor="middle" letter-spacing="2">170 BPM — D = DERECHO / I = IZQUIERDO</text>
               </svg>
             </div>
             <p class="visual-caption">Un clic por pie — alternando derecho e izquierdo</p>
           </div>
-        </div>
+
+        </div><!-- /step-list -->
 
         <!-- SECCIÓN 3: RESULTADOS -->
         <div class="reveal">
@@ -675,11 +272,11 @@
         <div class="tip-box reveal">
           <p class="tip-box-label"><i class="bi bi-lightbulb-fill me-1"></i> Tip extra</p>
           <p class="tip-box-text">
-            Practica el metrónomo <strong>solo 5 minutos al inicio de tu calentamiento</strong>, antes de comenzar el rodaje normal. Es la forma más rápida de que el cerebro "automatice" el ritmo sin la presión de mantenerlo todo el tiempo. Con el paso de las semanas, tu cadencia natural subirá por sí sola.
+            Practica el metrónomo <strong>solo 5 minutos al inicio de tu calentamiento</strong>, antes de comenzar el rodaje normal. Es la forma más rápida de que el cerebro "automatice" el ritmo sin la presión de mantenerlo todo el tiempo.
           </p>
         </div>
 
-        <!-- CTA ARTICLE BOTTOM -->
+        <!-- CTA ARTICLE -->
         <div class="article-cta reveal">
           <h3>¿Te sirvió esta<br><span>guía?</span></h3>
           <p>Cada semana subo tips como este en Instagram. Sígueme para no perderte la próxima guía de running.</p>
@@ -688,9 +285,9 @@
           </a>
         </div>
 
-        <!-- BACK TO GUIDES -->
         <div class="mt-4 reveal">
-          <a href="guias.html" style="font-family:'Space Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; color:var(--muted); text-decoration:none; text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; transition:color 0.2s;" onmouseover="this.style.color='#FF4D00'" onmouseout="this.style.color='var(--muted)'">
+          <a href="guias.html" style="font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);text-decoration:none;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s;"
+             onmouseover="this.style.color='#FF4D00'" onmouseout="this.style.color='var(--muted)'">
             <i class="bi bi-arrow-left"></i> Volver a guías
           </a>
         </div>
@@ -699,41 +296,9 @@
     </div>
   </main>
 
-  <!-- ══════════ FOOTER ══════════ -->
-  <footer>
-    <div class="container">
-      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
-        <div>
-          <div class="footer-logo">RUN<span>PROGRESS</span></div>
-          <p style="color:var(--muted);font-size:0.82rem;margin-top:6px;">De novato a corredor de carrera. Contenido de running en español.</p>
-        </div>
-        <div class="d-flex gap-2">
-          <a href="https://instagram.com/arielvillalona_" target="_blank" class="social-link"><i class="bi bi-instagram"></i></a>
-          <a href="guias.html" class="social-link"><i class="bi bi-book"></i></a>
-          <a href="index.html" class="social-link"><i class="bi bi-house"></i></a>
-        </div>
-      </div>
-      <hr style="border-color:var(--border);margin:24px 0 16px"/>
-      <p style="color:var(--muted);font-size:0.75rem;text-align:center;">© 2025 RunProgress · Todos los derechos reservados</p>
-    </div>
-  </footer>
+  <!-- ── Footer inyectado por js.js ── -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    window.addEventListener('scroll', () => {
-      document.querySelector('.navbar-custom').style.padding =
-        window.scrollY > 50 ? '12px 0' : '20px 0';
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js.js"></script>
 </body>
 </html>

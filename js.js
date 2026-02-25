@@ -1,37 +1,207 @@
+/* ============================================================
+   RUNPROGRESS — js.js
+   Script único compartido para todas las páginas.
+   Incluye: navbar, footer, scroll reveal, hamburger,
+            navbar shrink, traducciones (index), contador (sobre-mi)
+   ============================================================ */
+
+(function () {
 
   // ============================================================
-  // TRANSLATIONS
+  // 1. NAVBAR — Inyección dinámica
+  // ============================================================
+  function buildNavbar() {
+    const page = window.location.pathname.split('/').pop() || 'index.html';
+
+    // Qué página está activa en cada enlace
+    function active(href) {
+      if (href === 'guias.html' && (page === 'guias.html' || page === 'guia-cadencia.html')) return 'active';
+      if (href === 'sobre-mi.html' && page === 'sobre-mi.html') return 'active';
+      return '';
+    }
+
+    // El lang switcher solo se muestra si la página tiene data-i18n
+    const hasI18n = document.querySelector('[data-i18n]') !== null;
+    const langSwitcher = hasI18n ? `
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>` : '';
+
+    const html = `
+    <nav class="navbar-custom" id="mainNav">
+      <div class="container d-flex align-items-center justify-content-between">
+        <a href="index.html" class="nav-logo">RUN<span>PROGRESS</span></a>
+        <div class="d-none d-md-flex gap-4 align-items-center">
+          <a href="index.html#journey" class="nav-link-custom" data-i18n="nav_journey">El camino</a>
+          <a href="index.html#tips"    class="nav-link-custom" data-i18n="nav_tips">Tips</a>
+          <a href="index.html#plan"    class="nav-link-custom" data-i18n="nav_plan">Plan 10K</a>
+          <a href="guias.html"         class="nav-link-custom ${active('guias.html')}" data-i18n="nav_guia">Guías</a>
+          <a href="sobre-mi.html"      class="nav-link-custom ${active('sobre-mi.html')}">Sobre mí</a>
+          ${langSwitcher}
+          <a href="https://instagram.com/arielvillalona_" target="_blank"
+             class="btn-primary-custom" style="font-size:.65rem;" data-i18n="nav_follow">Seguir en IG</a>
+        </div>
+        <button id="menuBtn" class="d-md-none"
+                style="background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;">
+          <i class="bi bi-list" id="menuIcon"></i>
+        </button>
+      </div>
+      <div id="mobileMenu" style="display:none;background:rgba(10,10,10,0.98);border-top:1px solid var(--border);padding:20px 0;">
+        <div class="container d-flex flex-column gap-3">
+          <a href="index.html#journey" class="nav-link-custom" data-i18n="nav_journey">El camino</a>
+          <a href="index.html#tips"    class="nav-link-custom" data-i18n="nav_tips">Tips</a>
+          <a href="index.html#plan"    class="nav-link-custom" data-i18n="nav_plan">Plan 10K</a>
+          <a href="guias.html"         class="nav-link-custom ${active('guias.html')}" data-i18n="nav_guia">Guías</a>
+          <a href="sobre-mi.html"      class="nav-link-custom ${active('sobre-mi.html')}">Sobre mí</a>
+          ${hasI18n ? `<div class="lang-switcher" style="align-self:flex-start;">
+            <button class="lang-btn active" data-lang="es">ES</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+          </div>` : ''}
+          <a href="https://instagram.com/arielvillalona_" target="_blank"
+             class="btn-primary-custom" style="text-align:center;" data-i18n="nav_follow_long">Seguir en Instagram</a>
+        </div>
+      </div>
+    </nav>`;
+
+    document.body.insertAdjacentHTML('afterbegin', html);
+  }
+
+  // ============================================================
+  // 2. FOOTER — Inyección dinámica
+  // ============================================================
+  function buildFooter() {
+    const html = `
+    <footer>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="footer-logo">RUN<span>PROGRESS</span></div>
+            <p style="color:var(--muted);font-size:0.8rem;margin-top:6px;" data-i18n="footer_desc">
+              De novato a corredor de carrera. Contenido de running en español.
+            </p>
+          </div>
+          <div class="col-md-4 text-md-center mb-3 mb-md-0">
+            <div class="d-flex gap-3 justify-content-md-center flex-wrap">
+              <a href="index.html#journey" class="nav-link-custom" data-i18n="nav_journey">El Camino</a>
+              <a href="index.html#tips"    class="nav-link-custom" data-i18n="nav_tips">Tips</a>
+              <a href="index.html#plan"    class="nav-link-custom" data-i18n="nav_plan">Plan 10K</a>
+              <a href="guias.html"         class="nav-link-custom" data-i18n="nav_guia">Guías</a>
+              <a href="sobre-mi.html"      class="nav-link-custom">Sobre mí</a>
+            </div>
+          </div>
+          <div class="col-md-4 text-md-end">
+            <div class="d-flex gap-2 justify-content-md-end">
+              <a href="https://instagram.com/arielvillalona_" class="social-link" target="_blank">
+                <i class="bi bi-instagram"></i>
+              </a>
+              <a href="index.html" class="social-link"><i class="bi bi-house"></i></a>
+            </div>
+            <p style="color:var(--muted);font-size:0.72rem;margin-top:12px;font-family:'Space Mono',monospace;" data-i18n="footer_copy">
+              © 2025 RunProgress · Todos los derechos reservados
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>`;
+
+    document.body.insertAdjacentHTML('beforeend', html);
+  }
+
+  // ============================================================
+  // 3. HAMBURGER MENU
+  // ============================================================
+  function initHamburger() {
+    const menuBtn    = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon   = document.getElementById('menuIcon');
+
+    if (!menuBtn) return;
+
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      menuIcon.className = open ? 'bi bi-list' : 'bi bi-x-lg';
+    });
+
+    // Cerrar al hacer click en cualquier link del menú móvil
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) closeMenu();
+    });
+  }
+
+  function closeMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon   = document.getElementById('menuIcon');
+    if (mobileMenu) mobileMenu.style.display = 'none';
+    if (menuIcon)   menuIcon.className = 'bi bi-list';
+  }
+
+  // Exponer closeMenu globalmente por si algún onclick inline lo usa
+  window.closeMenu = closeMenu;
+
+  // ============================================================
+  // 4. NAVBAR SHRINK ON SCROLL
+  // ============================================================
+  function initNavbarShrink() {
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('mainNav');
+      if (nav) nav.style.padding = window.scrollY > 50 ? '12px 0' : '20px 0';
+    });
+  }
+
+  // ============================================================
+  // 5. SCROLL REVEAL
+  // ============================================================
+  function initScrollReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    reveals.forEach(el => observer.observe(el));
+  }
+
+  // ============================================================
+  // 6. TRADUCCIONES (solo index.html — páginas con data-i18n)
   // ============================================================
   const translations = {
     es: {
-      nav_journey:      "El camino",
-      nav_tips:         "Tips",
-      nav_plan:         "Plan 10K",
-      nav_guia:         "Guias",
-      nav_follow:       "Seguir en IG",
-      nav_follow_long:  "Seguir en Instagram",
-      hero_label:       "📍 Tu guía de running · desde 0 hasta la línea de meta",
-      hero_title:       "De sofá<br><span>a corredor</span>",
-      hero_sub:         "Contenido real para runners reales. Tips, planes de entrenamiento y todo lo que necesitas para completar tu primer 10K — sin morir en el intento.",
-      hero_cta_ig:      "Sígueme en Instagram",
+      nav_journey: "El camino", nav_tips: "Tips", nav_plan: "Plan 10K",
+      nav_guia: "Guías", nav_follow: "Seguir en IG", nav_follow_long: "Seguir en Instagram",
+      hero_label:   "📍 Tu guía de running · desde 0 hasta la línea de meta",
+      hero_title:   "De sofá<br><span>a corredor</span>",
+      hero_sub:     "Contenido real para runners reales. Tips, planes de entrenamiento y todo lo que necesitas para completar tu primer 10K — sin morir en el intento.",
+      hero_cta_ig:  "Sígueme en Instagram",
       hero_cta_journey: "Ver el camino →",
-      stat1:            "Programa progresivo para 10K",
-      stat2:            "Meta alcanzable para cualquiera",
-      stat3:            "Experiencia previa requerida",
-      journey_label:    "El camino",
-      journey_title:    "3 Fases para<br>Llegar a Meta",
-      journey_desc:     "No importa si no has corrido en tu vida. Este es el proceso real, sin atajos, el mismo que estoy utilizando para mi primer 10K.",
-      p1_badge: "Semanas 1–3",   p1_title: "El Despertar",
-      p1_desc:  "Empezar es lo más difícil. Esta fase trata de construir el hábito, no el rendimiento.",
-      p1_list:  ["Correr/caminar 20 min alternando","3 salidas por semana","Ritmo donde puedas hablar","Tenis adecuados","Registro diario de cómo te sientes"],
-      p2_badge: "Semanas 4–6",   p2_title: "La Construcción",
-      p2_desc:  "Aquí el cuerpo se adapta. Empiezas a correr sin parar y el progreso se vuelve visible.",
-      p2_list:  ["Correr 20–30 min continuos","Aumentar distancia 10% semanal","Trabajo de técnica de carrera","Hidratación y nutrición básica","Un día de recuperación activa"],
-      p3_badge: "Semanas 7–8",   p3_title: "La Llegada",
-      p3_desc:  "Ya eres corredor. Hora de afinarte para ese primer 10K oficial y la foto en la meta.",
-      p3_list:  ["Rodaje largo de 7–8 km","Reducción de carga (tapering)","Estrategia de carrera","Logística del día de la carrera","¡Celebrar el logro! 🎉"],
+      stat1: "Programa progresivo para 10K",
+      stat2: "Meta alcanzable para cualquiera",
+      stat3: "Experiencia previa requerida",
+      journey_label: "El camino",
+      journey_title: "3 Fases para<br>Llegar a Meta",
+      journey_desc:  "No importa si no has corrido en tu vida. Este es el proceso real, sin atajos, el mismo que estoy utilizando para mi primer 10K.",
+      p1_badge: "Semanas 1–3", p1_title: "El Despertar",
+      p1_desc: "Empezar es lo más difícil. Esta fase trata de construir el hábito, no el rendimiento.",
+      p1_list: ["Correr/caminar 20 min alternando","3 salidas por semana","Ritmo donde puedas hablar","Tenis adecuados","Registro diario de cómo te sientes"],
+      p2_badge: "Semanas 4–6", p2_title: "La Construcción",
+      p2_desc: "Aquí el cuerpo se adapta. Empiezas a correr sin parar y el progreso se vuelve visible.",
+      p2_list: ["Correr 20–30 min continuos","Aumentar distancia 10% semanal","Trabajo de técnica de carrera","Hidratación y nutrición básica","Un día de recuperación activa"],
+      p3_badge: "Semanas 7–8", p3_title: "La Llegada",
+      p3_desc: "Ya eres corredor. Hora de afinarte para ese primer 10K oficial y la foto en la meta.",
+      p3_list: ["Rodaje largo de 7–8 km","Reducción de carga (tapering)","Estrategia de carrera","Logística del día de la carrera","¡Celebrar el logro! 🎉"],
       tips_label: "Contenido de valor",
-      tips_title:  "Tips que<br>Cambian Todo",
+      tips_title: "Tips que<br>Cambian Todo",
       tip1_title: "Respiración Correcta",
       tip1_text:  "El ritmo 3-3 (inhalar 3 pasos, exhalar 3 pasos) reduce los famosos \"ponchazos / flato\". Practica respiración diafragmática antes de salir.",
       tip2_title: "El Calzado Correcto",
@@ -65,36 +235,31 @@
       footer_copy: "© 2025 RunProgress · Todos los derechos reservados",
       ticker: ["Empieza hoy","Tips de running","De 0 a 10K","Sin lesiones","Progreso real","Primera carrera","Constancia > Velocidad"]
     },
-
     en: {
-      nav_journey:      "The journey",
-      nav_tips:         "Tips",
-      nav_plan:         "10K Plan",
-      nav_guia:         "Guides",
-      nav_follow:       "Follow on IG",
-      nav_follow_long:  "Follow on Instagram",
-      hero_label:       "📍 Your running guide · from 0 to the finish line",
-      hero_title:       "From couch<br><span>to runner</span>",
-      hero_sub:         "Real content for real runners. Tips, training plans, and everything you need to complete your first 10K — without dying in the process.",
-      hero_cta_ig:      "Follow me on Instagram",
+      nav_journey: "The journey", nav_tips: "Tips", nav_plan: "10K Plan",
+      nav_guia: "Guides", nav_follow: "Follow on IG", nav_follow_long: "Follow on Instagram",
+      hero_label:   "📍 Your running guide · from 0 to the finish line",
+      hero_title:   "From couch<br><span>to runner</span>",
+      hero_sub:     "Real content for real runners. Tips, training plans, and everything you need to complete your first 10K — without dying in the process.",
+      hero_cta_ig:  "Follow me on Instagram",
       hero_cta_journey: "See the journey →",
-      stat1:            "Progressive 10K training program",
-      stat2:            "A goal anyone can achieve",
-      stat3:            "Prior experience required",
-      journey_label:    "The journey",
-      journey_title:    "3 Phases to<br>Cross the Line",
-      journey_desc:     "Doesn't matter if you've never run a step in your life. This is the real process, no shortcuts — the same one I'm using for my first 10K.",
-      p1_badge: "Weeks 1–3",     p1_title: "The Awakening",
-      p1_desc:  "Starting is the hardest part. This phase is about building the habit, not the performance.",
-      p1_list:  ["Run/walk intervals for 20 min","3 runs per week","Conversational pace","Proper running shoes","Daily log of how you feel"],
-      p2_badge: "Weeks 4–6",     p2_title: "The Build",
-      p2_desc:  "Your body adapts. You start running non-stop and progress becomes visible.",
-      p2_list:  ["Run 20–30 min straight","Increase distance 10% per week","Running form & technique work","Basic hydration & nutrition","One active recovery day"],
-      p3_badge: "Weeks 7–8",     p3_title: "The Finish",
-      p3_desc:  "You're a runner now. Time to fine-tune for your first official 10K and that finish line photo.",
-      p3_list:  ["Long run of 7–8 km","Taper your training load","Race-day strategy","Race-day logistics","Celebrate the achievement! 🎉"],
+      stat1: "Progressive 10K training program",
+      stat2: "A goal anyone can achieve",
+      stat3: "Prior experience required",
+      journey_label: "The journey",
+      journey_title: "3 Phases to<br>Cross the Line",
+      journey_desc:  "Doesn't matter if you've never run a step in your life. This is the real process, no shortcuts — the same one I'm using for my first 10K.",
+      p1_badge: "Weeks 1–3", p1_title: "The Awakening",
+      p1_desc: "Starting is the hardest part. This phase is about building the habit, not the performance.",
+      p1_list: ["Run/walk intervals for 20 min","3 runs per week","Conversational pace","Proper running shoes","Daily log of how you feel"],
+      p2_badge: "Weeks 4–6", p2_title: "The Build",
+      p2_desc: "Your body adapts. You start running non-stop and progress becomes visible.",
+      p2_list: ["Run 20–30 min straight","Increase distance 10% per week","Running form & technique work","Basic hydration & nutrition","One active recovery day"],
+      p3_badge: "Weeks 7–8", p3_title: "The Finish",
+      p3_desc: "You're a runner now. Time to fine-tune for your first official 10K and that finish line photo.",
+      p3_list: ["Long run of 7–8 km","Taper your training load","Race-day strategy","Race-day logistics","Celebrate the achievement! 🎉"],
       tips_label: "Value content",
-      tips_title:  "Tips That<br>Change Everything",
+      tips_title: "Tips That<br>Change Everything",
       tip1_title: "Proper Breathing",
       tip1_text:  "The 3-3 rhythm (inhale 3 steps, exhale 3 steps) eliminates side stitches. Practice diaphragmatic breathing before heading out.",
       tip2_title: "The Right Running Shoes",
@@ -130,94 +295,103 @@
     }
   };
 
-  // ============================================================
-  // APPLY LANGUAGE
-  // ============================================================
   function applyLang(lang) {
     const t = translations[lang];
+    if (!t) return;
 
-    // Textos simples con data-i18n
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (t[key] !== undefined) el.innerHTML = t[key];
     });
 
-    // Listas de fases (arrays)
     [['p1list','p1_list'], ['p2list','p2_list'], ['p3list','p3_list']].forEach(([id, key]) => {
       const ul = document.getElementById(id);
       if (ul && t[key]) ul.innerHTML = t[key].map(i => `<li>${i}</li>`).join('');
     });
 
-    // Ticker
     const track = document.getElementById('tickerTrack');
     if (track && t.ticker) {
       const doubled = [...t.ticker, ...t.ticker];
       track.innerHTML = doubled.map(w => `<span class="ticker-item">${w}</span>`).join('');
     }
 
-    // html lang attr
     document.documentElement.lang = lang;
 
-    // Sincronizar todos los botones de idioma (desktop + mobile)
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
   }
 
-  // ============================================================
-  // LANG BUTTON CLICKS (delegado — captura desktop y mobile)
-  // ============================================================
-  document.addEventListener('click', e => {
-    if (e.target.classList.contains('lang-btn')) {
-      applyLang(e.target.dataset.lang);
-    }
-  });
+  function initTranslations() {
+    if (!document.querySelector('[data-i18n]')) return;
 
-  // ============================================================
-  // SCROLL REVEAL
-  // ============================================================
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
+    document.addEventListener('click', e => {
+      if (e.target.classList.contains('lang-btn')) {
+        applyLang(e.target.dataset.lang);
       }
     });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
 
-  // ============================================================
-  // HAMBURGER MENU
-  // ============================================================
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const menuIcon = document.getElementById('menuIcon');
-
-  menuBtn.addEventListener('click', () => {
-    const open = mobileMenu.style.display === 'block';
-    mobileMenu.style.display = open ? 'none' : 'block';
-    menuIcon.className = open ? 'bi bi-list' : 'bi bi-x-lg';
-  });
-
-  function closeMenu() {
-    mobileMenu.style.display = 'none';
-    menuIcon.className = 'bi bi-list';
+    applyLang('es'); // default
   }
 
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768) closeMenu();
-  });
+  // ============================================================
+  // 7. CONTADOR DE DÍAS (sobre-mi.html)
+  // ============================================================
+  function initCounter() {
+    const counterDias = document.getElementById('counterDias');
+    const statDias    = document.getElementById('statDias');
+    if (!counterDias && !statDias) return;
+
+    function calcularDias() {
+      const inicio = new Date('2026-01-06T00:00:00');
+      const hoy    = new Date();
+      return Math.max(0, Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24)));
+    }
+
+    function animateCounter(el, targetVal, duration = 1200) {
+      const start = performance.now();
+      const update = (ts) => {
+        const progress = Math.min((ts - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * targetVal);
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    }
+
+    const dias = calcularDias();
+    const targets = [counterDias, statDias].filter(Boolean);
+    let animated = false;
+
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting) && !animated) {
+        animated = true;
+        targets.forEach(el => animateCounter(el, dias));
+      }
+    }, { threshold: 0.3 });
+
+    targets.forEach(el => observer.observe(el));
+
+    // Fecha dinámica en el timeline
+    const fechaEl = document.getElementById('timelineHoy');
+    if (fechaEl) {
+      const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+      const hoy   = new Date();
+      fechaEl.textContent = `${hoy.getDate()} ${meses[hoy.getMonth()]} ${hoy.getFullYear()}`;
+    }
+  }
 
   // ============================================================
-  // NAVBAR SHRINK ON SCROLL
+  // 8. INIT — Todo arranca aquí
   // ============================================================
-  window.addEventListener('scroll', () => {
-    document.querySelector('.navbar-custom').style.padding =
-      window.scrollY > 50 ? '12px 0' : '20px 0';
+  document.addEventListener('DOMContentLoaded', () => {
+    buildNavbar();
+    buildFooter();
+    initHamburger();
+    initNavbarShrink();
+    initScrollReveal();
+    initTranslations();
+    initCounter();
   });
 
-  // ============================================================
-  // INIT — Español por defecto
-  // ============================================================
-  applyLang('es');
+})();

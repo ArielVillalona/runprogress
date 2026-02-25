@@ -4,31 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RunProgress | De 0 a 10K</title>
-  
-  <!-- Primary Meta -->
-   <meta name="title" content="RunProgress — Plan 0→10K en 8 semanas" />
-    <meta name="description" content="Guía técnica, fases y plan realista para completar tu primer 10K en 8 semanas." />
 
-    <!-- Open Graph / Facebook / WhatsApp -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://runprogress.netlify.app/" />
-    <meta property="og:title" content="RunProgress — Plan 0→10K en 8 semanas" />
-    <meta property="og:description" content="Guía técnica, fases y plan realista para completar tu primer 10K en 8 semanas." />
-    <meta property="og:image" content="https://runprogress.netlify.app/assets/img/og-cover.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="RunProgress" />
-    <meta property="og:locale" content="es_ES" />
-
-    <!-- Twitter -->
-    <!-- <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="RunProgress — Plan 0→10K en 8 semanas" />
-    <meta name="twitter:description" content="Guía técnica, fases y plan realista para completar tu primer 10K en 8 semanas." />
-    <meta name="twitter:image" content="https://TU-DOMINIO/assets/img/og-cover.jpg" /> -->
-
-    <!-- Opcionales útiles -->
-    <link rel="canonical" href="https://runprogress.netlify.app/" />
-    <meta name="theme-color" content="#FF4D00" />
+  <meta name="title"       content="RunProgress — Plan 0→10K en 8 semanas" />
+  <meta name="description" content="Guía técnica, fases y plan realista para completar tu primer 10K en 8 semanas." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://runprogress.netlify.app/" />
+  <meta property="og:title"       content="RunProgress — Plan 0→10K en 8 semanas" />
+  <meta property="og:description" content="Guía técnica, fases y plan realista para completar tu primer 10K en 8 semanas." />
+  <meta property="og:image"       content="https://runprogress.netlify.app/assets/img/og-cover.jpg" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name"   content="RunProgress" />
+  <meta property="og:locale"      content="es_ES" />
+  <link rel="canonical" href="https://runprogress.netlify.app/" />
+  <meta name="theme-color" content="#FF4D00" />
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -37,356 +26,288 @@
 </head>
 <body>
 
-  <!-- ════════════════════ NAVBAR ════════════════════ -->
-  <nav class="navbar-custom">
-    <div class="container d-flex align-items-center justify-content-between">
-      <a href="index.html" class="nav-logo">RUN<span>PROGRESS</span></a>
-      <div class="d-none d-md-flex gap-4 align-items-center">
-        <a href="index.html#journey" class="nav-link-custom">El camino</a>
-        <a href="index.html#tips"    class="nav-link-custom">Tips</a>
-        <a href="index.html#plan"    class="nav-link-custom">Plan 10K</a>
-        <a href="guias.html"         class="nav-link-custom">Guías</a>
-        <a href="sobre-mi.html"      class="nav-link-custom">Sobre mí</a>
-        <a href="https://instagram.com/arielvillalona_" target="_blank"
-           class="btn-primary-custom" style="font-size:.65rem;">Seguir en IG</a>
-      </div>
-      <!-- Mobile menu button -->
-      <button id="menuBtn" class="d-md-none"
-              style="background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;">
-        <i class="bi bi-list" id="menuIcon"></i>
-      </button>
-    </div>
-    <!-- Mobile dropdown -->
-    <div id="mobileMenu" style="display:none;background:rgba(10,10,10,0.98);border-top:1px solid var(--border);padding:20px 0;">
-      <div class="container d-flex flex-column gap-3">
-        <a href="index.html#journey" class="nav-link-custom" onclick="closeMenu()">El camino</a>
-        <a href="index.html#tips"    class="nav-link-custom" onclick="closeMenu()">Tips</a>
-        <a href="index.html#plan"    class="nav-link-custom" onclick="closeMenu()">Plan 10K</a>
-        <a href="guias.html"         class="nav-link-custom" onclick="closeMenu()">Guías</a>
-        <a href="sobre-mi.html"      class="nav-link-custom" onclick="closeMenu()">Sobre mí</a>
-        <a href="https://instagram.com/arielvillalona_" target="_blank"
-           class="btn-primary-custom" style="text-align:center;">Seguir en Instagram</a>
-      </div>
-    </div>
-  </nav>
+  <!-- ── Navbar inyectada por js.js ── -->
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg-number">10K</div>
-  <div class="container position-relative" style="z-index:1;">
-    <p class="hero-label" data-i18n="hero_label">📍 Tu guía de running · desde 0 hasta la línea de meta</p>
-    <h1 class="hero-title" data-i18n="hero_title">
-      De sofá<br><span>a corredor</span>
-    </h1>
-    <p class="hero-sub" data-i18n="hero_sub">
-      Contenido real para runners reales. Tips, planes de entrenamiento y todo lo que necesitas para completar tu primer 10K — sin morir en el intento.
-    </p>
-    <div class="hero-cta d-flex flex-wrap gap-3">
-      <a href="#instagram" class="btn-primary-custom">
-        <i class="bi bi-instagram me-2"></i><span data-i18n="hero_cta_ig">Sígueme en Instagram</span>
-      </a>
-      <a href="#journey" class="btn-outline-custom" data-i18n="hero_cta_journey">Ver el camino →</a>
-    </div>
-  </div>
-</section>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-track" id="tickerTrack">
-    <span class="ticker-item">Empieza hoy</span>
-    <span class="ticker-item">Tips de running</span>
-    <span class="ticker-item">De 0 a 10K</span>
-    <span class="ticker-item">Sin lesiones</span>
-    <span class="ticker-item">Progreso real</span>
-    <span class="ticker-item">Primera carrera</span>
-    <span class="ticker-item">Constancia > Velocidad</span>
-    <span class="ticker-item">Empieza hoy</span>
-    <span class="ticker-item">Tips de running</span>
-    <span class="ticker-item">De 0 a 10K</span>
-    <span class="ticker-item">Sin lesiones</span>
-    <span class="ticker-item">Progreso real</span>
-    <span class="ticker-item">Primera carrera</span>
-    <span class="ticker-item">Constancia > Velocidad</span>
-  </div>
-</div>
-
-<!-- STATS -->
-<section class="stats-section">
-  <div class="container">
-    <div class="row g-4 reveal">
-      <div class="col-6 col-md-3">
-        <div class="stat-card">
-          <div class="stat-number">8<span class="stat-unit">sem</span></div>
-          <div class="stat-label" data-i18n="stat1">Programa progresivo para 10K</div>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="stat-card">
-          <div class="stat-number">10<span class="stat-unit">K</span></div>
-          <div class="stat-label" data-i18n="stat2">Meta alcanzable para cualquiera</div>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="stat-card">
-          <div class="stat-number"><span class="stat-unit">%</span>0</div>
-          <div class="stat-label" data-i18n="stat3">Experiencia previa requerida</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- JOURNEY -->
-<section class="journey-section" id="journey">
-  <div class="container">
-    <div class="reveal mb-5">
-      <p class="section-label" data-i18n="journey_label">El camino</p>
-      <h2 class="section-title" data-i18n="journey_title">3 Fases para<br>Llegar a Meta</h2>
-      <div class="divider"></div>
-      <p class="stat-label" style="max-width:500px;font-size:0.95rem;line-height:1.7;" data-i18n="journey_desc">
-        No importa si no has corrido en tu vida. Este es el proceso real, sin atajos, el mismo que estoy utilizando para mi primer 10K.
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-number">10K</div>
+    <div class="container position-relative" style="z-index:1;">
+      <p class="hero-label" data-i18n="hero_label">📍 Tu guía de running · desde 0 hasta la línea de meta</p>
+      <h1 class="hero-title" data-i18n="hero_title">
+        De sofá<br><span>a corredor</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero_sub">
+        Contenido real para runners reales. Tips, planes de entrenamiento y todo lo que necesitas para completar tu primer 10K — sin morir en el intento.
       </p>
-    </div>
-    <div class="row g-4">
-      <!-- FASE 1 -->
-      <div class="col-md-4 reveal">
-        <div class="phase-card">
-          <div class="phase-num">01</div>
-          <div class="phase-badge" data-i18n="p1_badge">Semanas 1–3</div>
-          <div class="phase-title" data-i18n="p1_title">El Despertar</div>
-          <p class="phase-desc" data-i18n="p1_desc">Empezar es lo más difícil. Esta fase trata de construir el hábito, no el rendimiento.</p>
-          <ul class="phase-list" id="p1list">
-            <li>Correr/caminar 20 min alternando</li>
-            <li>3 salidas por semana</li>
-            <li>Ritmo donde puedas hablar</li>
-            <li>Tenis adecuados</li>
-            <li>Registro diario de cómo te sientes</li>
-          </ul>
-        </div>
-      </div>
-      <!-- FASE 2 -->
-      <div class="col-md-4 reveal">
-        <div class="phase-card">
-          <div class="phase-num">02</div>
-          <div class="phase-badge" data-i18n="p2_badge">Semanas 4–6</div>
-          <div class="phase-title" data-i18n="p2_title">La Construcción</div>
-          <p class="phase-desc" data-i18n="p2_desc">Aquí el cuerpo se adapta. Empiezas a correr sin parar y el progreso se vuelve visible.</p>
-          <ul class="phase-list" id="p2list">
-            <li>Correr 20–30 min continuos</li>
-            <li>Aumentar distancia 10% semanal</li>
-            <li>Trabajo de técnica de carrera</li>
-            <li>Hidratación y nutrición básica</li>
-            <li>Un día de recuperación activa</li>
-          </ul>
-        </div>
-      </div>
-      <!-- FASE 3 -->
-      <div class="col-md-4 reveal">
-        <div class="phase-card">
-          <div class="phase-num">03</div>
-          <div class="phase-badge" data-i18n="p3_badge">Semanas 7–8</div>
-          <div class="phase-title" data-i18n="p3_title">La Llegada</div>
-          <p class="phase-desc" data-i18n="p3_desc">Ya eres corredor. Hora de afinarte para ese primer 10K oficial y la foto en la meta.</p>
-          <ul class="phase-list" id="p3list">
-            <li>Rodaje largo de 7–8 km</li>
-            <li>Reducción de carga (tapering)</li>
-            <li>Estrategia de carrera</li>
-            <li>Logística del día de la carrera</li>
-            <li>¡Celebrar el logro! 🎉</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TIPS -->
-<section class="tips-section" id="tips">
-  <div class="container">
-    <div class="reveal mb-5">
-      <p class="section-label" data-i18n="tips_label">Contenido de valor</p>
-      <h2 class="section-title" data-i18n="tips_title">Tips que<br>Cambian Todo</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="row g-4">
-      <div class="col-sm-6 col-lg-4 reveal">
-        <div class="tip-card">
-          <i class="bi bi-lungs tip-icon"></i>
-          <div class="tip-title" data-i18n="tip1_title">Respiración Correcta</div>
-          <p class="tip-text" data-i18n="tip1_text">El ritmo 3-3 (inhalar 3 pasos, exhalar 3 pasos) reduce los famosos "ponchazos / flato". Practica respiración diafragmática antes de salir.</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4 reveal">
-        <div class="tip-card">
-          <i class="bi bi-lightning-charge tip-icon"></i>
-          <div class="tip-title" data-i18n="tip2_title">El Calzado Correcto</div>
-          <p class="tip-text" data-i18n="tip2_text">No necesitas las más caras; necesitas unas que se sientan cómodas. Pruébate varios modelos y elige el que mejor se adapte a ti. Si puedes, pide un análisis de marcha para orientación adicional.</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4 reveal">
-        <div class="tip-card">
-          <i class="bi bi-clock tip-icon"></i>
-          <div class="tip-title" data-i18n="tip3_title">Correr Lento para Correr Rápido</div>
-          <p class="tip-text" data-i18n="tip3_text">El 80% de tus rodajes deben ser muy suaves, ritmo donde puedas hablar. La velocidad llega después, cuando tu base aeróbica mejora.</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4 reveal">
-        <div class="tip-card">
-          <i class="bi bi-droplet tip-icon"></i>
-          <div class="tip-title" data-i18n="tip4_title">Hidratación Antes y Después</div>
-          <p class="tip-text" data-i18n="tip4_text">Hidrátate desde 2 horas antes. Una buena hidratación mejora tu rendimiento entre un 2% y 10%. El color de la orina es tu mejor indicador.</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4 reveal">
-        <div class="tip-card">
-          <i class="bi bi-calendar-check tip-icon"></i>
-          <div class="tip-title" data-i18n="tip5_title">Descanso = Progreso</div>
-          <p class="tip-text" data-i18n="tip5_text">El progreso ocurre en el descanso, no en el entrenamiento. La fatiga acumulada por entrenar demasiado rápido es el error #1 de los principiantes.</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-4 reveal">
-        <div class="tip-card">
-          <i class="bi bi-trophy tip-icon"></i>
-          <div class="tip-title" data-i18n="tip6_title">Inscríbete a una Carrera</div>
-          <p class="tip-text" data-i18n="tip6_text">Tener una fecha en el calendario te da una motivación increíble. Busca una 5K o 10K y anótate cuando te sientas listo.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PLAN 10K -->
-<section class="plan-section" id="plan">
-  <div class="container">
-    <div class="reveal mb-5">
-      <p class="section-label" data-i18n="plan_label">Plan de entrenamiento</p>
-      <h2 class="section-title" data-i18n="plan_title">8 Semanas<br>a tu 10K</h2>
-      <div class="divider"></div>
-      <p class="stat-label" style="max-width:500px;font-size:0.9rem;line-height:1.7;" data-i18n="plan_desc">
-        Este es el plan base. Cada semana lo detallo en Instagram con videos, reels y tips específicos.
-      </p>
-    </div>
-    <div class="plan-table-wrap reveal">
-      <div class="week-row" style="border-bottom:1px solid rgba(255,77,0,0.2);">
-        <span class="week-num" style="color:var(--muted);" data-i18n="col_week">SEMANA</span>
-        <span class="week-name" style="color:var(--muted);font-size:0.75rem;letter-spacing:0.1em;font-family:'Space Mono',monospace;" data-i18n="col_focus">ENFOQUE</span>
-        <div style="flex:2;"></div>
-        <span class="week-km" style="color:var(--muted);font-size:0.7rem;font-family:'Space Mono',monospace;" data-i18n="col_km">KM TOT.</span>
-      </div>
-      <div class="week-row">
-        <span class="week-num" data-i18n="w1_num">SEM 01</span>
-        <span class="week-name" data-i18n="w1_desc">Correr/caminar – construir el hábito</span>
-        <div class="progress-bar-custom"><div class="progress-fill" style="width:10%"></div></div>
-        <span class="week-km">8 km</span>
-      </div>
-      <div class="week-row">
-        <span class="week-num" data-i18n="w2_num">SEM 02</span>
-        <span class="week-name" data-i18n="w2_desc">20 min corriendo – primera prueba</span>
-        <div class="progress-bar-custom"><div class="progress-fill" style="width:18%"></div></div>
-        <span class="week-km">12 km</span>
-      </div>
-      <div class="week-row">
-        <span class="week-num" data-i18n="w3_num">SEM 03</span>
-        <span class="week-name" data-i18n="w3_desc">Resistencia aeróbica base</span>
-        <div class="progress-bar-custom"><div class="progress-fill" style="width:26%"></div></div>
-        <span class="week-km">15 km</span>
-      </div>
-      <div class="week-row">
-        <span class="week-num" data-i18n="w4_num">SEM 04</span>
-        <span class="week-name" data-i18n="w4_desc">Primer rodaje de 5K continuo</span>
-        <div class="progress-bar-custom"><div class="progress-fill" style="width:38%"></div></div>
-        <span class="week-km">18 km</span>
-      </div>
-      <div class="week-row">
-        <span class="week-num" data-i18n="w5_num">SEM 05</span>
-        <span class="week-name" data-i18n="w5_desc">Aumento de volumen + técnica</span>
-        <div class="progress-bar-custom"><div class="progress-fill" style="width:52%"></div></div>
-        <span class="week-km">22 km</span>
-      </div>
-      <div class="week-row">
-        <span class="week-num" data-i18n="w6_num">SEM 06</span>
-        <span class="week-name" data-i18n="w6_desc">Rodaje largo 7K + recuperación</span>
-        <div class="progress-bar-custom"><div class="progress-fill" style="width:67%"></div></div>
-        <span class="week-km">22-24 km</span>
-      </div>
-      <div class="week-row">
-        <span class="week-num" data-i18n="w7_num">SEM 07</span>
-        <span class="week-name" data-i18n="w7_desc">Simulacro de carrera – 7-8K</span>
-        <div class="progress-bar-custom"><div class="progress-fill" style="width:84%"></div></div>
-        <span class="week-km">24-26 km</span>
-      </div>
-      <div class="week-row" style="border-bottom:none;">
-        <span class="week-num" style="color:var(--orange);" data-i18n="w8_num">SEM 08</span>
-        <span class="week-name" style="color:#fff;font-weight:600;" data-i18n="w8_desc">🏁 CARRERA – Tu primer 10K oficial</span>
-        <div class="progress-bar-custom"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,var(--orange),#FF7A3D)"></div></div>
-        <span class="week-km" style="color:var(--orange);">10K</span>
-      </div>
-    </div>
-    <p class="stat-label mt-3 reveal" style="font-size:0.8rem;" data-i18n="plan_note">
-      * Cada semana tiene 3 días de entrenamiento + descanso activo. Sígueme en Instagram para los detalles de cada sesión.
-    </p>
-  </div>
-</section>
-
-<!-- TESTIMONIALS (comentado como en el original) -->
-<!--
-<section class="test-section"> ... </section>
--->
-
-<!-- CTA INSTAGRAM -->
-<section class="cta-section" id="instagram">
-  <div class="container position-relative" style="z-index:1;">
-    <div class="reveal">
-      <h2 class="cta-big" data-i18n="cta_heading">
-        Tu <span class="accent">10K</span><br>
-        empieza hoy
-      </h2>
-      <p class="cta-sub" data-i18n="cta_sub">
-        Cada semana subo tips, planes y contenido real sobre el camino de novato a corredor. Únete a la comunidad.
-      </p>
-      <div class="text-center">
-        <a href="https://instagram.com/arielvillalona_" target="_blank" class="btn-primary-custom" style="font-size:0.9rem;padding:18px 48px;">
-          <i class="bi bi-instagram me-2"></i><span data-i18n="cta_btn">Seguir @arielvillalona_</span>
+      <div class="hero-cta d-flex flex-wrap gap-3">
+        <a href="#instagram" class="btn-primary-custom">
+          <i class="bi bi-instagram me-2"></i><span data-i18n="hero_cta_ig">Sígueme en Instagram</span>
         </a>
+        <a href="#journey" class="btn-outline-custom" data-i18n="hero_cta_journey">Ver el camino →</a>
       </div>
-      <p class="text-center mt-4" style="color:var(--muted);font-size:0.8rem;font-family:'Space Mono',monospace;" data-i18n="cta_note">
-        Gratis · Sin spam · Solo running
-      </p>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">Empieza hoy</span>
+      <span class="ticker-item">Tips de running</span>
+      <span class="ticker-item">De 0 a 10K</span>
+      <span class="ticker-item">Sin lesiones</span>
+      <span class="ticker-item">Progreso real</span>
+      <span class="ticker-item">Primera carrera</span>
+      <span class="ticker-item">Constancia > Velocidad</span>
+      <span class="ticker-item">Empieza hoy</span>
+      <span class="ticker-item">Tips de running</span>
+      <span class="ticker-item">De 0 a 10K</span>
+      <span class="ticker-item">Sin lesiones</span>
+      <span class="ticker-item">Progreso real</span>
+      <span class="ticker-item">Primera carrera</span>
+      <span class="ticker-item">Constancia > Velocidad</span>
     </div>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-4 mb-3 mb-md-0">
-        <div class="footer-logo">RUN<span>PROGRESS</span></div>
-        <p class="stat-label mt-2" style="font-size:0.8rem;" data-i18n="footer_desc">De novato a corredor de carrera. Contenido de running en español.</p>
-      </div>
-      <div class="col-md-4 text-md-center mb-3 mb-md-0">
-        <div class="d-flex gap-3 justify-content-md-center">
-          <a href="#journey" class="nav-link-custom" data-i18n="nav_journey">El Camino</a>
-          <a href="#tips" class="nav-link-custom" data-i18n="nav_tips">Tips</a>
-          <a href="#plan" class="nav-link-custom" data-i18n="nav_plan">Plan 10K</a>
-          <a href="guias.html" class="nav-link-custom" data-i18n="nav_guia">Guias</a>
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row g-4 reveal">
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-number">8<span class="stat-unit">sem</span></div>
+            <div class="stat-label" data-i18n="stat1">Programa progresivo para 10K</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-number">10<span class="stat-unit">K</span></div>
+            <div class="stat-label" data-i18n="stat2">Meta alcanzable para cualquiera</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-number"><span class="stat-unit">%</span>0</div>
+            <div class="stat-label" data-i18n="stat3">Experiencia previa requerida</div>
+          </div>
         </div>
       </div>
-      <div class="col-md-4 text-md-end">
-        <div class="d-flex gap-2 justify-content-md-end">
-          <a href="https://instagram.com/arielvillalona_" class="social-link" target="_blank"><i class="bi bi-instagram"></i></a>
-          <!-- <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
-          <a href="#" class="social-link"><i class="bi bi-youtube"></i></a> -->
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section class="journey-section" id="journey">
+    <div class="container">
+      <div class="reveal mb-5">
+        <p class="section-label" data-i18n="journey_label">El camino</p>
+        <h2 class="section-title" data-i18n="journey_title">3 Fases para<br>Llegar a Meta</h2>
+        <div class="divider"></div>
+        <p class="stat-label" style="max-width:500px;font-size:0.95rem;line-height:1.7;" data-i18n="journey_desc">
+          No importa si no has corrido en tu vida. Este es el proceso real, sin atajos.
+        </p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4 reveal">
+          <div class="phase-card">
+            <div class="phase-num">01</div>
+            <div class="phase-badge" data-i18n="p1_badge">Semanas 1–3</div>
+            <div class="phase-title" data-i18n="p1_title">El Despertar</div>
+            <p class="phase-desc" data-i18n="p1_desc">Empezar es lo más difícil. Esta fase trata de construir el hábito, no el rendimiento.</p>
+            <ul class="phase-list" id="p1list">
+              <li>Correr/caminar 20 min alternando</li>
+              <li>3 salidas por semana</li>
+              <li>Ritmo donde puedas hablar</li>
+              <li>Tenis adecuados</li>
+              <li>Registro diario de cómo te sientes</li>
+            </ul>
+          </div>
         </div>
-        <p class="stat-label mt-3" style="font-size:0.72rem;font-family:'Space Mono',monospace;" data-i18n="footer_copy">
-          © 2025 RunProgress · Todos los derechos reservados
+        <div class="col-md-4 reveal">
+          <div class="phase-card">
+            <div class="phase-num">02</div>
+            <div class="phase-badge" data-i18n="p2_badge">Semanas 4–6</div>
+            <div class="phase-title" data-i18n="p2_title">La Construcción</div>
+            <p class="phase-desc" data-i18n="p2_desc">Aquí el cuerpo se adapta. Empiezas a correr sin parar y el progreso se vuelve visible.</p>
+            <ul class="phase-list" id="p2list">
+              <li>Correr 20–30 min continuos</li>
+              <li>Aumentar distancia 10% semanal</li>
+              <li>Trabajo de técnica de carrera</li>
+              <li>Hidratación y nutrición básica</li>
+              <li>Un día de recuperación activa</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="phase-card">
+            <div class="phase-num">03</div>
+            <div class="phase-badge" data-i18n="p3_badge">Semanas 7–8</div>
+            <div class="phase-title" data-i18n="p3_title">La Llegada</div>
+            <p class="phase-desc" data-i18n="p3_desc">Ya eres corredor. Hora de afinarte para ese primer 10K oficial y la foto en la meta.</p>
+            <ul class="phase-list" id="p3list">
+              <li>Rodaje largo de 7–8 km</li>
+              <li>Reducción de carga (tapering)</li>
+              <li>Estrategia de carrera</li>
+              <li>Logística del día de la carrera</li>
+              <li>¡Celebrar el logro! 🎉</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section class="tips-section" id="tips">
+    <div class="container">
+      <div class="reveal mb-5">
+        <p class="section-label" data-i18n="tips_label">Contenido de valor</p>
+        <h2 class="section-title" data-i18n="tips_title">Tips que<br>Cambian Todo</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-4 reveal">
+          <div class="tip-card">
+            <i class="bi bi-lungs tip-icon"></i>
+            <div class="tip-title" data-i18n="tip1_title">Respiración Correcta</div>
+            <p class="tip-text" data-i18n="tip1_text">El ritmo 3-3 reduce los famosos "ponchazos / flato". Practica respiración diafragmática antes de salir.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4 reveal">
+          <div class="tip-card">
+            <i class="bi bi-lightning-charge tip-icon"></i>
+            <div class="tip-title" data-i18n="tip2_title">El Calzado Correcto</div>
+            <p class="tip-text" data-i18n="tip2_text">No necesitas las más caras; necesitas unas que se sientan cómodas. Pruébate varios modelos.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4 reveal">
+          <div class="tip-card">
+            <i class="bi bi-clock tip-icon"></i>
+            <div class="tip-title" data-i18n="tip3_title">Correr Lento para Correr Rápido</div>
+            <p class="tip-text" data-i18n="tip3_text">El 80% de tus rodajes deben ser muy suaves, ritmo donde puedas hablar.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4 reveal">
+          <div class="tip-card">
+            <i class="bi bi-droplet tip-icon"></i>
+            <div class="tip-title" data-i18n="tip4_title">Hidratación Antes y Después</div>
+            <p class="tip-text" data-i18n="tip4_text">Hidrátate desde 2 horas antes. El color de la orina es tu mejor indicador.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4 reveal">
+          <div class="tip-card">
+            <i class="bi bi-calendar-check tip-icon"></i>
+            <div class="tip-title" data-i18n="tip5_title">Descanso = Progreso</div>
+            <p class="tip-text" data-i18n="tip5_text">El progreso ocurre en el descanso. La fatiga acumulada por entrenar demasiado rápido es el error #1.</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4 reveal">
+          <div class="tip-card">
+            <i class="bi bi-trophy tip-icon"></i>
+            <div class="tip-title" data-i18n="tip6_title">Inscríbete a una Carrera</div>
+            <p class="tip-text" data-i18n="tip6_text">Tener una fecha en el calendario te da una motivación increíble. Busca una 5K o 10K.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAN 10K -->
+  <section class="plan-section" id="plan">
+    <div class="container">
+      <div class="reveal mb-5">
+        <p class="section-label" data-i18n="plan_label">Plan de entrenamiento</p>
+        <h2 class="section-title" data-i18n="plan_title">8 Semanas<br>a tu 10K</h2>
+        <div class="divider"></div>
+        <p class="stat-label" style="max-width:500px;font-size:0.9rem;line-height:1.7;" data-i18n="plan_desc">
+          Este es el plan base. Cada semana lo detallo en Instagram.
+        </p>
+      </div>
+      <div class="plan-table-wrap reveal">
+        <div class="week-row" style="border-bottom:1px solid rgba(255,77,0,0.2);">
+          <span class="week-num" style="color:var(--muted);" data-i18n="col_week">SEMANA</span>
+          <span class="week-name" style="color:var(--muted);font-size:0.75rem;letter-spacing:0.1em;font-family:'Space Mono',monospace;" data-i18n="col_focus">ENFOQUE</span>
+          <div style="flex:2;"></div>
+          <span class="week-km" style="color:var(--muted);font-size:0.7rem;font-family:'Space Mono',monospace;" data-i18n="col_km">KM TOT.</span>
+        </div>
+        <div class="week-row">
+          <span class="week-num" data-i18n="w1_num">SEM 01</span>
+          <span class="week-name" data-i18n="w1_desc">Correr/caminar – construir el hábito</span>
+          <div class="progress-bar-custom"><div class="progress-fill" style="width:10%"></div></div>
+          <span class="week-km">8 km</span>
+        </div>
+        <div class="week-row">
+          <span class="week-num" data-i18n="w2_num">SEM 02</span>
+          <span class="week-name" data-i18n="w2_desc">20 min corriendo – primera prueba</span>
+          <div class="progress-bar-custom"><div class="progress-fill" style="width:18%"></div></div>
+          <span class="week-km">12 km</span>
+        </div>
+        <div class="week-row">
+          <span class="week-num" data-i18n="w3_num">SEM 03</span>
+          <span class="week-name" data-i18n="w3_desc">Resistencia aeróbica base</span>
+          <div class="progress-bar-custom"><div class="progress-fill" style="width:26%"></div></div>
+          <span class="week-km">15 km</span>
+        </div>
+        <div class="week-row">
+          <span class="week-num" data-i18n="w4_num">SEM 04</span>
+          <span class="week-name" data-i18n="w4_desc">Primer rodaje de 5K continuo</span>
+          <div class="progress-bar-custom"><div class="progress-fill" style="width:38%"></div></div>
+          <span class="week-km">18 km</span>
+        </div>
+        <div class="week-row">
+          <span class="week-num" data-i18n="w5_num">SEM 05</span>
+          <span class="week-name" data-i18n="w5_desc">Aumento de volumen + técnica</span>
+          <div class="progress-bar-custom"><div class="progress-fill" style="width:52%"></div></div>
+          <span class="week-km">22 km</span>
+        </div>
+        <div class="week-row">
+          <span class="week-num" data-i18n="w6_num">SEM 06</span>
+          <span class="week-name" data-i18n="w6_desc">Rodaje largo 7K + recuperación</span>
+          <div class="progress-bar-custom"><div class="progress-fill" style="width:67%"></div></div>
+          <span class="week-km">22-24 km</span>
+        </div>
+        <div class="week-row">
+          <span class="week-num" data-i18n="w7_num">SEM 07</span>
+          <span class="week-name" data-i18n="w7_desc">Simulacro de carrera – 7-8K</span>
+          <div class="progress-bar-custom"><div class="progress-fill" style="width:84%"></div></div>
+          <span class="week-km">24-26 km</span>
+        </div>
+        <div class="week-row" style="border-bottom:none;">
+          <span class="week-num" style="color:var(--orange);" data-i18n="w8_num">SEM 08</span>
+          <span class="week-name" style="color:#fff;font-weight:600;" data-i18n="w8_desc">🏁 CARRERA – Tu primer 10K oficial</span>
+          <div class="progress-bar-custom"><div class="progress-fill" style="width:100%;background:linear-gradient(90deg,var(--orange),#FF7A3D)"></div></div>
+          <span class="week-km" style="color:var(--orange);">10K</span>
+        </div>
+      </div>
+      <p class="stat-label mt-3 reveal" style="font-size:0.8rem;" data-i18n="plan_note">
+        * Cada semana tiene 3 días de entrenamiento + descanso activo.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA INSTAGRAM -->
+  <section class="cta-section" id="instagram">
+    <div class="container position-relative" style="z-index:1;">
+      <div class="reveal">
+        <h2 class="cta-big" data-i18n="cta_heading">
+          Tu <span class="accent">10K</span><br>empieza hoy
+        </h2>
+        <p class="cta-sub" data-i18n="cta_sub">
+          Cada semana subo tips, planes y contenido real sobre el camino de novato a corredor.
+        </p>
+        <div class="text-center">
+          <a href="https://instagram.com/arielvillalona_" target="_blank" class="btn-primary-custom" style="font-size:0.9rem;padding:18px 48px;">
+            <i class="bi bi-instagram me-2"></i><span data-i18n="cta_btn">Seguir @arielvillalona_</span>
+          </a>
+        </div>
+        <p class="text-center mt-4" style="color:var(--muted);font-size:0.8rem;font-family:'Space Mono',monospace;" data-i18n="cta_note">
+          Gratis · Sin spam · Solo running
         </p>
       </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js.js"></script>
+  <!-- ── Footer inyectado por js.js ── -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js.js"></script>
 </body>
 </html>
