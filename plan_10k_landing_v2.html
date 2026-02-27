@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10K Sub 50 – Plan de Entrenamiento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080B12;--bg2:#0D1220;--accent:#F0FF00;--accent2:#FF3B5C;--teal:#00D4FF;--white:#FFFFFF;--muted:#5A6478;--card:#111827;--border:rgba(255,255,255,0.07)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s ease-out;opacity:.5}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:linear-gradient(to bottom,rgba(8,11,18,.95),transparent);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--accent);text-decoration:none}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;letter-spacing:1px;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{background:var(--accent);color:var(--bg);padding:10px 24px;border-radius:2px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+/* HERO */
+.hero{position:relative;min-height:100vh;display:grid;place-items:center;overflow:hidden;padding:120px 48px 80px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(240,255,0,.04) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(0,212,255,.05) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 80% 10%,rgba(255,59,92,.04) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;animation:gridDrift 20s linear infinite}
+@keyframes gridDrift{0%{transform:translateY(0)}100%{transform:translateY(60px)}}
+.hero::after{content:'';position:absolute;right:-100px;top:50%;width:500px;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:rotate(-20deg);opacity:.3}
+.hero-content{position:relative;max-width:1100px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.level-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#EF4444;padding:6px 14px;border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;opacity:0;animation:fadeUp .6s .1s forwards}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp .6s .2s forwards}
+.hero-eyebrow::before{content:'';display:block;width:30px;height:1px;background:var(--accent)}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,8vw,110px);line-height:.92;letter-spacing:2px;opacity:0;animation:fadeUp .6s .35s forwards}
+.hero-title .outline{-webkit-text-stroke:1.5px rgba(255,255,255,.25);color:transparent}
+.hero-title .acc{color:var(--accent)}
+.hero-sub{margin-top:24px;font-size:16px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.6);max-width:460px;opacity:0;animation:fadeUp .6s .5s forwards}
+.hero-actions{margin-top:40px;display:flex;gap:16px;align-items:center;opacity:0;animation:fadeUp .6s .65s forwards}
+.btn-primary{background:var(--accent);color:var(--bg);padding:16px 36px;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;display:inline-block;transition:transform .2s,box-shadow .2s;box-shadow:0 0 30px rgba(240,255,0,.2)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(240,255,0,.35)}
+.btn-ghost{color:rgba(255,255,255,.6);padding:16px 24px;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);transition:color .2s,border-color .2s}
+.btn-ghost:hover{color:var(--white);border-color:var(--white)}
+.hero-stats{display:flex;flex-direction:column;gap:20px;opacity:0;animation:fadeUp .6s .4s forwards}
+.stat-block{border-left:2px solid var(--border);padding:16px 24px;background:rgba(255,255,255,.03);backdrop-filter:blur(10px);transition:border-color .3s,background .3s}
+.stat-block:hover{border-color:var(--accent);background:rgba(240,255,0,.03)}
+.stat-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.stat-value{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;letter-spacing:2px}
+.stat-value .unit{font-size:18px;color:var(--muted);margin-left:4px}
+.stat-desc{font-size:13px;color:var(--muted);margin-top:4px}
+.scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s 1.2s forwards}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2s infinite}
+@keyframes scrollPulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.4;transform:scaleY(.7)}}
+.scroll-text{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+/* SECTIONS */
+section{padding:100px 48px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.section-tag::after{content:'';flex:1;max-width:40px;height:1px;background:var(--accent)}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);line-height:1;letter-spacing:2px;margin-bottom:48px}
+/* NIVEL */
+#nivel{background:var(--bg2)}
+.nivel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:16px}
+.nivel-card{padding:28px 24px;background:var(--card);border-top:3px solid transparent;transition:background .3s}
+.nivel-card:hover{background:rgba(255,255,255,.04)}
+.nivel-card.highlight{border-color:var(--accent);background:rgba(240,255,0,.03)}
+.nivel-card-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.nivel-card-val{font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;margin-bottom:4px}
+.nivel-card-sub{font-size:12px;color:var(--muted);line-height:1.5}
+.delta-box{display:grid;grid-template-columns:1fr 60px 1fr;gap:16px;align-items:center;padding:28px 32px;background:var(--card);border:1px solid var(--border);margin-bottom:16px}
+.delta-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.delta-val{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1}
+.delta-arrow{font-size:32px;text-align:center;color:var(--accent)}
+.delta-sub{font-size:12px;color:var(--muted);margin-top:4px}
+/* PLAN */
+#plan{background:var(--bg)}
+.timeline{position:relative;display:grid;gap:2px}
+.timeline::before{content:'';position:absolute;left:120px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--border),var(--border),transparent)}
+.phase-row{display:grid;grid-template-columns:120px 1fr;gap:32px;align-items:stretch;position:relative}
+.phase-weeks{text-align:right;padding:24px 24px 24px 0;display:flex;flex-direction:column;justify-content:center}
+.phase-week-num{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;color:rgba(255,255,255,.15)}
+.phase-week-date{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:4px}
+.phase-dot{position:absolute;left:120px;top:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;border:2px solid var(--bg);z-index:2}
+.phase-card{padding:24px 32px;border-left:3px solid transparent;transition:background .3s}
+.phase-card:hover{background:rgba(255,255,255,.02)}
+.phase-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;margin-bottom:6px}
+.phase-desc{font-size:13px;color:rgba(255,255,255,.5);font-weight:300;line-height:1.6;margin-bottom:12px}
+.phase-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;padding:4px 10px;border-radius:2px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5)}
+.phase-row:nth-child(1) .phase-dot{background:#3B82F6}.phase-row:nth-child(1) .phase-card{border-color:#3B82F6}.phase-row:nth-child(1) .phase-name{color:#3B82F6}
+.phase-row:nth-child(2) .phase-dot{background:#22C55E}.phase-row:nth-child(2) .phase-card{border-color:#22C55E}.phase-row:nth-child(2) .phase-name{color:#22C55E}
+.phase-row:nth-child(3) .phase-dot{background:#F59E0B}.phase-row:nth-child(3) .phase-card{border-color:#F59E0B}.phase-row:nth-child(3) .phase-name{color:#F59E0B}
+.phase-row:nth-child(4) .phase-dot{background:#EF4444}.phase-row:nth-child(4) .phase-card{border-color:#EF4444}.phase-row:nth-child(4) .phase-name{color:#EF4444}
+.phase-row:nth-child(5) .phase-dot{background:#A855F7}.phase-row:nth-child(5) .phase-card{border-color:#A855F7}.phase-row:nth-child(5) .phase-name{color:#A855F7}
+.phase-row:nth-child(6) .phase-dot{background:var(--accent)}.phase-row:nth-child(6) .phase-card{border-color:var(--accent)}.phase-row:nth-child(6) .phase-name{color:var(--accent)}
+/* ZONAS */
+#zonas{background:var(--bg2)}
+.zones-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+.zone-card{position:relative;padding:32px 20px;overflow:hidden;cursor:default;transition:transform .3s}
+.zone-card:hover{transform:translateY(-4px)}
+.zone-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.zone-card::after{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s}
+.zone-card:hover::after{opacity:1}
+.z1c{background:rgba(59,130,246,.06)}.z1c::before{background:#3B82F6}.z1c:hover::after{background:radial-gradient(circle at 50% 0,rgba(59,130,246,.12),transparent 70%)}
+.z2c{background:rgba(34,197,94,.06)}.z2c::before{background:#22C55E}.z2c:hover::after{background:radial-gradient(circle at 50% 0,rgba(34,197,94,.12),transparent 70%)}
+.z3c{background:rgba(245,158,11,.06)}.z3c::before{background:#F59E0B}.z3c:hover::after{background:radial-gradient(circle at 50% 0,rgba(245,158,11,.12),transparent 70%)}
+.z4c{background:rgba(239,68,68,.06)}.z4c::before{background:#EF4444}.z4c:hover::after{background:radial-gradient(circle at 50% 0,rgba(239,68,68,.12),transparent 70%)}
+.z5c{background:rgba(168,85,247,.06)}.z5c::before{background:#A855F7}.z5c:hover::after{background:radial-gradient(circle at 50% 0,rgba(168,85,247,.12),transparent 70%)}
+.zone-num{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;opacity:.12;margin-bottom:-16px}
+.zone-name{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1}
+.zone-bpm{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1;position:relative;z-index:1}
+.zone-bpm .u{font-size:14px;color:var(--muted)}
+.zone-pct{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin:4px 0 12px}
+.zone-pace{font-size:13px;padding:8px 0;border-top:1px solid var(--border);color:rgba(255,255,255,.7);margin-top:12px}
+.zone-pace span{font-family:'JetBrains Mono',monospace;font-weight:700}
+.zone-use{font-size:12px;color:var(--muted);line-height:1.5;margin-top:8px}
+.zone-badge{display:inline-block;margin-top:12px;padding:3px 8px;border-radius:2px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+/* SEMANA */
+#semana{background:var(--bg)}
+.week-tabs{display:flex;gap:2px;margin-bottom:24px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.week-tab{padding:12px 20px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s;background:none;border-left:none;border-right:none;border-top:none}
+.week-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:12px}
+.day-col{padding:20px 14px;background:var(--card)}
+.day-col.active{background:rgba(240,255,0,.03);border-top:2px solid var(--accent)}
+.day-col.rest{opacity:.4}
+.day-col.quality{border-top:2px solid #EF4444;background:rgba(239,68,68,.04)}
+.day-col.long-run{border-top:2px solid #22C55E;background:rgba(34,197,94,.04)}
+.day-name{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.day-icon{font-size:20px;margin-bottom:10px}
+.day-activity{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:6px}
+.day-detail{font-size:11px;color:var(--muted);line-height:1.6}
+.day-zone{display:inline-block;margin-top:10px;padding:2px 8px;border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700}
+.day-km{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.3);margin-top:6px}
+.week-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:4px}
+.ws-block{padding:14px 16px;background:rgba(255,255,255,.02);border:1px solid var(--border);text-align:center}
+.ws-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ws-val{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1}
+/* EJERCICIOS */
+#ejercicios{background:var(--bg2)}
+.ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.ex-block{background:var(--card);padding:40px}
+.ex-block-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;margin-bottom:8px}
+.ex-block-sub{font-size:13px;color:var(--muted);margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.ex-list{display:flex;flex-direction:column;gap:12px}
+.ex-item{display:flex;gap:16px;align-items:flex-start;padding:16px;background:rgba(255,255,255,.02);border:1px solid var(--border);transition:border-color .2s,background .2s}
+.ex-item:hover{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.04)}
+.ex-num{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;color:rgba(255,255,255,.1);flex-shrink:0;width:32px;text-align:center}
+.ex-name{font-size:14px;font-weight:600;margin-bottom:4px}
+.ex-sets{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:4px}
+.ex-muscle{font-size:12px;color:var(--muted)}
+.cardio-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cardio-item{padding:14px;background:rgba(255,255,255,.02);border:1px solid var(--border);display:flex;gap:12px;align-items:center;transition:border-color .2s}
+.cardio-item:hover{border-color:var(--teal)}
+.cardio-icon{font-size:22px}
+.cardio-name{font-size:13px;font-weight:600}
+.cardio-time{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal)}
+/* RACE */
+#carrera{background:var(--bg2);position:relative;overflow:hidden}
+#carrera::before{content:'29 NOV';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:200px;line-height:1;color:rgba(240,255,0,.03);letter-spacing:10px;pointer-events:none;white-space:nowrap}
+.race-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.race-countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px}
+.countdown-block{text-align:center;padding:20px 12px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+.countdown-num{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:var(--accent)}
+.countdown-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:4px}
+.race-pace{display:flex;gap:16px;margin-bottom:32px}
+.pace-block{flex:1;padding:18px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+.pace-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.pace-val{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1}
+.race-cta{background:var(--accent);color:var(--bg);display:block;text-align:center;text-decoration:none;padding:20px;border-radius:2px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;transition:box-shadow .3s,transform .2s;box-shadow:0 0 40px rgba(240,255,0,.25)}
+.race-cta:hover{box-shadow:0 0 70px rgba(240,255,0,.45);transform:translateY(-2px)}
+.race-timeline{display:flex;flex-direction:column;gap:2px}
+.race-step{display:flex;gap:20px;padding:14px 20px;background:rgba(255,255,255,.02);border:1px solid var(--border);align-items:center;transition:background .2s}
+.race-step:last-child{background:rgba(240,255,0,.06);border-color:rgba(240,255,0,.3)}
+.race-step:hover{background:rgba(255,255,255,.04)}
+.race-km{font-family:'Bebas Neue',sans-serif;font-size:20px;width:60px;flex-shrink:0;color:var(--muted)}
+.race-step:last-child .race-km{color:var(--accent)}
+.race-step-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.race-step-desc{font-size:12px;color:var(--muted)}
+footer{background:var(--bg);padding:48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:var(--accent)}
+.progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:200;transition:width .1s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+  nav{padding:16px 24px}.nav-links,.nav-cta{display:none}
+  section{padding:60px 24px}.hero{padding:100px 24px 60px}
+  .hero-content{grid-template-columns:1fr;gap:40px}
+  .nivel-grid{grid-template-columns:repeat(2,1fr)}
+  .zones-grid{grid-template-columns:repeat(3,1fr)}
+  .week-grid{grid-template-columns:repeat(4,1fr)}
+  .ex-grid{grid-template-columns:1fr}
+  .race-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:16px;text-align:center}
+  .timeline::before{left:80px}.phase-row{grid-template-columns:80px 1fr}.phase-dot{left:80px}
+  .delta-box{grid-template-columns:1fr 40px 1fr}.delta-val{font-size:36px}
+  .week-summary{grid-template-columns:repeat(2,1fr)}
+  .race-countdown{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+  <a href="#" class="nav-logo">10K SUB 50</a>
+  <ul class="nav-links">
+    <li><a href="#nivel">Tu Nivel</a></li>
+    <li><a href="#plan">Fases</a></li>
+    <li><a href="#zonas">Zonas</a></li>
+    <li><a href="#semana">Semana Tipo</a></li>
+    <li><a href="#carrera">Carrera</a></li>
+  </ul>
+  <a href="#carrera" class="nav-cta">29 Nov 2026</a>
+</nav>
+
+<!-- RACE DAY -->
+<section id="carrera">
+  <div class="section-inner">
+    <div class="section-tag">El gran día</div>
+    <h2 class="section-title reveal">29 NOV 2026<br><span style="color:var(--accent)">¡A POR EL SUB 50!</span></h2>
+    <div class="race-grid reveal">
+      <div>
+        <div class="race-countdown">
+          <div class="countdown-block"><div class="countdown-num" id="cd-days">--</div><div class="countdown-label">Días</div></div>
+          <div class="countdown-block"><div class="countdown-num" id="cd-hours">--</div><div class="countdown-label">Horas</div></div>
+          <div class="countdown-block"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-label">Minutos</div></div>
+          <div class="countdown-block"><div class="countdown-num" id="cd-secs">--</div><div class="countdown-label">Segundos</div></div>
+        </div>
+        <div class="race-pace">
+          <div class="pace-block"><div class="pace-label">Pace hoy</div><div class="pace-val" style="color:var(--muted)">7:30</div><div style="font-size:11px;color:var(--muted)">min/km · Z2</div></div>
+          <div class="pace-block" style="border-color:rgba(240,255,0,.3);background:rgba(240,255,0,.04)"><div class="pace-label" style="color:var(--accent)">Pace objetivo</div><div class="pace-val" style="color:var(--accent)">5:00</div><div style="font-size:11px;color:var(--muted)">min/km · Z4</div></div>
+          <div class="pace-block"><div class="pace-label">Tiempo meta</div><div class="pace-val" style="color:var(--accent2)">49:59</div><div style="font-size:11px;color:var(--muted)">minutos</div></div>
+        </div>
+        <a href="#plan" class="race-cta">🏁 COMENZAR EL PLAN – 1 MARZO</a>
+      </div>
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:16px">Plan de carrera · 10K @ 5:00 min/km</div>
+        <div class="race-timeline">
+          <div class="race-step"><div class="race-km">-2h</div><div><div class="race-step-title">Desayuno ligero</div><div class="race-step-desc">Avena + plátano + café si acostumbras. Nada nuevo el día de carrera.</div></div></div>
+          <div class="race-step"><div class="race-km">-30'</div><div><div class="race-step-title">Calentamiento</div><div class="race-step-desc">10 min trote Z1 + movilidad + 4×100m progresivos hasta Z4.</div></div></div>
+          <div class="race-step"><div class="race-km">Km 1</div><div><div class="race-step-title">No te pases de listo</div><div class="race-step-desc">Sal a 5:05-5:10. La adrenalina te dirá que puedes más. No le hagas caso.</div></div></div>
+          <div class="race-step"><div class="race-km">Km 2-6</div><div><div class="race-step-title">Metronomo</div><div class="race-step-desc">Z4: 169-176 bpm. Ritmo constante y mecánico. Confía en el entrenamiento.</div></div></div>
+          <div class="race-step"><div class="race-km">Km 7-8</div><div><div class="race-step-title">Aquí se decide</div><div class="race-step-desc">Si guardaste algo, empuja hasta 176 bpm. Si no, mantén. No especules.</div></div></div>
+          <div class="race-step"><div class="race-km">Km 9-10</div><div><div class="race-step-title">Vacíate</div><div class="race-step-desc">Todo lo que quede. Z5 permitida. 39 semanas de trabajo se pagan aquí.</div></div></div>
+          <div class="race-step"><div class="race-km">🏁 META</div><div><div class="race-step-title">SUB 50 · 49:59</div><div class="race-step-desc">Objetivo cumplido. Fue tuyo desde el 1 de marzo.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</section>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div>
+      <div class="level-badge">🔥 Corredor Intermedio Con Base</div>
+      <div class="hero-eyebrow">Plan Personalizado · 39 Semanas</div>
+      <h1 class="hero-title">BASE<br><span class="outline">SÓLIDA</span><br>A <span class="acc">SUB 50</span></h1>
+      <p class="hero-sub">Ya tienes los kilómetros en las piernas. Aguantas 2 horas corriendo en Z2 y acumulas 40 km semanales. Este plan no empieza de cero — empieza donde tú estás y te lleva al <strong>5:00 min/km en el 10K del 29 de noviembre</strong>.</p>
+      <div class="hero-actions">
+        <a href="#plan" class="btn-primary">Ver el Plan</a>
+        <a href="#nivel" class="btn-ghost">Mi punto de partida →</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-block">
+        <div class="stat-label">Fondo largo ajustado</div>
+        <div class="stat-value">90 <span class="unit">min</span></div>
+        <div class="stat-desc">~12 km @ 7:30 · Libera energía para calidad</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Carga semanal</div>
+        <div class="stat-value" style="color:var(--accent)">40 <span class="unit">km</span></div>
+        <div class="stat-desc">Estable desde el día 1 · Mejor calidad, no más km</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Ritmo objetivo</div>
+        <div class="stat-value" style="color:var(--accent2)">5:00 <span class="unit">min/km</span></div>
+        <div class="stat-desc">Desde 7:30 actual · -33% en 39 semanas</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">FC Máxima / Reposo</div>
+        <div class="stat-value">184 <span class="unit">bpm</span></div>
+        <div class="stat-desc">FC Reposo: 61 bpm · Z4 objetivo: 169-176 bpm</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator"><div class="scroll-line"></div><span class="scroll-text">Scroll</span></div>
+</section>
+
+<!-- NIVEL ACTUAL -->
+<section id="nivel">
+  <div class="section-inner">
+    <div class="section-tag">Tu punto de partida real</div>
+    <h2 class="section-title reveal">DÓNDE<br>ESTÁS HOY</h2>
+    <div class="nivel-grid reveal">
+      <div class="nivel-card highlight">
+        <div class="nivel-card-label">Pace Z2 consolidado</div>
+        <div class="nivel-card-val" style="color:var(--accent)">7:30</div>
+        <div class="nivel-card-sub">min/km · Puedes sostenerlo 2 horas sin parar. Base aeróbica real y muy sólida.</div>
+      </div>
+      <div class="nivel-card">
+        <div class="nivel-card-label">Fondo largo actual</div>
+        <div class="nivel-card-val" style="color:#22C55E">~16 km</div>
+        <div class="nivel-card-sub">2h @ 7:30. Lo bajamos a 90 min (12 km) para invertir esa energía en sesiones de calidad.</div>
+      </div>
+      <div class="nivel-card">
+        <div class="nivel-card-label">Volumen semanal</div>
+        <div class="nivel-card-val" style="color:#00D4FF">40 km</div>
+        <div class="nivel-card-sub">Carga que mantenemos desde el día 1. No necesitas más km — necesitas km más rápidos.</div>
+      </div>
+      <div class="nivel-card">
+        <div class="nivel-card-label">Perfil corredor</div>
+        <div class="nivel-card-val" style="color:#F59E0B;font-size:22px;padding-top:8px">Intermedio<br>Con Base</div>
+        <div class="nivel-card-sub">La base ya está. Lo que falta es velocidad, umbral y especificidad al 10K.</div>
+      </div>
+    </div>
+    <div class="delta-box reveal">
+      <div>
+        <div class="delta-label">Ritmo hoy</div>
+        <div class="delta-val" style="color:var(--muted)">7:30</div>
+        <div class="delta-sub">min/km · Z2 · FC 152-163 bpm<br>10K actual ≈ 1h 15 min</div>
+      </div>
+      <div class="delta-arrow">→</div>
+      <div>
+        <div class="delta-label">Ritmo objetivo</div>
+        <div class="delta-val" style="color:var(--accent)">5:00</div>
+        <div class="delta-sub">min/km · Z4 · FC 169-176 bpm<br>10K objetivo = Sub 50 min</div>
+      </div>
+    </div>
+    <div style="padding:20px 28px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);display:flex;gap:20px;align-items:flex-start" class="reveal">
+      <div style="font-size:28px;flex-shrink:0">🧠</div>
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#EF4444;margin-bottom:6px">La clave de tu plan</div>
+        <p style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.7">Tu problema no es el volumen — ya tienes los kilómetros. Tu reto es <strong style="color:var(--white)">enseñarle al cuerpo a correr más rápido</strong>. Por eso este plan mantiene 40 km/semana pero introduce <strong style="color:var(--white)">2 sesiones de calidad desde la Semana 1</strong>: un rodaje tempo (Z3) y una sesión de series (Z4-5). El fondo largo baja a 90 min para que llegues fresco a esas sesiones clave cada semana.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASES -->
+<section id="plan">
+  <div class="section-inner">
+    <div class="section-tag">Estructura del Plan</div>
+    <h2 class="section-title reveal">6 FASES<br><span style="color:var(--muted);font-size:.6em;letter-spacing:1px">39 semanas desde tu nivel real</span></h2>
+    <div class="timeline reveal">
+      <div class="phase-row">
+        <div class="phase-weeks"><div class="phase-week-num">1–6</div><div class="phase-week-date">1 Mar<br>11 Abr</div></div>
+        <div class="phase-dot"></div>
+        <div class="phase-card">
+          <div class="phase-name">FASE 1 · CONSOLIDACIÓN Y PRIMER TEMPO</div>
+          <div class="phase-desc">Arrancas a 40 km/semana desde el día 1. Fondo largo fijado en 90 min (12 km). Se introducen tempo en Z3 (20-25 min) y primeras series cortas 4×600m en Z4-5. El objetivo es establecer el patrón de 2 sesiones de calidad semanales que sostendrás todo el plan.</div>
+          <div class="phase-tags"><span class="tag">40 km/sem</span><span class="tag">Tempo Z3 20-25 min</span><span class="tag">Series 4×600m Z4-5</span><span class="tag">Fondo 90 min · 12 km</span><span class="tag">6 semanas</span></div>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-weeks"><div class="phase-week-num">7–14</div><div class="phase-week-date">12 Abr<br>6 Jun</div></div>
+        <div class="phase-dot"></div>
+        <div class="phase-card">
+          <div class="phase-name">FASE 2 · DESARROLLO DEL UMBRAL DE LACTATO</div>
+          <div class="phase-desc">Tempo crece hasta 30-35 min sostenidos en Z3. Las series evolucionan a 800m y 1000m en Z4. El fondo incluye los últimos 2-3 km en Z3. El cuerpo empieza a construir resistencia específica a velocidades que antes eran "imposibles de mantener".</div>
+          <div class="phase-tags"><span class="tag">40-42 km/sem</span><span class="tag">Tempo 30-35 min Z3</span><span class="tag">Series 5×800m Z4</span><span class="tag">Fondo con km Z3</span><span class="tag">8 semanas</span></div>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-weeks"><div class="phase-week-num">15–22</div><div class="phase-week-date">7 Jun<br>1 Ago</div></div>
+        <div class="phase-dot"></div>
+        <div class="phase-card">
+          <div class="phase-name">FASE 3 · INTRODUCCIÓN AL RITMO DE CARRERA</div>
+          <div class="phase-desc">Primer contacto sostenido con el RC de 5:00 min/km. Series de 1000m exactamente al ritmo objetivo. El fondo largo incluye 3-4 km al RC. El cuerpo empieza a "memorizar" 5:00 — cada repetición es una impresión que se graba en la memoria muscular.</div>
+          <div class="phase-tags"><span class="tag">42 km/sem</span><span class="tag">Series 5×1000m RC</span><span class="tag">Fondo 8 km Z2 + 3 km RC</span><span class="tag">Tempo 30 min Z3</span><span class="tag">8 semanas</span></div>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-weeks"><div class="phase-week-num">23–30</div><div class="phase-week-date">2 Ago<br>26 Sep</div></div>
+        <div class="phase-dot"></div>
+        <div class="phase-card">
+          <div class="phase-name">FASE 4 · INTENSIFICACIÓN MÁXIMA</div>
+          <div class="phase-desc">Pico de carga del plan: 44-45 km/semana. Series largas de 1200m en Z4-5. Tempo extendido a 40 min a 5:20-5:30. El fondo incluye hasta 5 km al RC. Estas son las semanas más duras — las que construyen la capacidad de mantener el ritmo en el km 8, 9 y 10.</div>
+          <div class="phase-tags"><span class="tag">44-45 km/sem (pico)</span><span class="tag">Series 5×1200m Z4-5</span><span class="tag">Tempo 40 min Z3-4</span><span class="tag">Fondo con 5 km RC</span><span class="tag">8 semanas</span></div>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-weeks"><div class="phase-week-num">31–38</div><div class="phase-week-date">27 Sep<br>21 Nov</div></div>
+        <div class="phase-dot"></div>
+        <div class="phase-card">
+          <div class="phase-name">FASE 5 · ESPECIFICIDAD Y SIMULACROS 10K</div>
+          <div class="phase-desc">Simulacros de 10K completos cada 2-3 semanas. Sesiones que replican las condiciones exactas de carrera. Volumen empieza a bajar desde semana 35. La primera vez que cruces 10 km en menos de 50 min en entrenamiento es la señal de que el día de la carrera ya está ganado.</div>
+          <div class="phase-tags"><span class="tag">Simulacro 10K completo</span><span class="tag">5:00 min/km RC</span><span class="tag">Z4: 169-176 bpm</span><span class="tag">Volumen decreciente</span><span class="tag">8 semanas</span></div>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-weeks"><div class="phase-week-num">39</div><div class="phase-week-date">22 Nov<br>29 Nov</div></div>
+        <div class="phase-dot"></div>
+        <div class="phase-card">
+          <div class="phase-name">FASE 6 · TAPERING</div>
+          <div class="phase-desc">Volumen al 40% del pico. Misma intensidad puntual, mucho menos cantidad. El cuerpo supercompensa: fibras musculares reparadas, glucógeno al máximo, sistema nervioso fresco. Resiste la tentación de "entrenar un poco más por si acaso" — eso es lo que arruina un tapering.</div>
+          <div class="phase-tags"><span class="tag">~15 km/sem</span><span class="tag">Activación suave</span><span class="tag">4×100m progresivos</span><span class="tag" style="background:rgba(240,255,0,.15);color:var(--accent)">🏁 CARRERA 29 NOV</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ZONAS -->
+<section id="zonas">
+  <div class="section-inner">
+    <div class="section-tag">Datos reales de tu Garmin · FC Reservada</div>
+    <h2 class="section-title reveal">TUS ZONAS<br>CARDÍACAS</h2>
+    <div class="zones-grid reveal">
+      <div class="zone-card z1c">
+        <div class="zone-num" style="color:#3B82F6">1</div>
+        <div class="zone-name" style="color:#3B82F6">Recuperación</div>
+        <div class="zone-bpm" style="color:#3B82F6">133–151 <span class="u">bpm</span></div>
+        <div class="zone-pct">59% – 73% FC Max</div>
+        <div class="zone-pace">Ritmo: <span style="color:#3B82F6">7:45+ min/km</span></div>
+        <div class="zone-use">Calentamiento, enfriamiento, rodajes de recuperación activa entre sesiones duras</div>
+      </div>
+      <div class="zone-card z2c">
+        <div class="zone-num" style="color:#22C55E">2</div>
+        <div class="zone-name" style="color:#22C55E">Aeróbico Base</div>
+        <div class="zone-bpm" style="color:#22C55E">152–163 <span class="u">bpm</span></div>
+        <div class="zone-pct">74% – 83% FC Max</div>
+        <div class="zone-pace">Ritmo: <span style="color:#22C55E">7:00–7:30 min/km</span></div>
+        <div class="zone-use">Fondos largos y rodajes de recuperación. Ya la dominas — ahora la usas como herramienta de recuperación entre las sesiones duras.</div>
+        <div class="zone-badge" style="background:rgba(34,197,94,.15);color:#22C55E;border:1px solid rgba(34,197,94,.3)">✓ ZONA DOMINADA</div>
+      </div>
+      <div class="zone-card z3c">
+        <div class="zone-num" style="color:#F59E0B">3</div>
+        <div class="zone-name" style="color:#F59E0B">Tempo / Umbral</div>
+        <div class="zone-bpm" style="color:#F59E0B">164–168 <span class="u">bpm</span></div>
+        <div class="zone-pct">84% – 87% FC Max</div>
+        <div class="zone-pace">Ritmo: <span style="color:#F59E0B">5:30–6:00 min/km</span></div>
+        <div class="zone-use">Rodajes tempo. Tu zona principal de desarrollo desde la semana 1. Construye el umbral de lactato que hace que 5:00 sea sostenible.</div>
+        <div class="zone-badge" style="background:rgba(245,158,11,.15);color:#F59E0B;border:1px solid rgba(245,158,11,.3)">⚡ ZONA DE TRABAJO</div>
+      </div>
+      <div class="zone-card z4c">
+        <div class="zone-num" style="color:#EF4444">4</div>
+        <div class="zone-name" style="color:#EF4444">Umbral / RC</div>
+        <div class="zone-bpm" style="color:#EF4444">169–176 <span class="u">bpm</span></div>
+        <div class="zone-pct">88% – 94% FC Max</div>
+        <div class="zone-pace">Ritmo: <span style="color:#EF4444">5:00–5:25 min/km</span></div>
+        <div class="zone-use">Tu ritmo de carrera vive aquí. El objetivo de 39 semanas es que esta zona se sienta controlada, no desesperada.</div>
+        <div class="zone-badge" style="background:rgba(239,68,68,.15);color:#EF4444;border:1px solid rgba(239,68,68,.3)">🎯 ZONA OBJETIVO</div>
+      </div>
+      <div class="zone-card z5c">
+        <div class="zone-num" style="color:#A855F7">5</div>
+        <div class="zone-name" style="color:#A855F7">Máximo / VO₂</div>
+        <div class="zone-bpm" style="color:#A855F7">177–184 <span class="u">bpm</span></div>
+        <div class="zone-pct">95% – 100% FC Max</div>
+        <div class="zone-pace">Ritmo: <span style="color:#A855F7">4:30–4:50 min/km</span></div>
+        <div class="zone-use">Intervalos cortos 400-600m desde semana 1 y sprint final del 10K. Desarrolla el VO₂Max que eleva el techo de velocidad.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEMANA TIPO -->
+<section id="semana">
+  <div class="section-inner">
+    <div class="section-tag">Cómo se ve cada semana</div>
+    <h2 class="section-title reveal">SEMANA TIPO</h2>
+    <div class="week-tabs reveal" id="weekTabs">
+      <button class="week-tab active" onclick="showPhase(1,this)">FASE 1 (1-6)</button>
+      <button class="week-tab" onclick="showPhase(2,this)">FASE 2 (7-14)</button>
+      <button class="week-tab" onclick="showPhase(3,this)">FASE 3 (15-22)</button>
+      <button class="week-tab" onclick="showPhase(4,this)">FASE 4 (23-30)</button>
+      <button class="week-tab" onclick="showPhase(5,this)">FASE 5 (31-38)</button>
+      <button class="week-tab" onclick="showPhase(6,this)">TAPERING (39)</button>
+    </div>
+    <div class="week-grid reveal" id="weekGrid"></div>
+    <div class="week-summary reveal" id="weekSummary"></div>
+    <div style="margin-top:12px;padding:16px 20px;background:rgba(240,255,0,.04);border:1px solid rgba(240,255,0,.15)">
+      <p style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.7"><strong style="color:var(--accent)">💡 Coach:</strong> <span id="coachTip"></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- EJERCICIOS -->
+<section id="ejercicios">
+  <div class="section-inner">
+    <div class="section-tag">Complementarios en Casa</div>
+    <h2 class="section-title reveal">FUERZA &<br>AERÓBICOS</h2>
+    <div class="ex-grid reveal">
+      <div class="ex-block">
+        <div class="ex-block-title" style="color:var(--teal)">FUERZA CON MANCUERNAS</div>
+        <div class="ex-block-sub">2 sesiones/sem · 35-40 min · Miércoles y Domingo · 3-4 series</div>
+        <div class="ex-list">
+          <div class="ex-item"><div class="ex-num">1</div><div><div class="ex-name">Bulgarian Split Squat</div><div class="ex-sets">4 × 10/pierna · 75s descanso</div><div class="ex-muscle">Potencia unilateral · Estabilidad cadera · El ejercicio más importante para velocidad</div></div></div>
+          <div class="ex-item"><div class="ex-num">2</div><div><div class="ex-name">Romanian Deadlift</div><div class="ex-sets">4 × 10 reps · 75s descanso</div><div class="ex-muscle">Isquiotibiales · Glúteos · Prevención de lesiones de rodilla y cadera</div></div></div>
+          <div class="ex-item"><div class="ex-num">3</div><div><div class="ex-name">Single-Leg Calf Raises</div><div class="ex-sets">4 × 15/pierna · 45s descanso</div><div class="ex-muscle">Gemelos · Tendón de Aquiles · Economía de carrera y propulsión</div></div></div>
+          <div class="ex-item"><div class="ex-num">4</div><div><div class="ex-name">Goblet Squat</div><div class="ex-sets">3 × 12 reps · 60s descanso</div><div class="ex-muscle">Cuádriceps · Glúteos · Core integrado</div></div></div>
+          <div class="ex-item"><div class="ex-num">5</div><div><div class="ex-name">Dumbbell Row</div><div class="ex-sets">3 × 12/lado · 60s descanso</div><div class="ex-muscle">Espalda alta · Postura de carrera · Braceo eficiente</div></div></div>
+          <div class="ex-item"><div class="ex-num">6</div><div><div class="ex-name">Plank con Arrastre</div><div class="ex-sets">3 × 40s · 45s descanso</div><div class="ex-muscle">Core anti-rotación · Estabilidad bajo fatiga máxima</div></div></div>
+        </div>
+      </div>
+      <div class="ex-block">
+        <div class="ex-block-title" style="color:var(--accent2)">AERÓBICOS + ACTIVACIÓN</div>
+        <div class="ex-block-sub">Como calentamiento en sesiones de calidad · 15-20 min antes de series o tempo</div>
+        <div class="cardio-list">
+          <div class="cardio-item"><div class="cardio-icon">🦵</div><div><div class="cardio-name">Skipping alto</div><div class="cardio-time">40s · Activación neuromuscular</div></div></div>
+          <div class="cardio-item"><div class="cardio-icon">🦘</div><div><div class="cardio-name">Pogos</div><div class="cardio-time">30s · Elasticidad del tobillo</div></div></div>
+          <div class="cardio-item"><div class="cardio-icon">🧗</div><div><div class="cardio-name">Mountain Climbers</div><div class="cardio-time">40s · Core dinámico</div></div></div>
+          <div class="cardio-item"><div class="cardio-icon">💨</div><div><div class="cardio-name">A-skips</div><div class="cardio-time">2×20m · Técnica de carrera</div></div></div>
+          <div class="cardio-item"><div class="cardio-icon">⚡</div><div><div class="cardio-name">B-skips</div><div class="cardio-time">2×20m · Extensión trasera</div></div></div>
+          <div class="cardio-item"><div class="cardio-icon">🏃</div><div><div class="cardio-name">Strides 100m</div><div class="cardio-time">4×100m progresivos al RC</div></div></div>
+        </div>
+        <div style="margin-top:20px;padding:20px;background:rgba(255,255,255,.02);border:1px solid var(--border)">
+          <div style="font-size:12px;font-weight:700;letter-spacing:2px;color:var(--accent);margin-bottom:12px">RITMOS DE ENTRENAMIENTO</div>
+          <div style="display:grid;gap:6px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">R1 · Suave</span><span style="font-family:'JetBrains Mono',monospace;color:#22C55E">6:45 – 7:30 min/km</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">R2 · Tempo Z3</span><span style="font-family:'JetBrains Mono',monospace;color:#F59E0B">5:30 – 5:45 min/km</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">R3 · Fuerte Z3-4</span><span style="font-family:'JetBrains Mono',monospace;color:#EF4444">5:10 – 5:25 min/km</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">RC · Carrera 10K</span><span style="font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:700">5:00 min/km · Z4</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0"><span style="color:var(--muted)">RS · Series Z4-5</span><span style="font-family:'JetBrains Mono',monospace;color:#A855F7">4:30 – 4:50 min/km</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">10K SUB 50</div>
+  <div style="font-size:12px;color:var(--muted)">Plan personalizado · 1 Mar – 29 Nov 2026 · Corredor intermedio · 40 km/sem</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">FC Max 184 · FC Rep 61 · RC = 5:00</div>
+</footer>
+
+<script>
+// Cursor
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+document.querySelectorAll('a,button,.stat-block,.phase-card,.zone-card,.ex-item,.nivel-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='18px';cursor.style.height='18px';});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='10px';cursor.style.height='10px';});
+});
+// Progress bar
+const bar=document.getElementById('progressBar');
+window.addEventListener('scroll',()=>{bar.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';});
+// Reveal
+new IntersectionObserver(e=>e.forEach(i=>{if(i.isIntersecting)i.target.classList.add('visible');}),{threshold:.08}).observe||0;
+const ro=new IntersectionObserver(e=>e.forEach(i=>{if(i.isIntersecting)i.target.classList.add('visible');}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+// Zone color maps
+const ZC={'Z1':'#3B82F6','Z2':'#22C55E','Z3':'#F59E0B','Z4':'#EF4444','Z4-5':'#EF4444','Z5':'#A855F7','FUERZA':'#00D4FF','RC':'#F0FF00','RS':'#A855F7','Z1-2':'#3B82F6','ACTIVO':'#22C55E','Z1 activo':'#22C55E'};
+const ZB={'Z1':'rgba(59,130,246,.15)','Z2':'rgba(34,197,94,.15)','Z3':'rgba(245,158,11,.15)','Z4':'rgba(239,68,68,.15)','Z4-5':'rgba(239,68,68,.15)','Z5':'rgba(168,85,247,.15)','FUERZA':'rgba(0,212,255,.15)','RC':'rgba(240,255,0,.15)','RS':'rgba(168,85,247,.15)','Z1-2':'rgba(59,130,246,.15)','ACTIVO':'rgba(34,197,94,.15)','Z1 activo':'rgba(34,197,94,.15)'};
+// Phase definitions – intermediate runner, 40km/week from day 1
+const P={
+1:{tip:"Desde la semana 1 tienes calidad. Ese es el cambio clave respecto a lo que hacías. El tempo debe sentirse 'cómodamente duro' — puedes hablar, pero en frases muy cortas. Si el tempo se siente fácil, vas demasiado lento. Si no puedes sostenerlo 20 min, vas demasiado rápido.",km:"~40",sessions:"4",fondo:"12 km · 90 min",quality:"Tempo Z3 + Series 600m",
+days:[
+{n:'DOM',i:'😴',t:'Descanso total',d:'Recuperación completa.\nEl cuerpo asimila\nel trabajo de la semana.',z:'',c:'rest',km:''},
+{n:'LUN',i:'⚡',t:'Rodaje Tempo',d:'3 km Z2 calent.\n+ 20 min Z3 (5:35-5:45)\n+ 2 km Z2 enfr.\nTotal ~10 km.',z:'Z3',c:'quality',km:'~10 km'},
+{n:'MAR',i:'💪',t:'Fuerza 40 min',d:'Bulgarian 4×10\nRomanian DL 4×10\nCalf Raises 4×15\nCore 3×40s',z:'FUERZA',c:'',km:''},
+{n:'MIÉ',i:'🔥',t:'Series 4×600m',d:'2 km Z2 calent.\n+ 4×600m Z4-5 (4:45)\n2\' rec. entre series\n+ 2 km Z2 enfr.',z:'Z4-5',c:'quality',km:'~8 km'},
+{n:'JUE',i:'😴',t:'Descanso / Activo',d:'Descanso total o\ncaminata 20-30 min.\nNo corras.',z:'',c:'rest',km:''},
+{n:'VIE',i:'🏃',t:'Rodaje Suave 10 km',d:'Z1-Z2 · 7:00-7:20\nRecuperación activa\npost-fondo.',z:'Z2',c:'active',km:'10 km'},
+{n:'SÁB',i:'🏔',t:'Fondo Largo 90 min',d:'12 km @ Z2\n7:00-7:30 min/km\nCompletamente\nconversacional.',z:'Z2',c:'long-run',km:'12 km'},
+]},
+2:{tip:"El umbral de lactato es el punto donde el ácido láctico empieza a acumularse más rápido de lo que el cuerpo puede eliminarlo. Entrenar en Z3 eleva ese punto — y cuando el umbral sube, correr a 5:00 min/km produce menos ácido láctico. Ese es el mecanismo detrás de todo el tempo.",km:"40-42",sessions:"4",fondo:"12 km (2 km Z3 al final)",quality:"Tempo 30 min + 800m",
+days:[
+{n:'DOM',i:'😴',t:'Descanso total',d:'Recuperación completa.',z:'',c:'rest',km:''},
+{n:'LUN',i:'⚡',t:'Rodaje Tempo',d:'3 km Z2 calent.\n+ 30 min Z3 (5:30-5:40)\n+ 2 km Z2 enfr.',z:'Z3',c:'quality',km:'~11 km'},
+{n:'MAR',i:'💪',t:'Fuerza 40 min',d:'4 ejercicios runner\nProgresión de peso\n+ Aeróbicos 10 min',z:'FUERZA',c:'',km:''},
+{n:'MIÉ',i:'🔥',t:'Series 5×800m',d:'2 km Z2 calent.\n+ 5×800m Z4 (4:50-5:05)\n90s rec. entre series\n+ 2 km Z2 enfr.',z:'Z4',c:'quality',km:'~9 km'},
+{n:'JUE',i:'😴',t:'Descanso / Activo',d:'Caminata suave.\nMovilidad articular.',z:'',c:'rest',km:''},
+{n:'VIE',i:'🏃',t:'Rodaje Suave',d:'10 km Z1-Z2\n6:50-7:20 min/km\nRecuperación activa.',z:'Z2',c:'active',km:'10 km'},
+{n:'SÁB',i:'🏔',t:'Fondo con Z3',d:'10 km Z2\n+ 2 km Z3 final\n+ 1 km Z2 calma.\nPrimeros km rápidos\ndentro del fondo.',z:'Z3',c:'long-run',km:'~13 km'},
+]},
+3:{tip:"Cuando corres series de 1000m al RC (5:00) te estás haciendo dos cosas al mismo tiempo: construyes la memoria muscular del ritmo Y elevas el VO2Max. Cada serie a RC es una 'muestra' del esfuerzo de carrera. Cuantas más muestras acumula el cuerpo, más fácil se siente ese ritmo el día de la carrera.",km:"42",sessions:"4",fondo:"13 km (3-4 km RC)",quality:"Series 1000m RC + Tempo Z3",
+days:[
+{n:'DOM',i:'😴',t:'Descanso total',d:'Recuperación completa.',z:'',c:'rest',km:''},
+{n:'LUN',i:'⚡',t:'Rodaje Tempo',d:'3 km Z2 calent.\n+ 30 min Z3 (5:25-5:35)\n+ 2 km Z2 enfr.',z:'Z3',c:'quality',km:'~11 km'},
+{n:'MAR',i:'💪',t:'Fuerza 40 min',d:'Potencia + Pliometría\nBulgarian 4×10\nBox step-up 3×12\nCore 3×45s',z:'FUERZA',c:'',km:''},
+{n:'MIÉ',i:'🔥',t:'Series 5×1000m RC',d:'2 km Z2 calent.\n+ 5×1000m @ 5:00 (RC)\n2\' rec. entre series\n+ 2 km Z2 enfr.',z:'RC',c:'quality',km:'~11 km'},
+{n:'JUE',i:'😴',t:'Descanso / Activo',d:'Caminata o descanso.\nEstiramiento suave.',z:'',c:'rest',km:''},
+{n:'VIE',i:'🏃',t:'Rodaje Suave',d:'10 km Z1-Z2\n6:50-7:20 min/km',z:'Z2',c:'active',km:'10 km'},
+{n:'SÁB',i:'🏔',t:'Fondo con RC',d:'8 km Z2\n+ 3 km @ RC (5:00)\n+ 2 km Z2 calma.\nSesión de referencia.',z:'RC',c:'long-run',km:'~13 km'},
+]},
+4:{tip:"Las semanas más duras del plan. Las series de 1200m en Z4-5 recrean el esfuerzo de los últimos 3 km del 10K cuando ya estás acumulando fatiga. El fondo con 5 km RC te enseña a mantener el ritmo de carrera con las piernas cargadas. Descansa MUY bien entre las dos sesiones de calidad.",km:"44-45",sessions:"4-5",fondo:"15 km (5 km RC)",quality:"Series 1200m Z4-5 + Tempo largo",
+days:[
+{n:'DOM',i:'😴',t:'Descanso total',d:'Recuperación completa.\nSemanas más duras\ndel plan.',z:'',c:'rest',km:''},
+{n:'LUN',i:'⚡',t:'Tempo Largo',d:'3 km Z2 calent.\n+ 40 min Z3-4 (5:20-5:30)\n+ 2 km Z2 enfr.',z:'Z3',c:'quality',km:'~13 km'},
+{n:'MAR',i:'💪',t:'Fuerza 35 min',d:'Mantenimiento.\nCarga moderada.\nFocus: gemelos\ny estabilidad.',z:'FUERZA',c:'',km:''},
+{n:'MIÉ',i:'🔥',t:'Series 5×1200m',d:'2 km Z2 calent.\n+ 5×1200m Z4-5 (4:48)\n90s rec. entre series\n+ 2 km Z2 enfr.',z:'Z4-5',c:'quality',km:'~12 km'},
+{n:'JUE',i:'😴',t:'Descanso / Activo',d:'No tentes al diablo\ncon un "fácil".\nDescansa de verdad.',z:'',c:'rest',km:''},
+{n:'VIE',i:'🏃',t:'Rodaje Suave',d:'8-9 km Z1-Z2\n7:00-7:30 min/km\nRecuperación activa.',z:'Z2',c:'active',km:'9 km'},
+{n:'SÁB',i:'🏔',t:'Fondo con RC largo',d:'8 km Z2\n+ 5 km @ RC (5:00)\n+ 2 km Z2 calma.\nSesión de referencia.',z:'RC',c:'long-run',km:'~15 km'},
+]},
+5:{tip:"El simulacro de 10K no es para ver si puedes hacerlo — es para aprender a DISTRIBUIR el esfuerzo. La primera vez que el reloj marque 49:XX en entrenamiento, guardarás ese momento para siempre. Lo recordarás en el km 8 del día de la carrera cuando las piernas quieran parar.",km:"38-42",sessions:"4",fondo:"10-12 km sim.",quality:"Simulacro 10K + Series RC",
+days:[
+{n:'DOM',i:'😴',t:'Descanso total',d:'Recuperación completa.',z:'',c:'rest',km:''},
+{n:'LUN',i:'⚡',t:'Sharpener RC',d:'3 km Z2 calent.\n+ 5×1000m @ RC (5:00)\n90s rec. + 2 km Z2\nAfina el ritmo.',z:'RC',c:'quality',km:'~12 km'},
+{n:'MAR',i:'💪',t:'Fuerza ligera 30 min',d:'Carga reducida.\nMantenimiento puro.\nNo generar fatiga\npara el sábado.',z:'FUERZA',c:'',km:''},
+{n:'MIÉ',i:'🏃',t:'Rodaje Suave 8 km',d:'Z2 · 7:00-7:20\nFresco y activo.\nPreparar el simulacro.',z:'Z2',c:'active',km:'8 km'},
+{n:'JUE',i:'😴',t:'Descanso pre-sim.',d:'Descanso total o\ncaminata 20 min.',z:'',c:'rest',km:''},
+{n:'VIE',i:'🏃',t:'Recuperación activa',d:'20-30 min Z1\no caminata suave.\nEstiramiento completo.',z:'ACTIVO',c:'active',km:'~5 km'},
+{n:'SÁB',i:'🏁',t:'Simulacro 10K',d:'10 min Z1 calent.\n+ 10K @ RC (5:00)\n+ 10 min Z1 enfr.\nEsfuerzo de carrera.',z:'RC',c:'long-run',km:'~12 km'},
+]},
+6:{tip:"Ya está todo el trabajo hecho. El tapering no es descanso — es supercompensación. Menos volumen, misma intensidad puntual. Resiste la tentación de entrenar más 'por si acaso'. Confía en las 38 semanas anteriores. Tú ya sabes lo que es correr a 5:00 min/km.",km:"~15",sessions:"3",fondo:"— (carrera el sábado)",quality:"Activación + 4×100m",
+days:[
+{n:'DOM',i:'😴',t:'Descanso total',d:'Sin correr.\nCamina si quieres.',z:'',c:'rest',km:''},
+{n:'LUN',i:'🏃',t:'Rodaje Suave 5 km',d:'Z2 · 7:00-7:15\nSin presión.\nDeja que fluya.',z:'Z2',c:'active',km:'5 km'},
+{n:'MAR',i:'😴',t:'Descanso total',d:'No hagas fuerza.\nMovilidad articular\nsi lo deseas.',z:'',c:'rest',km:''},
+{n:'MIE',i:'⚡',t:'Activación final',d:'3 km Z2 suave\n+ 4×100m progresivos\nHasta Z4 el último.\nActiva sin fatigar.',z:'Z2',c:'active',km:'~4 km'},
+{n:'JUE',i:'😴',t:'Descanso pre-carrera',d:'Descanso completo.\nHidratación y sueño.\n¡Mañana es el día!',z:'',c:'rest',km:''},
+{n:'VIE',i:'🎉',t:'Recuperación & Celebra',d:'Caminata suave.\nCelebra el logro.\nLo ganaste.',z:'ACTIVO',c:'active',km:''},
+{n:'SÁB',i:'🏁',t:'10K – DÍA DE CARRERA',d:'5:00 min/km · Z4\nFC 169-176 bpm\n¡A POR EL SUB 50!\n39 semanas.',z:'RC',c:'long-run',km:'10 km'},
+]}
+};
+
+function showPhase(n,btn){
+  document.querySelectorAll('.week-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const d=P[n];
+  document.getElementById('coachTip').textContent=d.tip;
+  document.getElementById('weekGrid').innerHTML=d.days.map(day=>`
+    <div class="day-col ${day.c}">
+      <div class="day-name">${day.n}</div>
+      <div class="day-icon">${day.i}</div>
+      <div class="day-activity">${day.t}</div>
+      <div class="day-detail">${day.d.replace(/\n/g,'<br>')}</div>
+      ${day.z?`<div class="day-zone" style="background:${ZB[day.z]||'rgba(255,255,255,.1)'};color:${ZC[day.z]||'#fff'}">${day.z}</div>`:''}
+      ${day.km?`<div class="day-km">${day.km}</div>`:''}
+    </div>`).join('');
+  document.getElementById('weekSummary').innerHTML=`
+    <div class="ws-block"><div class="ws-label">Km semana</div><div class="ws-val" style="color:var(--accent)">${d.km} <span style="font-size:14px;color:var(--muted)">km</span></div></div>
+    <div class="ws-block"><div class="ws-label">Sesiones carrera</div><div class="ws-val" style="color:var(--teal)">${d.sessions}</div></div>
+    <div class="ws-block"><div class="ws-label">Fondo largo</div><div class="ws-val" style="color:#22C55E;font-size:18px;padding-top:6px">${d.fondo}</div></div>
+    <div class="ws-block"><div class="ws-label">Calidad clave</div><div class="ws-val" style="color:#EF4444;font-size:14px;padding-top:6px;font-family:'DM Sans',sans-serif;font-weight:700;line-height:1.3">${d.quality}</div></div>`;
+}
+showPhase(1,document.querySelector('.week-tab'));
+
+// Countdown
+function cd(){
+  const r=new Date('2026-11-29T08:00:00'),n=new Date(),d=r-n;
+  if(d<=0)return;
+  document.getElementById('cd-days').textContent=Math.floor(d/86400000);
+  document.getElementById('cd-hours').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0');
+}
+cd();setInterval(cd,1000);
+</script>
+</body>
+</html>
